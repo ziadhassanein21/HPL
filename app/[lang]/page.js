@@ -1,6 +1,6 @@
 import { getDictionary } from '../../dictionaries';
 import ClientPage from './ClientPage';
-import { getLocalizedUrl, getSiteUrl, siteConfig } from '../../lib/site';
+import { getLocalizedUrl, getSiteUrl, hasRealContactValue, siteConfig } from '../../lib/site';
 
 export default async function Page({ params }) {
   const { lang } = await params;
@@ -50,15 +50,16 @@ export default async function Page({ params }) {
       {
         '@type': 'Service',
         '@id': `${pageUrl}#service`,
-        serviceType: lang === 'ar' ? 'توريد وتركيب قواطع حمامات HPL' : 'HPL partition supply and installation',
+        serviceType: lang === 'ar' ? 'توريد وتركيب حلول HPL في السعودية' : 'HPL supply and installation in Saudi Arabia',
         name: dict.meta.title,
         description: dict.meta.description,
-        areaServed: siteConfig.serviceArea,
+        areaServed: {
+          '@type': 'Country',
+          name: siteConfig.countryName,
+        },
         provider: {
-          '@type': 'LocalBusiness',
+          '@type': 'Organization',
           name: siteConfig.name,
-          telephone: siteConfig.phoneRaw,
-          email: siteConfig.email,
         },
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
@@ -93,6 +94,14 @@ export default async function Page({ params }) {
       },
     ],
   };
+
+  if (hasRealContactValue(siteConfig.phoneRaw)) {
+    schemaGraph['@graph'][2].provider.telephone = siteConfig.phoneRaw;
+  }
+
+  if (hasRealContactValue(siteConfig.email)) {
+    schemaGraph['@graph'][2].provider.email = siteConfig.email;
+  }
 
   return (
     <>

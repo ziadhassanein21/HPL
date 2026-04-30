@@ -3,12 +3,12 @@ import './globals.css';
 
 export const metadata = {
   title: 'HPL Solutions',
-  description: 'Premium HPL phenolic partition and locker systems in Riyadh.',
+  description: 'Premium HPL phenolic partition, locker and wet-area systems across Saudi Arabia.',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

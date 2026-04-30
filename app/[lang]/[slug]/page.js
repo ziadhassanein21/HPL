@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getSeoPageBySlug, getSeoPages } from '../../../lib/seo-pages';
-import { getLocalizedUrl, getSiteUrl, siteConfig } from '../../../lib/site';
+import { getLocalizedUrl, getSiteUrl, hasRealContactValue, siteConfig } from '../../../lib/site';
 
 export async function generateStaticParams() {
   return siteConfig.locales.flatMap((lang) =>
@@ -104,12 +104,13 @@ export default async function SeoServicePage({ params }) {
         name: page.shortTitle,
         serviceType: page.shortTitle,
         description: page.metaDescription,
-        areaServed: siteConfig.serviceArea,
+        areaServed: {
+          '@type': 'Country',
+          name: siteConfig.countryName,
+        },
         provider: {
-          '@type': 'LocalBusiness',
+          '@type': 'Organization',
           name: siteConfig.name,
-          telephone: siteConfig.phoneRaw,
-          email: siteConfig.email,
           image: imageUrl,
         },
       },
@@ -127,6 +128,14 @@ export default async function SeoServicePage({ params }) {
       },
     ],
   };
+
+  if (hasRealContactValue(siteConfig.phoneRaw)) {
+    schemaGraph['@graph'][2].provider.telephone = siteConfig.phoneRaw;
+  }
+
+  if (hasRealContactValue(siteConfig.email)) {
+    schemaGraph['@graph'][2].provider.email = siteConfig.email;
+  }
 
   return (
     <>

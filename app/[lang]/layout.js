@@ -1,6 +1,6 @@
 import { Alexandria, Cormorant_Garamond, Manrope } from 'next/font/google';
 import { getDictionary } from '../../dictionaries';
-import { getLocalizedUrl, getSiteUrl, keywordSets, siteConfig } from '../../lib/site';
+import { getLocalizedUrl, getSiteUrl, hasRealContactValue, keywordSets, siteConfig } from '../../lib/site';
 
 const arabicFont = Alexandria({
   subsets: ['arabic', 'latin'],
@@ -90,34 +90,49 @@ export async function generateStaticParams() {
 
 export default async function LangLayout({ children, params }) {
   const { lang } = await params;
-
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: siteConfig.name,
     alternateName: siteConfig.legalName,
     url: getSiteUrl(),
-    email: siteConfig.email,
-    telephone: siteConfig.phoneRaw,
-    areaServed: siteConfig.serviceArea,
+    areaServed: {
+      '@type': 'Country',
+      name: siteConfig.countryName,
+    },
   };
 
-  const localBusinessSchema = {
+  if (hasRealContactValue(siteConfig.email)) {
+    organizationSchema.email = siteConfig.email;
+  }
+
+  if (hasRealContactValue(siteConfig.phoneRaw)) {
+    organizationSchema.telephone = siteConfig.phoneRaw;
+  }
+
+  const onlineStoreSchema = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'OnlineStore',
     name: siteConfig.name,
-    description: 'Premium HPL phenolic partition, locker and shower systems in Riyadh',
+    description: lang === 'ar'
+      ? 'حلول HPL فينوليك للقواطع واللوكرات والمناطق الرطبة في السعودية'
+      : 'HPL phenolic partition, locker and wet-area solutions across Saudi Arabia',
     url: getLocalizedUrl(lang),
-    telephone: siteConfig.phoneRaw,
-    email: siteConfig.email,
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: siteConfig.addressLocality,
-      addressCountry: siteConfig.addressCountry,
+    areaServed: {
+      '@type': 'Country',
+      name: siteConfig.countryName,
     },
-    areaServed: siteConfig.serviceArea,
+    availableLanguage: ['ar', 'en'],
     image: `${getSiteUrl()}${siteConfig.ogImage}`,
   };
+
+  if (hasRealContactValue(siteConfig.phoneRaw)) {
+    onlineStoreSchema.telephone = siteConfig.phoneRaw;
+  }
+
+  if (hasRealContactValue(siteConfig.email)) {
+    onlineStoreSchema.email = siteConfig.email;
+  }
 
   return (
     <>
@@ -127,7 +142,7 @@ export default async function LangLayout({ children, params }) {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(onlineStoreSchema) }}
       />
       <div
         lang={lang}
