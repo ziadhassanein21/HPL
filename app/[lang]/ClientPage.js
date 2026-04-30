@@ -27,13 +27,13 @@ export default function ClientPage({ dict, lang }) {
   const [menuActive, setMenuActive] = useState(false);
   const [activeFaq, setActiveFaq] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    if (typeof document === 'undefined') {
-      return 'dark';
-    }
+  const [theme, setTheme] = useState('dark');
+  const [mounted, setMounted] = useState(false);
 
-    return document.documentElement.dataset.theme || 'dark';
-  });
+  useEffect(() => {
+    setMounted(true);
+    setTheme(document.documentElement.dataset.theme || localStorage.getItem('theme') || 'dark');
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -226,10 +226,10 @@ export default function ClientPage({ dict, lang }) {
               className="theme-toggle"
               type="button"
               onClick={toggleTheme}
-              aria-label={theme === 'dark' ? dict.nav.themeToLight : dict.nav.themeToDark}
+              aria-label={!mounted ? dict.nav.themeToLight : (theme === 'dark' ? dict.nav.themeToLight : dict.nav.themeToDark)}
             >
-              <span aria-hidden="true">{theme === 'dark' ? '☀' : '☾'}</span>
-              <span>{theme === 'dark' ? dict.nav.themeLight : dict.nav.themeDark}</span>
+              <span aria-hidden="true">{!mounted ? '☀' : (theme === 'dark' ? '☀' : '☾')}</span>
+              <span>{!mounted ? dict.nav.themeLight : (theme === 'dark' ? dict.nav.themeLight : dict.nav.themeDark)}</span>
             </button>
             <button className="lang-toggle" type="button" onClick={switchLanguage}>
               {dict.nav.langToggle}

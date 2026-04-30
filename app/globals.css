@@ -221,17 +221,19 @@ body[dir='rtl'] .cta-band-copy h2,
 body[dir='rtl'] .contact-form-card h3,
 body[dir='rtl'] .site-footer h3 {
   font-family: var(--font-arabic), sans-serif;
+  letter-spacing: 0;
 }
 
 body[dir='rtl'] .hero-title {
-  font-size: clamp(2.4rem, 5.2vw, 4.9rem);
-  line-height: 1.14;
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  line-height: 1.25;
+  max-width: 100%;
 }
 
 body[dir='rtl'] .section-title,
 body[dir='rtl'] .cta-band-copy h2 {
   font-size: clamp(1.8rem, 3.4vw, 3.2rem);
-  line-height: 1.18;
+  line-height: 1.5;
 }
 
 body[dir='rtl'] .product-body h3,
@@ -240,7 +242,7 @@ body[dir='rtl'] .process-card h3,
 body[dir='rtl'] .value-card h3,
 body[dir='rtl'] .contact-form-card h3,
 body[dir='rtl'] .site-footer h3 {
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .section-subtitle {
@@ -423,7 +425,7 @@ body[dir='rtl'] .site-footer h3 {
 }
 
 .hero-section {
-  min-height: 100svh;
+  min-height: auto;
   overflow: clip;
   padding: 8rem 0 4rem;
   position: relative;
@@ -448,8 +450,8 @@ body[dir='rtl'] .hero-backdrop {
   align-items: center;
   display: grid;
   gap: 42px;
-  grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
-  min-height: calc(100svh - 8rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.7fr);
+  min-height: auto;
   position: relative;
   z-index: 1;
 }
@@ -523,7 +525,7 @@ body[dir='rtl'] .hero-backdrop {
 }
 
 .hero-visual {
-  min-height: 620px;
+  min-height: 420px;
   position: relative;
 }
 
@@ -539,7 +541,7 @@ body[dir='rtl'] .hero-backdrop {
   border-radius: 34px;
   box-shadow: var(--shadow);
   height: 100%;
-  min-height: 620px;
+  min-height: 420px;
 }
 
 .hero-image-frame::after,
@@ -1047,7 +1049,7 @@ body[dir='rtl'] .hero-backdrop {
   gap: 16px;
 }
 
-.contact-point > span {
+.contact-point>span {
   background: rgba(201, 170, 106, 0.1);
   border: 1px solid rgba(201, 170, 106, 0.18);
   border-radius: 16px;
@@ -1310,6 +1312,7 @@ body[dir='ltr'] .whatsapp-float {
 }
 
 @media (max-width: 1080px) {
+
   .hero-grid,
   .seo-hero-grid,
   .seo-content-grid,
