@@ -1,4 +1,6 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Alexandria, Cormorant_Garamond, Manrope } from 'next/font/google';
+import '../globals.css';
 import { getDictionary } from '../../dictionaries';
 import { getLocalizedUrl, getSiteUrl, hasRealContactValue, keywordSets, siteConfig } from '../../lib/site';
 
@@ -52,12 +54,16 @@ export async function generateMetadata({ params }) {
       },
     },
     alternates: {
-      canonical: currentUrl,
+      canonical: `/${lang}`,
       languages: {
-        en: getLocalizedUrl('en'),
-        ar: getLocalizedUrl('ar'),
-        'x-default': getLocalizedUrl(siteConfig.defaultLocale),
+        en: '/en',
+        ar: '/ar',
+        'x-default': `/${siteConfig.defaultLocale}`,
       },
+    },
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/favicon.ico',
     },
     openGraph: {
       title: dict.meta.title,
@@ -135,25 +141,43 @@ export default async function LangLayout({ children, params }) {
   }
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(onlineStoreSchema) }}
-      />
-      <div
-        lang={lang}
-        dir={lang === 'ar' ? 'rtl' : 'ltr'}
+    <html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (() => {
+                try {
+                  const storedTheme = localStorage.getItem('theme');
+                  const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const resolvedTheme = storedTheme === 'light' || storedTheme === 'dark'
+                    ? storedTheme
+                    : (systemDark ? 'dark' : 'light');
+                  document.documentElement.dataset.theme = resolvedTheme;
+                  document.documentElement.style.colorScheme = resolvedTheme;
+                } catch (error) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body
         className={`${arabicFont.variable} ${bodyFont.variable} ${headingFont.variable}`}
         style={{
           fontFamily: lang === 'ar' ? 'var(--font-arabic)' : 'var(--font-body)',
         }}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(onlineStoreSchema) }}
+        />
         {children}
-      </div>
-    </>
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }
