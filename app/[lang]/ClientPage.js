@@ -339,6 +339,8 @@ export default function ClientPage({ dict, lang }) {
                   alt={dict.hero.imageAlt}
                   fill
                   priority
+                  loading="eager"
+                  fetchPriority="high"
                   sizes="(max-width: 900px) 100vw, 42vw"
                   className="cover-image"
                 />
