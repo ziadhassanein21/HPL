@@ -296,7 +296,7 @@ export default function ClientPage({ dict, lang }) {
         <section className="hero-section" id="home">
           <div className="hero-backdrop" />
           <div className="container hero-grid">
-            <div className="hero-copy reveal active">
+            <div className="hero-copy">
               <span className="eyebrow">{dict.hero.eyebrow}</span>
               <h1 className="hero-title">{dict.hero.title}</h1>
               <p className="hero-text">{dict.hero.subtitle}</p>
@@ -322,7 +322,7 @@ export default function ClientPage({ dict, lang }) {
               </div>
             </div>
 
-            <div className="hero-visual reveal">
+            <div className="hero-visual">
               <div className="hero-image-frame">
                 <Image
                   src="/Images/hpl-bathroom-partition-riyadh.jpg"
