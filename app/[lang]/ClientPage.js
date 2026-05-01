@@ -1,9 +1,18 @@
-'use client';
-
-import { useEffect, useMemo, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import Image from 'next/image';
+import Link from 'next/link';
+import SiteHeader from './components/SiteHeader';
+import ContactForm from './components/ContactForm';
+import FaqAccordion from './components/FaqAccordion';
+import ScrollObserver from './components/ScrollObserver';
 import { getSeoPages } from '../../lib/seo-pages';
+
+import HeroSection from './components/sections/HeroSection';
+import TrustSection from './components/sections/TrustSection';
+import ProductsSection from './components/sections/ProductsSection';
+import FeaturesSection from './components/sections/FeaturesSection';
+import ProcessSection from './components/sections/ProcessSection';
+import GallerySection from './components/sections/GallerySection';
+import SpecsSection from './components/sections/SpecsSection';
+import TestimonialsSection from './components/sections/TestimonialsSection';
 
 const galleryImages = [
   'hpl-partition-project-01.jpg',
@@ -14,442 +23,73 @@ const galleryImages = [
   'hpl-partition-project-05.jpg',
   'hpl-partition-project-06.png',
   'hpl-partition-project-07.png',
-];
-
-const productImages = [
-  'hpl-bathroom-partition-system.jpg',
-  'hpl-locker-phenolic-system.jpg',
-  'hpl-shower-cubicle-riyadh.jpg',
+  'hpl_locker_gym_01_1777661339876.png',
+  'hpl_locker_gym_02_1777661422143.png',
+  'hpl_locker_hospital_01_1777661449971.png',
+  'hpl_locker_school_01_1777661378585.png',
+  'hpl_partition_airport_01_1777661436449.png',
+  'hpl_partition_corporate_01_1777661505167.png',
+  'hpl_partition_mall_01_1777661359617.png',
+  'hpl_partition_office_01_1777661393466.png',
+  'hpl_shower_club_01_1777661470398.png',
+  'hpl_shower_pool_01_1777661407418.png',
 ];
 
 export default function ClientPage({ dict, lang }) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [menuActive, setMenuActive] = useState(false);
-  const [activeFaq, setActiveFaq] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    if (typeof document === 'undefined') {
-      return 'dark';
-    }
+  const useCases = [
+    dict.useCases.item1,
+    dict.useCases.item2,
+    dict.useCases.item3,
+    dict.useCases.item4,
+    dict.useCases.item5,
+    dict.useCases.item6,
+  ];
 
-    return document.documentElement.dataset.theme || localStorage.getItem('theme') || 'dark';
-  });
+  const serviceAreaItems = [
+    dict.serviceAreas.item1,
+    dict.serviceAreas.item2,
+    dict.serviceAreas.item3,
+    dict.serviceAreas.item4,
+  ];
 
-  useEffect(() => {
-    setMounted(true);
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-    };
-
-    const handleEscape = (event) => {
-      if (event.key === 'Escape') {
-        setMenuActive(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('keydown', handleEscape);
-    handleScroll();
-
-    // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target); // Stop observing once revealed
-          }
-        });
-      },
-      { rootMargin: '0px 0px -90px 0px', threshold: 0 }
-    );
-
-    const reveals = document.querySelectorAll('.reveal');
-    reveals.forEach((element) => observer.observe(element));
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('keydown', handleEscape);
-      observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    document.body.classList.toggle('menu-open', menuActive);
-    return () => document.body.classList.remove('menu-open');
-  }, [menuActive]);
-
-
-
-  const metrics = useMemo(
-    () => [dict.hero.metric1, dict.hero.metric2, dict.hero.metric3],
-    [dict.hero.metric1, dict.hero.metric2, dict.hero.metric3]
-  );
-
-  const heroBadges = useMemo(
-    () => [dict.hero.badge1, dict.hero.badge2, dict.hero.badge3].filter(Boolean),
-    [dict.hero.badge1, dict.hero.badge2, dict.hero.badge3]
-  );
-
-  const products = useMemo(
-    () => [
-      { title: dict.products.p1_title, description: dict.products.p1_desc, tag: dict.products.p1_tag },
-      { title: dict.products.p2_title, description: dict.products.p2_desc, tag: dict.products.p2_tag },
-      { title: dict.products.p3_title, description: dict.products.p3_desc, tag: dict.products.p3_tag },
-    ],
-    [dict.products]
-  );
-
-  const features = useMemo(
-    () => [
-      { icon: '01', title: dict.features.f1_title, description: dict.features.f1_desc },
-      { icon: '02', title: dict.features.f2_title, description: dict.features.f2_desc },
-      { icon: '03', title: dict.features.f3_title, description: dict.features.f3_desc },
-      { icon: '04', title: dict.features.f4_title, description: dict.features.f4_desc },
-      { icon: '05', title: dict.features.f5_title, description: dict.features.f5_desc },
-      { icon: '06', title: dict.features.f6_title, description: dict.features.f6_desc },
-    ],
-    [dict.features]
-  );
-
-  const processSteps = useMemo(
-    () => [
-      { step: '01', title: dict.process.s1_title, description: dict.process.s1_desc },
-      { step: '02', title: dict.process.s2_title, description: dict.process.s2_desc },
-      { step: '03', title: dict.process.s3_title, description: dict.process.s3_desc },
-    ],
-    [dict.process]
-  );
-
-  const useCases = useMemo(
-    () => [
-      dict.useCases.item1,
-      dict.useCases.item2,
-      dict.useCases.item3,
-      dict.useCases.item4,
-      dict.useCases.item5,
-      dict.useCases.item6,
-    ],
-    [dict.useCases]
-  );
-
-  const specificationItems = useMemo(
-    () => [
-      dict.specs.item1,
-      dict.specs.item2,
-      dict.specs.item3,
-      dict.specs.item4,
-      dict.specs.item5,
-      dict.specs.item6,
-    ],
-    [dict.specs]
-  );
-
-  const serviceAreaItems = useMemo(
-    () => [
-      dict.serviceAreas.item1,
-      dict.serviceAreas.item2,
-      dict.serviceAreas.item3,
-      dict.serviceAreas.item4,
-    ],
-    [dict.serviceAreas]
-  );
-
-  const faqs = useMemo(
-    () => [
-      { question: dict.faq.q1, answer: dict.faq.a1 },
-      { question: dict.faq.q2, answer: dict.faq.a2 },
-      { question: dict.faq.q3, answer: dict.faq.a3 },
-    ],
-    [dict.faq]
-  );
-
-  const valueProps = useMemo(
-    () => [
-      dict.valueProps.item1,
-      dict.valueProps.item2,
-      dict.valueProps.item3,
-      dict.valueProps.item4,
-    ],
-    [dict.valueProps]
-  );
-
-  const seoLinks = useMemo(() => getSeoPages(lang), [lang]);
-
-  const switchLanguage = () => {
-    const newLang = lang === 'ar' ? 'en' : 'ar';
-    const newPathname = pathname.replace(`/${lang}`, `/${newLang}`);
-    router.push(newPathname || `/${newLang}`);
-  };
-
-  const toggleTheme = () => {
-    const root = document.documentElement;
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = nextTheme;
-    root.style.colorScheme = nextTheme;
-    localStorage.setItem('theme', nextTheme);
-    setTheme(nextTheme);
-  };
-
-  const handleNavClick = () => setMenuActive(false);
-
-  const [submitting, setSubmitting] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setSubmitting(true);
-
-    const form = event.target;
-    const formData = {
-      name: form.querySelector('#name').value,
-      phone: form.querySelector('#phone').value,
-      projectType: form.querySelector('#project-type').value,
-      details: form.querySelector('#project-details').value,
-    };
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        setSubmitted(true);
-        form.reset();
-
-        // Also send a WhatsApp message as a backup notification
-        const waMessage = encodeURIComponent(
-          `New inquiry from website:\n\nName: ${formData.name}\nPhone: ${formData.phone}\nProject: ${formData.projectType}\nDetails: ${formData.details}`
-        );
-        window.open(`https://wa.me/966551130855?text=${waMessage}`, '_blank');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const faqs = [
+    { question: dict.faq.q1, answer: dict.faq.a1 },
+    { question: dict.faq.q2, answer: dict.faq.a2 },
+    { question: dict.faq.q3, answer: dict.faq.a3 },
+  ];
 
   return (
     <>
-
-      <header className={scrolled ? 'site-header scrolled' : 'site-header'}>
-        <div className="container nav-shell">
-          <a href="#home" className="brand-mark" onClick={handleNavClick}>
-            <Image
-              src="/Images/logo.png"
-              alt="NEW BASIC Company"
-              width={42}
-              height={42}
-              className="brand-logo"
-              priority
-            />
-            <span className="brand-copy">
-              <strong>NEW BASIC</strong>
-              <small>{dict.nav.brand}</small>
-            </span>
-          </a>
-
-          <nav id="primary-navigation" className={`nav-links ${menuActive ? 'active' : ''}`} aria-label={dict.nav.ariaLabel}>
-            <a href="#products" onClick={handleNavClick}>{dict.nav.products}</a>
-            <a href="#features" onClick={handleNavClick}>{dict.nav.features}</a>
-            <a href="#process" onClick={handleNavClick}>{dict.nav.process}</a>
-            <a href="#gallery" onClick={handleNavClick}>{dict.nav.gallery}</a>
-            <a href="#faq" onClick={handleNavClick}>{dict.nav.faq}</a>
-            <a href="#contact" onClick={handleNavClick}>{dict.nav.contact}</a>
-            <button
-              className="theme-toggle"
-              type="button"
-              onClick={toggleTheme}
-              aria-label={mounted ? (theme === 'dark' ? dict.nav.themeToLight : dict.nav.themeToDark) : dict.nav.themeToLight}
-            >
-              <span aria-hidden="true">{mounted ? (theme === 'dark' ? '☀' : '☾') : '☀'}</span>
-              <span>{mounted ? (theme === 'dark' ? dict.nav.themeLight : dict.nav.themeDark) : dict.nav.themeLight}</span>
-            </button>
-            <button className="lang-toggle" type="button" onClick={switchLanguage}>
-              {dict.nav.langToggle}
-            </button>
-          </nav>
-
-          <button
-            type="button"
-            className={`hamburger ${menuActive ? 'active' : ''}`}
-            onClick={() => setMenuActive((current) => !current)}
-            aria-label={dict.nav.menuToggle}
-            aria-expanded={menuActive}
-            aria-controls="primary-navigation"
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-        </div>
-      </header>
+      <SiteHeader dict={dict} lang={lang} />
+      <ScrollObserver />
 
       <main id="main-content">
-        <section className="hero-section" id="home">
-          <div className="hero-backdrop" />
-          <div className="container hero-grid">
-            <div className="hero-copy">
-              <span className="eyebrow">{dict.hero.eyebrow}</span>
-              <h1 className="hero-title">{dict.hero.title}</h1>
-              <p className="hero-text">{dict.hero.subtitle}</p>
-
-              <div className="hero-actions">
-                <a href="#products" className="btn btn-primary">{dict.hero.btnExplore}</a>
-                <a href="#contact" className="btn btn-secondary">{dict.hero.btnQuote}</a>
-              </div>
-
-              <div className="hero-chip-row">
-                {heroBadges.map((item) => (
-                  <span className="hero-chip" key={item}>{item}</span>
-                ))}
-              </div>
-
-              <div className="hero-metrics">
-                {metrics.map((item) => (
-                  <div className="metric-card" key={item.label}>
-                    <strong>{item.value}</strong>
-                    <span>{item.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="hero-visual">
-              <div className="hero-image-frame">
-                <Image
-                  src="/Images/hpl-bathroom-partition-riyadh.jpg"
-                  alt={dict.hero.imageAlt}
-                  fill
-                  priority
-                  loading="eager"
-                  fetchPriority="high"
-                  sizes="(max-width: 900px) 100vw, 42vw"
-                  className="cover-image"
-                />
-              </div>
-
-              <div className="floating-panel panel-top">
-                <span>{dict.hero.panelTopLabel}</span>
-                <strong>{dict.hero.panelTopValue}</strong>
-              </div>
-
-              <div className="floating-panel panel-bottom">
-                <span>{dict.hero.panelBottomLabel}</span>
-                <strong>{dict.hero.panelBottomValue}</strong>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="trust-strip">
-          <div className="container trust-grid reveal">
-            <p>{dict.trust.title}</p>
-            <div className="trust-items">
-              <span>{dict.trust.item1}</span>
-              <span>{dict.trust.item2}</span>
-              <span>{dict.trust.item3}</span>
-              <span>{dict.trust.item4}</span>
-            </div>
-          </div>
-        </section>
-
-        <section className="products-section" id="products">
-          <div className="container">
-            <div className="section-heading reveal">
-              <span className="eyebrow">{dict.products.eyebrow}</span>
-              <h2 className="section-title">{dict.products.title}</h2>
-              <p className="section-subtitle">{dict.products.subtitle}</p>
-            </div>
-
-            <div className="product-grid">
-              {products.map((product, index) => (
-                <article className="product-card reveal" key={product.title}>
-                  <div className="product-image-wrap">
-                    <Image
-                      src={`/Images/${productImages[index]}`}
-                      alt={product.title}
-                      fill
-                      sizes="(max-width: 900px) 100vw, 33vw"
-                      className="cover-image"
-                    />
-                  </div>
-                  <div className="product-body">
-                    <span className="product-tag">{product.tag}</span>
-                    <h3>{product.title}</h3>
-                    <p>{product.description}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="features-section" id="features">
-          <div className="container features-layout">
-            <div className="section-heading reveal">
-              <span className="eyebrow">{dict.features.eyebrow}</span>
-              <h2 className="section-title">{dict.features.title}</h2>
-              <p className="section-subtitle">{dict.features.subtitle}</p>
-            </div>
-
-            <div className="features-grid">
-              {features.map((feature) => (
-                <article className="feature-card reveal" key={feature.title}>
-                  <span className="feature-index">{feature.icon}</span>
-                  <h3>{feature.title}</h3>
-                  <p>{feature.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="process-section" id="process">
-          <div className="container">
-            <div className="section-heading reveal">
-              <span className="eyebrow">{dict.process.eyebrow}</span>
-              <h2 className="section-title">{dict.process.title}</h2>
-              <p className="section-subtitle">{dict.process.subtitle}</p>
-            </div>
-
-            <div className="process-grid">
-              {processSteps.map((item) => (
-                <article className="process-card reveal" key={item.step}>
-                  <span className="process-step">{item.step}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <HeroSection dict={dict.hero} />
+        <TrustSection dict={dict.trust} />
+        <ProductsSection dict={dict.products} />
+        <FeaturesSection dict={dict.features} />
+        <ProcessSection dict={dict.process} />
 
         <section className="value-section">
-          <div className="container value-shell">
+          <div className="container value-grid">
             <div className="value-copy reveal">
               <span className="eyebrow">{dict.valueProps.eyebrow}</span>
               <h2 className="section-title">{dict.valueProps.title}</h2>
               <p className="section-subtitle align-start">{dict.valueProps.subtitle}</p>
-              <div className="value-actions">
-                <a href="#contact" className="btn btn-primary">{dict.contact.quickQuote}</a>
-                <a href="https://wa.me/966551130855" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                  {dict.contact.quickWhatsapp}
-                </a>
+
+              <div className="value-points">
+                {(dict.valueProps.points || []).map((point, index) => (
+                  <div className="value-point" key={index}>
+                    <span className="value-dot" aria-hidden="true" />
+                    <p>{point}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="value-grid">
-              {valueProps.map((item) => (
+            <div className="value-cards">
+              {[dict.valueProps.item1, dict.valueProps.item2, dict.valueProps.item3, dict.valueProps.item4].map((item) => (
                 <article className="value-card reveal" key={item.title}>
-                  <span className="value-marker" aria-hidden="true" />
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </article>
@@ -461,103 +101,25 @@ export default function ClientPage({ dict, lang }) {
         <section className="landing-links-section">
           <div className="container">
             <div className="section-heading reveal">
-              <span className="eyebrow">{lang === 'ar' ? 'حلول متخصصة' : 'Specialized Solutions'}</span>
-              <h2 className="section-title">
-                {lang === 'ar'
-                  ? 'استعرض حلولاً مخصصة لكل نوع من أنواع مشاريع HPL.'
-                  : 'Explore dedicated solution pages for each main HPL application.'}
-              </h2>
-              <p className="section-subtitle">
-                {lang === 'ar'
-                  ? 'كل صفحة تقدم نظرة أوضح على الاستخدامات والمزايا والمعلومات العملية الخاصة بكل حل.'
-                  : 'Each page gives a clearer overview of applications, benefits and practical project information for that solution.'}
-              </p>
+              <span className="eyebrow">{dict.landingLinks?.eyebrow || (lang === 'ar' ? 'أدلة المشاريع' : 'Project Guides')}</span>
+              <h2 className="section-title">{dict.landingLinks?.title || (lang === 'ar' ? 'تعرف على المزيد حول حلولنا' : 'Learn More About Our Solutions')}</h2>
+              <p className="section-subtitle">{dict.landingLinks?.subtitle || ''}</p>
             </div>
 
             <div className="landing-links-grid">
-              {seoLinks.map((item) => (
-                <a className="landing-link-card reveal" href={`/${lang}/${item.slug}`} key={item.slug}>
-                  <span className="product-tag">{item.shortTitle}</span>
-                  <h3>{item.metaTitle}</h3>
-                  <p>{item.metaDescription}</p>
-                </a>
+              {getSeoPages(lang).map((item) => (
+                <Link className="landing-link-card reveal" href={`/${lang}/${item.slug}`} key={item.slug}>
+                  <h3>{item.shortTitle}</h3>
+                  <p>{item.heroText.substring(0, 80)}...</p>
+                  <span className="read-more">{lang === 'ar' ? 'اقرأ المزيد ←' : 'Read More →'}</span>
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="showcase-section">
-          <div className="container showcase-grid">
-            <div className="showcase-image reveal">
-              <div className="showcase-frame">
-                <Image
-                  src="/Images/hpl-locker-system-riyadh.jpg"
-                  alt={dict.useCases.imageAlt}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 45vw"
-                  className="cover-image"
-                />
-              </div>
-            </div>
-
-            <div className="showcase-copy reveal">
-              <span className="eyebrow">{dict.useCases.eyebrow}</span>
-              <h2 className="section-title">{dict.useCases.title}</h2>
-              <p className="section-subtitle align-start">{dict.useCases.subtitle}</p>
-              <div className="use-case-grid">
-                {useCases.map((item) => (
-                  <div className="use-case-item" key={item}>
-                    <span className="use-case-dot" aria-hidden="true" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="specs-section" id="specs">
-          <div className="container specs-shell">
-            <div className="section-heading reveal">
-              <span className="eyebrow">{dict.specs.eyebrow}</span>
-              <h2 className="section-title">{dict.specs.title}</h2>
-              <p className="section-subtitle">{dict.specs.subtitle}</p>
-            </div>
-
-            <div className="specs-grid">
-              {specificationItems.map((item) => (
-                <article className="spec-card reveal" key={item.title}>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="gallery-section" id="gallery">
-          <div className="container">
-            <div className="section-heading reveal">
-              <span className="eyebrow">{dict.gallery.eyebrow}</span>
-              <h2 className="section-title">{dict.gallery.title}</h2>
-              <p className="section-subtitle">{dict.gallery.subtitle}</p>
-            </div>
-
-            <div className="gallery-grid">
-              {galleryImages.map((image, index) => (
-                <figure className={`gallery-card gallery-card-${index + 1} reveal`} key={image}>
-                  <Image
-                    src={`/Images/${image}`}
-                    alt={`${dict.gallery.title} ${index + 1}`}
-                    fill
-                    sizes="(max-width: 900px) 100vw, 33vw"
-                    className="cover-image"
-                  />
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
+        <SpecsSection dict={dict.specs} />
+        <GallerySection dict={dict.gallery} images={galleryImages} />
 
         <section className="stats-section">
           <div className="container stats-bar reveal">
@@ -580,37 +142,7 @@ export default function ClientPage({ dict, lang }) {
           </div>
         </section>
 
-        <section className="testimonials-section">
-          <div className="container">
-            <div className="section-heading reveal">
-              <span className="eyebrow">{dict.testimonials.eyebrow}</span>
-              <h2 className="section-title">{dict.testimonials.title}</h2>
-              <p className="section-subtitle">{dict.testimonials.subtitle}</p>
-            </div>
-
-            <div className="testimonials-grid">
-              {dict.testimonials.items.map((item) => (
-                <article className="testimonial-card reveal" key={item.name}>
-                  <div className="testimonial-stars" aria-label={`${item.rating} stars`}>
-                    {'★'.repeat(item.rating)}
-                  </div>
-                  <blockquote className="testimonial-text">
-                    &ldquo;{item.text}&rdquo;
-                  </blockquote>
-                  <div className="testimonial-author">
-                    <div className="testimonial-avatar" aria-hidden="true">
-                      {item.name.charAt(0)}
-                    </div>
-                    <div>
-                      <strong className="testimonial-name">{item.name}</strong>
-                      <span className="testimonial-role">{item.role}</span>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <TestimonialsSection dict={dict.testimonials} />
 
         <section className="service-area-section">
           <div className="container service-area-shell reveal">
@@ -656,25 +188,7 @@ export default function ClientPage({ dict, lang }) {
               <h2 className="section-title">{dict.faq.title}</h2>
             </div>
 
-            <div className="faq-list">
-              {faqs.map((item, index) => (
-                <article className={`faq-item ${activeFaq === index ? 'active' : ''}`} key={item.question}>
-                  <button
-                    type="button"
-                    className="faq-question"
-                    onClick={() => setActiveFaq(activeFaq === index ? -1 : index)}
-                    aria-expanded={activeFaq === index}
-                    aria-controls={`faq-answer-${index}`}
-                  >
-                    <span>{item.question}</span>
-                    <span className="faq-symbol">{activeFaq === index ? '−' : '+'}</span>
-                  </button>
-                  <div className="faq-answer" id={`faq-answer-${index}`}>
-                    <p>{item.answer}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <FaqAccordion faqs={faqs} />
           </div>
         </section>
 
@@ -710,40 +224,7 @@ export default function ClientPage({ dict, lang }) {
               </div>
             </div>
 
-            <div className="contact-form-card reveal">
-              <h3>{dict.contact.subtitle}</h3>
-              <p className="contact-note">{dict.contact.note}</p>
-              <form onSubmit={handleSubmit}>
-                <div className="form-grid">
-                  <div>
-                    <label className="sr-only" htmlFor="name">{dict.contact.form_name}</label>
-                    <input id="name" type="text" className="form-control" placeholder={dict.contact.form_name} required />
-                  </div>
-                  <div>
-                    <label className="sr-only" htmlFor="phone">{dict.contact.form_phone}</label>
-                    <input id="phone" type="tel" className="form-control" placeholder={dict.contact.form_phone} required />
-                  </div>
-                </div>
-                <div>
-                  <label className="sr-only" htmlFor="project-type">{dict.contact.form_project}</label>
-                  <select id="project-type" className="form-control" defaultValue="" required>
-                    <option value="" disabled>{dict.contact.form_project}</option>
-                    <option value="bathroom">{dict.contact.form_opt1}</option>
-                    <option value="lockers">{dict.contact.form_opt2}</option>
-                    <option value="shower">{dict.contact.form_opt3}</option>
-                    <option value="other">{dict.contact.form_opt4}</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="sr-only" htmlFor="project-details">{dict.contact.form_msg}</label>
-                  <textarea id="project-details" className="form-control textarea-control" placeholder={dict.contact.form_msg} required />
-                </div>
-                <button type="submit" className="btn btn-primary full-width" disabled={submitting}>
-                  {submitting ? (lang === 'ar' ? 'جارٍ الإرسال...' : 'Sending...') : dict.contact.form_submit}
-                </button>
-                {submitted ? <p className="form-success" role="status">{dict.contact.success}</p> : null}
-              </form>
-            </div>
+            <ContactForm dict={dict} />
           </div>
         </section>
       </main>

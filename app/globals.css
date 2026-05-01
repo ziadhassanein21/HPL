@@ -932,7 +932,11 @@ html[lang="en"] h3 {
 
 .gallery-card-1,
 .gallery-card-4,
-.gallery-card-7 {
+.gallery-card-7,
+.gallery-card-10,
+.gallery-card-11,
+.gallery-card-14,
+.gallery-card-17 {
   grid-column: span 7;
 }
 
@@ -940,7 +944,13 @@ html[lang="en"] h3 {
 .gallery-card-3,
 .gallery-card-5,
 .gallery-card-6,
-.gallery-card-8 {
+.gallery-card-8,
+.gallery-card-9,
+.gallery-card-12,
+.gallery-card-13,
+.gallery-card-15,
+.gallery-card-16,
+.gallery-card-18 {
   grid-column: span 5;
 }
 
