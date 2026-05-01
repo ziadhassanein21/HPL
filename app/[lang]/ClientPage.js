@@ -27,6 +27,7 @@ export default function ClientPage({ dict, lang }) {
   const [menuActive, setMenuActive] = useState(false);
   const [activeFaq, setActiveFaq] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState(() => {
     if (typeof document === 'undefined') {
       return 'dark';
@@ -36,6 +37,7 @@ export default function ClientPage({ dict, lang }) {
   });
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
 
@@ -266,10 +268,10 @@ export default function ClientPage({ dict, lang }) {
               className="theme-toggle"
               type="button"
               onClick={toggleTheme}
-              aria-label={theme === 'dark' ? dict.nav.themeToLight : dict.nav.themeToDark}
+              aria-label={mounted ? (theme === 'dark' ? dict.nav.themeToLight : dict.nav.themeToDark) : dict.nav.themeToLight}
             >
-              <span aria-hidden="true">{theme === 'dark' ? '☀' : '☾'}</span>
-              <span>{theme === 'dark' ? dict.nav.themeLight : dict.nav.themeDark}</span>
+              <span aria-hidden="true">{mounted ? (theme === 'dark' ? '☀' : '☾') : '☀'}</span>
+              <span>{mounted ? (theme === 'dark' ? dict.nav.themeLight : dict.nav.themeDark) : dict.nav.themeLight}</span>
             </button>
             <button className="lang-toggle" type="button" onClick={switchLanguage}>
               {dict.nav.langToggle}
