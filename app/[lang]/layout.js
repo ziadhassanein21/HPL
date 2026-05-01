@@ -63,7 +63,7 @@ export async function generateMetadata({ params }) {
     },
     icons: {
       icon: '/favicon.ico',
-      apple: '/favicon.ico',
+      apple: '/Images/logo.png',
     },
     openGraph: {
       title: dict.meta.title,

@@ -333,14 +333,12 @@ body[dir='rtl'] .site-footer h3 {
   z-index: 2;
 }
 
-.brand-emblem {
-  background: linear-gradient(135deg, #f5d998, #9c7840);
-  border-radius: 10px;
-  box-shadow: 0 10px 24px rgba(201, 170, 106, 0.2);
+.brand-logo {
+  border-radius: 8px;
   display: block;
-  height: 18px;
-  transform: rotate(45deg);
-  width: 18px;
+  height: 42px;
+  object-fit: contain;
+  width: 42px;
 }
 
 .brand-copy {
