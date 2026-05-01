@@ -82,17 +82,7 @@ export default function ClientPage({ dict, lang }) {
     return () => document.body.classList.remove('menu-open');
   }, [menuActive]);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    const body = document.body;
-    const direction = lang === 'ar' ? 'rtl' : 'ltr';
 
-    root.lang = lang;
-    root.dir = direction;
-    body.lang = lang;
-    body.dir = direction;
-
-  }, [lang]);
 
   const metrics = useMemo(
     () => [dict.hero.metric1, dict.hero.metric2, dict.hero.metric3],

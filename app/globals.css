@@ -384,6 +384,11 @@ body[dir='rtl'] .site-footer h3 {
   padding: 0 16px;
 }
 
+.theme-toggle {
+  min-width: 92px;
+  justify-content: center;
+}
+
 .hamburger {
   background: transparent;
   border: 0;

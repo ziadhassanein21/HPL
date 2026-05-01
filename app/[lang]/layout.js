@@ -211,6 +211,7 @@ export default async function LangLayout({ children, params }) {
         />
       </head>
       <body
+        dir={lang === 'ar' ? 'rtl' : 'ltr'}
         className={`${arabicFont.variable} ${bodyFont.variable} ${headingFont.variable}`}
         style={{
           fontFamily: lang === 'ar' ? 'var(--font-arabic)' : 'var(--font-body)',
