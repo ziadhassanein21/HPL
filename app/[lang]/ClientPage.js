@@ -6,18 +6,18 @@ import Image from 'next/image';
 import { getSeoPages } from '../../lib/seo-pages';
 
 const galleryImages = [
-  'photo_1_2026-04-29_18-01-45.jpg',
-  'photo_2_2026-04-29_18-01-45.jpg',
-  'photo_3_2026-04-29_18-01-45.jpg',
-  'photo_4_2026-04-29_18-01-45.jpg',
-  'photo_8_2026-04-29_18-01-45.jpg',
-  'photo_9_2026-04-29_18-01-45.jpg',
+  'hpl-partition-project-01.jpg',
+  'hpl-partition-project-02.jpg',
+  'hpl-bathroom-partition-riyadh.jpg',
+  'hpl-partition-project-03.jpg',
+  'hpl-partition-project-04.jpg',
+  'hpl-partition-project-05.jpg',
 ];
 
 const productImages = [
-  'photo_5_2026-04-29_18-01-45.jpg',
-  'photo_11_2026-04-29_18-01-45.jpg',
-  'photo_12_2026-04-29_18-01-45.jpg',
+  'hpl-bathroom-partition-system.jpg',
+  'hpl-locker-phenolic-system.jpg',
+  'hpl-shower-cubicle-riyadh.jpg',
 ];
 
 export default function ClientPage({ dict, lang }) {
@@ -195,10 +195,44 @@ export default function ClientPage({ dict, lang }) {
 
   const handleNavClick = () => setMenuActive(false);
 
-  const handleSubmit = (event) => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitted(true);
-    event.target.reset();
+    setSubmitting(true);
+
+    const form = event.target;
+    const formData = {
+      name: form.querySelector('#name').value,
+      phone: form.querySelector('#phone').value,
+      projectType: form.querySelector('#project-type').value,
+      details: form.querySelector('#project-details').value,
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+        form.reset();
+
+        // Also send a WhatsApp message as a backup notification
+        const waMessage = encodeURIComponent(
+          `📩 New inquiry from website:\n\n👤 Name: ${formData.name}\n📞 Phone: ${formData.phone}\n🏗️ Project: ${formData.projectType}\n📝 Details: ${formData.details}`
+        );
+        window.open(`https://wa.me/966551130855?text=${waMessage}`, '_blank');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -291,7 +325,7 @@ export default function ClientPage({ dict, lang }) {
             <div className="hero-visual reveal">
               <div className="hero-image-frame">
                 <Image
-                  src="/Images/photo_3_2026-04-29_18-01-45.jpg"
+                  src="/Images/hpl-bathroom-partition-riyadh.jpg"
                   alt={dict.hero.imageAlt}
                   fill
                   priority
@@ -455,7 +489,7 @@ export default function ClientPage({ dict, lang }) {
             <div className="showcase-image reveal">
               <div className="showcase-frame">
                 <Image
-                  src="/Images/photo_10_2026-04-29_18-01-45.jpg"
+                  src="/Images/hpl-locker-system-riyadh.jpg"
                   alt={dict.useCases.imageAlt}
                   fill
                   sizes="(max-width: 900px) 100vw, 45vw"
@@ -518,6 +552,59 @@ export default function ClientPage({ dict, lang }) {
                     className="cover-image"
                   />
                 </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="stats-section">
+          <div className="container stats-bar reveal">
+            <div className="stat-item">
+              <span className="stat-value">{dict.stats.projects}</span>
+              <span className="stat-label">{dict.stats.projectsLabel}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-value">{dict.stats.experience}</span>
+              <span className="stat-label">{dict.stats.experienceLabel}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-value">{dict.stats.cities}</span>
+              <span className="stat-label">{dict.stats.citiesLabel}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-value">{dict.stats.satisfaction}</span>
+              <span className="stat-label">{dict.stats.satisfactionLabel}</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="testimonials-section">
+          <div className="container">
+            <div className="section-heading reveal">
+              <span className="eyebrow">{dict.testimonials.eyebrow}</span>
+              <h2 className="section-title">{dict.testimonials.title}</h2>
+              <p className="section-subtitle">{dict.testimonials.subtitle}</p>
+            </div>
+
+            <div className="testimonials-grid">
+              {dict.testimonials.items.map((item) => (
+                <article className="testimonial-card reveal" key={item.name}>
+                  <div className="testimonial-stars" aria-label={`${item.rating} stars`}>
+                    {'★'.repeat(item.rating)}
+                  </div>
+                  <blockquote className="testimonial-text">
+                    &ldquo;{item.text}&rdquo;
+                  </blockquote>
+                  <div className="testimonial-author">
+                    <div className="testimonial-avatar" aria-hidden="true">
+                      {item.name.charAt(0)}
+                    </div>
+                    <div>
+                      <strong className="testimonial-name">{item.name}</strong>
+                      <span className="testimonial-role">{item.role}</span>
+                    </div>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
@@ -649,7 +736,9 @@ export default function ClientPage({ dict, lang }) {
                   <label className="sr-only" htmlFor="project-details">{dict.contact.form_msg}</label>
                   <textarea id="project-details" className="form-control textarea-control" placeholder={dict.contact.form_msg} required />
                 </div>
-                <button type="submit" className="btn btn-primary full-width">{dict.contact.form_submit}</button>
+                <button type="submit" className="btn btn-primary full-width" disabled={submitting}>
+                  {submitting ? (lang === 'ar' ? 'جارٍ الإرسال...' : 'Sending...') : dict.contact.form_submit}
+                </button>
                 {submitted ? <p className="form-success" role="status">{dict.contact.success}</p> : null}
               </form>
             </div>

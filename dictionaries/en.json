@@ -226,6 +226,41 @@
     "quickWhatsapp": "WhatsApp",
     "success": "Thanks — your request has been received. We’ll contact you soon."
   },
+  "testimonials": {
+    "eyebrow": "Client Feedback",
+    "title": "What our clients say about working with us.",
+    "subtitle": "We take pride in delivering clean execution, reliable material quality and a professional experience from consultation to final handover.",
+    "items": [
+      {
+        "name": "Eng. Khalid Al-Otaibi",
+        "role": "Project Manager — Construction Firm",
+        "text": "We worked with them on a bathroom partition project for a commercial building in Riyadh. The installation was clean, delivery was on time, and the material quality and moisture resistance were excellent from day one.",
+        "rating": 5
+      },
+      {
+        "name": "Sarah Al-Malki",
+        "role": "Operations Manager — Sports Club",
+        "text": "We installed HPL lockers in the changing rooms. The look is professional and maintenance is very easy. After a full year of heavy use, the lockers still look brand new.",
+        "rating": 5
+      },
+      {
+        "name": "Eng. Abdullah Al-Shammari",
+        "role": "Interior Design Consultant",
+        "text": "I recommend them for any project that needs phenolic partitions. Communication is clear, recommendations are practical, and the final result always exceeds expectations.",
+        "rating": 5
+      }
+    ]
+  },
+  "stats": {
+    "projects": "+150",
+    "projectsLabel": "Completed Projects",
+    "experience": "+10",
+    "experienceLabel": "Years of Experience",
+    "cities": "+15",
+    "citiesLabel": "Cities in Saudi Arabia",
+    "satisfaction": "98%",
+    "satisfactionLabel": "Client Satisfaction"
+  },
   "footer": {
     "title": "NEW BASIC Company",
     "desc": "Premium compact phenolic systems for projects that need performance and polish.",

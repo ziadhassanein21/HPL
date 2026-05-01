@@ -432,7 +432,7 @@ body[dir='rtl'] .site-footer h3 {
 .hero-backdrop {
   background:
     linear-gradient(90deg, var(--hero-overlay-start) 18%, var(--hero-overlay-mid) 58%, var(--hero-overlay-end) 100%),
-    url('/Images/photo_6_2026-04-29_18-01-45.jpg') center/cover no-repeat;
+    url('/Images/hpl-partition-installation-ksa.jpg') center/cover no-repeat;
   inset: 0;
   opacity: 0.38;
   position: absolute;
@@ -441,7 +441,7 @@ body[dir='rtl'] .site-footer h3 {
 body[dir='rtl'] .hero-backdrop {
   background:
     linear-gradient(270deg, var(--hero-overlay-start) 18%, var(--hero-overlay-mid) 58%, var(--hero-overlay-end) 100%),
-    url('/Images/photo_6_2026-04-29_18-01-45.jpg') center/cover no-repeat;
+    url('/Images/hpl-partition-installation-ksa.jpg') center/cover no-repeat;
 }
 
 .hero-grid {
@@ -1108,6 +1108,148 @@ body[dir='rtl'] .hero-backdrop {
   font-size: 0.95rem;
 }
 
+/* ── Stats Bar ─────────────────────────────────── */
+.stats-section {
+  padding: 3.5rem 0;
+}
+
+.stats-bar {
+  background: var(--card-bg);
+  border: 1px solid rgba(201, 170, 106, 0.14);
+  border-radius: 24px;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 3rem 2.5rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: center;
+}
+
+.stat-value {
+  background: linear-gradient(135deg, #f5d998, #c9aa6a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+/* ── Testimonials ──────────────────────────────── */
+.testimonials-section {
+  padding: var(--section-space) 0;
+}
+
+.testimonials-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 3rem;
+}
+
+.testimonial-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 2rem 1.8rem;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.testimonial-card:hover {
+  border-color: rgba(201, 170, 106, 0.3);
+  transform: translateY(-4px);
+}
+
+.testimonial-stars {
+  color: #f5d998;
+  font-size: 1.25rem;
+  letter-spacing: 3px;
+}
+
+.testimonial-text {
+  color: var(--text);
+  font-size: 0.96rem;
+  font-style: italic;
+  line-height: 1.7;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.testimonial-author {
+  align-items: center;
+  border-top: 1px solid var(--card-border);
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 1.2rem;
+}
+
+.testimonial-avatar {
+  align-items: center;
+  background: linear-gradient(135deg, #c9aa6a, #9c7840);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.testimonial-name {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.testimonial-role {
+  color: var(--muted);
+  display: block;
+  font-size: 0.82rem;
+  margin-top: 2px;
+}
+
+@media (max-width: 1080px) {
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-bar {
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem 1.5rem;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .seo-page {
   padding-bottom: 4rem;
 }
@@ -1128,7 +1270,7 @@ body[dir='rtl'] .hero-backdrop {
 .seo-hero-backdrop {
   background:
     linear-gradient(90deg, var(--seo-overlay-start) 18%, var(--seo-overlay-mid) 58%, var(--seo-overlay-end) 100%),
-    url('/Images/photo_7_2026-04-29_18-01-45.jpg') center/cover no-repeat;
+    url('/Images/hpl-shower-cubicle-backdrop.jpg') center/cover no-repeat;
   inset: 0;
   opacity: 0.36;
   position: absolute;
@@ -1137,7 +1279,7 @@ body[dir='rtl'] .hero-backdrop {
 body[dir='rtl'] .seo-hero-backdrop {
   background:
     linear-gradient(270deg, var(--seo-overlay-start) 18%, var(--seo-overlay-mid) 58%, var(--seo-overlay-end) 100%),
-    url('/Images/photo_7_2026-04-29_18-01-45.jpg') center/cover no-repeat;
+    url('/Images/hpl-shower-cubicle-backdrop.jpg') center/cover no-repeat;
 }
 
 .seo-hero-grid,

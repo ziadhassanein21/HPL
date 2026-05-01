@@ -140,6 +140,55 @@ export default async function LangLayout({ children, params }) {
     onlineStoreSchema.email = siteConfig.email;
   }
 
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${getSiteUrl()}#localbusiness`,
+    name: siteConfig.name,
+    image: `${getSiteUrl()}${siteConfig.logo}`,
+    url: getSiteUrl(),
+    telephone: siteConfig.phoneRaw,
+    email: siteConfig.email,
+    description: lang === 'ar'
+      ? 'توريد وتركيب قواطع حمامات ولوكرات وكبائن استحمام HPL فينوليك في السعودية'
+      : 'Supply and installation of HPL phenolic bathroom partitions, lockers and shower cubicles in Saudi Arabia',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'SA',
+      addressRegion: lang === 'ar' ? 'المملكة العربية السعودية' : 'Saudi Arabia',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Saudi Arabia',
+    },
+    priceRange: '$$',
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+      opens: '08:00',
+      closes: '18:00',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: lang === 'ar' ? 'حلول HPL' : 'HPL Solutions',
+      itemListElement: [
+        {
+          '@type': 'OfferCatalog',
+          name: lang === 'ar' ? 'قواطع حمامات HPL' : 'HPL Bathroom Partitions',
+        },
+        {
+          '@type': 'OfferCatalog',
+          name: lang === 'ar' ? 'لوكرات HPL' : 'HPL Lockers',
+        },
+        {
+          '@type': 'OfferCatalog',
+          name: lang === 'ar' ? 'كبائن استحمام HPL' : 'HPL Shower Cubicles',
+        },
+      ],
+    },
+    sameAs: [],
+  };
+
   return (
     <html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <head>
@@ -174,6 +223,10 @@ export default async function LangLayout({ children, params }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(onlineStoreSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         {children}
         <SpeedInsights />
