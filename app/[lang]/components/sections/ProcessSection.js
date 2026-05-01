@@ -7,7 +7,7 @@ export default function ProcessSection({ dict }) {
 
   return (
     <section className="process-section" id="process">
-      <div className="container process-shell">
+      <div className="container">
         <div className="section-heading reveal">
           <span className="eyebrow">{dict.eyebrow}</span>
           <h2 className="section-title">{dict.title}</h2>

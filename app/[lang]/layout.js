@@ -62,7 +62,7 @@ export async function generateMetadata({ params }) {
       },
     },
     icons: {
-      icon: '/favicon.ico',
+      icon: '/Images/logo.png',
       apple: '/Images/logo.png',
     },
     openGraph: {

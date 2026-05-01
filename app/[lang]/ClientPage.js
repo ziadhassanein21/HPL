@@ -4,9 +4,9 @@ import ContactForm from './components/ContactForm';
 import FaqAccordion from './components/FaqAccordion';
 import ScrollObserver from './components/ScrollObserver';
 import { getSeoPages } from '../../lib/seo-pages';
+import { siteConfig } from '../../lib/site';
 
 import HeroSection from './components/sections/HeroSection';
-import TrustSection from './components/sections/TrustSection';
 import ProductsSection from './components/sections/ProductsSection';
 import FeaturesSection from './components/sections/FeaturesSection';
 import ProcessSection from './components/sections/ProcessSection';
@@ -23,16 +23,12 @@ const galleryImages = [
   'hpl-partition-project-05.jpg',
   'hpl-partition-project-06.png',
   'hpl-partition-project-07.png',
-  'hpl_locker_gym_01_1777661339876.png',
-  'hpl_locker_gym_02_1777661422143.png',
-  'hpl_locker_hospital_01_1777661449971.png',
-  'hpl_locker_school_01_1777661378585.png',
-  'hpl_partition_airport_01_1777661436449.png',
-  'hpl_partition_corporate_01_1777661505167.png',
-  'hpl_partition_mall_01_1777661359617.png',
-  'hpl_partition_office_01_1777661393466.png',
-  'hpl_shower_club_01_1777661470398.png',
-  'hpl_shower_pool_01_1777661407418.png',
+  'hpl-locker-gym-facilities-ksa.png',
+  'hpl-partition-corporate-office-ksa.png',
+  'hpl-partition-shopping-mall-ksa.png',
+  'hpl-partition-office-building-ksa.png',
+  'hpl-shower-cubicle-sports-club-ksa.png',
+  'hpl-shower-cubicle-swimming-pool-ksa.png',
 ];
 
 export default function ClientPage({ dict, lang }) {
@@ -65,7 +61,6 @@ export default function ClientPage({ dict, lang }) {
 
       <main id="main-content">
         <HeroSection dict={dict.hero} />
-        <TrustSection dict={dict.trust} />
         <ProductsSection dict={dict.products} />
         <FeaturesSection dict={dict.features} />
         <ProcessSection dict={dict.process} />
@@ -173,7 +168,7 @@ export default function ClientPage({ dict, lang }) {
               </div>
               <div className="cta-band-actions">
                 <a href="#contact" className="btn btn-primary">{dict.ctaBand.primary}</a>
-                <a href="https://wa.me/966551130855" className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                <a href={`https://wa.me/${siteConfig.whatsappRaw}`} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                   {dict.ctaBand.secondary}
                 </a>
               </div>
@@ -211,14 +206,14 @@ export default function ClientPage({ dict, lang }) {
                   <span>📞</span>
                   <div>
                     <strong>{dict.contact.phoneLabel}</strong>
-                    <p dir="ltr"><a href="tel:+966551130855" style={{ color: 'inherit' }}>+966 551 130 855</a></p>
+                    <p dir="ltr"><a href={`tel:${siteConfig.phoneRaw}`} style={{ color: 'inherit' }}>{siteConfig.phoneDisplay}</a></p>
                   </div>
                 </div>
                 <div className="contact-point">
                   <span>✉️</span>
                   <div>
                     <strong>{dict.contact.emailLabel}</strong>
-                    <p><a href="mailto:newbasic.ac@gmail.com" style={{ color: 'inherit' }}>newbasic.ac@gmail.com</a></p>
+                    <p><a href={`mailto:${siteConfig.email}`} style={{ color: 'inherit' }}>{siteConfig.email}</a></p>
                   </div>
                 </div>
               </div>
@@ -241,13 +236,13 @@ export default function ClientPage({ dict, lang }) {
 
       <div className="mobile-action-bar">
         <a href="#contact" className="mobile-action primary-action">{dict.contact.quickQuote}</a>
-        <a href="tel:+966551130855" className="mobile-action">{dict.contact.quickCall}</a>
-        <a href="https://wa.me/966551130855" className="mobile-action" target="_blank" rel="noopener noreferrer">
+        <a href={`tel:${siteConfig.phoneRaw}`} className="mobile-action">{dict.contact.quickCall}</a>
+        <a href={`https://wa.me/${siteConfig.whatsappRaw}`} className="mobile-action" target="_blank" rel="noopener noreferrer">
           {dict.contact.quickWhatsapp}
         </a>
       </div>
 
-      <a href="https://wa.me/966551130855" className="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+      <a href={`https://wa.me/${siteConfig.whatsappRaw}`} className="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
           <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
         </svg>

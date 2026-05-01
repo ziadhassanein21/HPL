@@ -10,7 +10,7 @@ export default function FeaturesSection({ dict }) {
 
   return (
     <section className="features-section" id="features">
-      <div className="container features-shell">
+      <div className="container">
         <div className="section-heading reveal">
           <span className="eyebrow">{dict.eyebrow}</span>
           <h2 className="section-title">{dict.title}</h2>

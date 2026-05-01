@@ -1,7 +1,7 @@
 'use client';
 
+import { siteConfig } from '@/lib/site';
 import { useState } from 'react';
-import { siteConfig } from '../../../lib/site';
 
 export default function ContactForm({ dict }) {
   const [submitting, setSubmitting] = useState(false);
@@ -14,7 +14,6 @@ export default function ContactForm({ dict }) {
     const form = event.target;
     const formDataObj = Object.fromEntries(new FormData(form));
     
-    // Ensure the payload matches the backend expectations based on previous implementation
     const payload = {
       name: formDataObj['name'],
       phone: formDataObj['phone'],
@@ -50,12 +49,8 @@ export default function ContactForm({ dict }) {
   if (submitted) {
     return (
       <div className="contact-form-card">
-        <div className="success-state">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <h3>{dict.contact.successTitle}</h3>
-          <p>{dict.contact.successMessage}</p>
+        <div className="form-success">
+          <p>{dict.contact.success}</p>
         </div>
       </div>
     );
@@ -63,44 +58,65 @@ export default function ContactForm({ dict }) {
 
   return (
     <div className="contact-form-card">
-      <h3>{dict.contact.formTitle}</h3>
-      <p>{dict.contact.formSubtitle}</p>
-
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">{dict.contact.nameLabel}</label>
-          <input type="text" id="name" name="name" required placeholder={dict.contact.namePlaceholder} disabled={submitting} />
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">{dict.contact.form_name}</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            className="form-control" 
+            required 
+            placeholder={dict.contact.form_name} 
+            disabled={submitting} 
+          />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="phone">{dict.contact.phoneLabel}</label>
-          <input type="tel" id="phone" name="phone" required placeholder={dict.contact.phonePlaceholder} disabled={submitting} dir="ltr" />
+        <div style={{ marginTop: '16px' }}>
+          <label htmlFor="phone">{dict.contact.form_phone}</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            name="phone" 
+            className="form-control" 
+            required 
+            placeholder={dict.contact.form_phone} 
+            disabled={submitting} 
+            dir="ltr" 
+          />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="project-type">{dict.contact.projectTypeLabel}</label>
-          <select id="project-type" name="project-type" required disabled={submitting}>
-            <option value="">{dict.contact.projectTypeSelect}</option>
-            <option value="bathroom-partitions">{dict.contact.optionPartitions}</option>
-            <option value="lockers">{dict.contact.optionLockers}</option>
-            <option value="shower-cubicles">{dict.contact.optionShowers}</option>
-            <option value="other">{dict.contact.optionOther}</option>
+        <div style={{ marginTop: '16px' }}>
+          <label htmlFor="project-type">{dict.contact.form_project}</label>
+          <select 
+            id="project-type" 
+            name="project-type" 
+            className="form-control" 
+            required 
+            disabled={submitting}
+          >
+            <option value="">{dict.contact.form_project}</option>
+            <option value="bathroom-partitions">{dict.contact.form_opt1}</option>
+            <option value="lockers">{dict.contact.form_opt2}</option>
+            <option value="shower-cubicles">{dict.contact.form_opt3}</option>
+            <option value="other">{dict.contact.form_opt4}</option>
           </select>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="project-details">{dict.contact.detailsLabel}</label>
+        <div style={{ marginTop: '16px' }}>
+          <label htmlFor="project-details">{dict.contact.form_msg}</label>
           <textarea
             id="project-details"
             name="project-details"
+            className="form-control textarea-control"
             rows="4"
-            placeholder={dict.contact.detailsPlaceholder}
+            placeholder={dict.contact.form_msg}
             disabled={submitting}
           />
         </div>
 
-        <button type="submit" className="btn btn-primary full-width" disabled={submitting}>
-          {submitting ? dict.contact.btnSubmitting : dict.contact.btnSubmit}
+        <button type="submit" className="btn btn-primary full-width" style={{ marginTop: '24px' }} disabled={submitting}>
+          {submitting ? dict.contact.form_submit : dict.contact.form_submit}
         </button>
       </form>
     </div>

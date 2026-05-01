@@ -15,27 +15,27 @@ export default function ProductsSection({ dict }) {
 
   return (
     <section className="products-section" id="products">
-      <div className="container products-shell">
+      <div className="container">
         <div className="section-heading reveal">
           <span className="eyebrow">{dict.eyebrow}</span>
           <h2 className="section-title">{dict.title}</h2>
           <p className="section-subtitle">{dict.subtitle}</p>
         </div>
 
-        <div className="products-grid">
+        <div className="products-list">
           {products.map((product, index) => (
-            <article className="product-card reveal" key={product.title}>
-              <div className="product-image-container">
+            <article className="product-row reveal" key={product.title}>
+              <div className="product-row-image">
                 <span className="product-tag">{product.tag}</span>
                 <Image
                   src={`/Images/${productImages[index]}`}
                   alt={product.title}
                   fill
-                  sizes="(max-width: 900px) 100vw, 33vw"
+                  sizes="(max-width: 900px) 100vw, 50vw"
                   className="cover-image"
                 />
               </div>
-              <div className="product-info">
+              <div className="product-row-body">
                 <h3>{product.title}</h3>
                 <p>{product.description}</p>
               </div>
