@@ -12,6 +12,8 @@ const galleryImages = [
   'hpl-partition-project-03.jpg',
   'hpl-partition-project-04.jpg',
   'hpl-partition-project-05.jpg',
+  'hpl-partition-project-06.png',
+  'hpl-partition-project-07.png',
 ];
 
 const productImages = [
@@ -40,16 +42,6 @@ export default function ClientPage({ dict, lang }) {
     setMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
-
-      const reveals = document.querySelectorAll('.reveal');
-      const windowHeight = window.innerHeight;
-
-      reveals.forEach((element) => {
-        const elementTop = element.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 90) {
-          element.classList.add('active');
-        }
-      });
     };
 
     const handleEscape = (event) => {
@@ -62,9 +54,26 @@ export default function ClientPage({ dict, lang }) {
     window.addEventListener('keydown', handleEscape);
     handleScroll();
 
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); // Stop observing once revealed
+          }
+        });
+      },
+      { rootMargin: '0px 0px -90px 0px', threshold: 0 }
+    );
+
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach((element) => observer.observe(element));
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('keydown', handleEscape);
+      observer.disconnect();
     };
   }, []);
 

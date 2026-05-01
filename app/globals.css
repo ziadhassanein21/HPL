@@ -448,8 +448,14 @@ body[dir='rtl'] .hero-backdrop {
   z-index: 1;
 }
 
-.hero-title {
+html[lang="en"] .hero-title,
+html[lang="en"] h1,
+html[lang="en"] h2,
+html[lang="en"] h3 {
   font-family: var(--font-heading), serif;
+}
+
+.hero-title {
   font-size: clamp(1.8rem, 3.5vw, 3.2rem);
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -920,14 +926,16 @@ body[dir='rtl'] .hero-backdrop {
 }
 
 .gallery-card-1,
-.gallery-card-4 {
+.gallery-card-4,
+.gallery-card-7 {
   grid-column: span 7;
 }
 
 .gallery-card-2,
 .gallery-card-3,
 .gallery-card-5,
-.gallery-card-6 {
+.gallery-card-6,
+.gallery-card-8 {
   grid-column: span 5;
 }
 
