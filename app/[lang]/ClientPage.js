@@ -224,7 +224,7 @@ export default function ClientPage({ dict, lang }) {
 
         // Also send a WhatsApp message as a backup notification
         const waMessage = encodeURIComponent(
-          `📩 New inquiry from website:\n\n👤 Name: ${formData.name}\n📞 Phone: ${formData.phone}\n🏗️ Project: ${formData.projectType}\n📝 Details: ${formData.details}`
+          `New inquiry from website:\n\nName: ${formData.name}\nPhone: ${formData.phone}\nProject: ${formData.projectType}\nDetails: ${formData.details}`
         );
         window.open(`https://wa.me/966551130855?text=${waMessage}`, '_blank');
       }
@@ -237,7 +237,6 @@ export default function ClientPage({ dict, lang }) {
 
   return (
     <>
-      <a href="#main-content" className="skip-link">{dict.nav.skip}</a>
 
       <header className={scrolled ? 'site-header scrolled' : 'site-header'}>
         <div className="container nav-shell">
