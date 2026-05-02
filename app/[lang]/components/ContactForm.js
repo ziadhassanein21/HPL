@@ -6,10 +6,12 @@ import { useState } from 'react';
 export default function ContactForm({ dict }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setSubmitting(true);
+    setError(false);
 
     const form = event.target;
     const formDataObj = Object.fromEntries(new FormData(form));
@@ -38,8 +40,12 @@ export default function ContactForm({ dict }) {
           `New inquiry from website:\n\nName: ${payload.name}\nPhone: ${payload.phone}\nProject: ${payload.projectType}\nDetails: ${payload.details}`
         );
         window.open(`https://wa.me/${siteConfig.phoneRaw.replace(/\+/g, '')}?text=${waMessage}`, '_blank');
+      } else {
+        setError(true);
+        console.error('API Error:', result.message);
       }
     } catch (error) {
+      setError(true);
       console.error('Form submission error:', error);
     } finally {
       setSubmitting(false);
@@ -48,9 +54,15 @@ export default function ContactForm({ dict }) {
 
   if (submitted) {
     return (
-      <div className="contact-form-card">
-        <div className="form-success">
-          <p>{dict.contact.success}</p>
+      <div className="contact-form-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '300px', textAlign: 'center' }}>
+        <div className="form-success-content">
+          <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>✅</div>
+          <h3 style={{ color: 'var(--gold-strong)', marginBottom: '1rem', fontSize: '1.4rem' }}>
+            {dict.contact.sent}
+          </h3>
+          <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', fontSize: '1rem' }}>
+            {dict.contact.success}
+          </p>
         </div>
       </div>
     );
@@ -115,8 +127,14 @@ export default function ContactForm({ dict }) {
           />
         </div>
 
+        {error && (
+          <div style={{ marginTop: '16px', color: '#ff4d4d', fontSize: '0.9rem' }}>
+            {dict.contact.form_error}
+          </div>
+        )}
+
         <button type="submit" className="btn btn-primary full-width" style={{ marginTop: '24px' }} disabled={submitting}>
-          {submitting ? dict.contact.form_submit : dict.contact.form_submit}
+          {submitting ? dict.contact.form_submitting : dict.contact.form_submit}
         </button>
       </form>
     </div>
