@@ -24,10 +24,23 @@ export default function ContactForm({ dict }) {
     };
 
     try {
-      const response = await fetch('/api/contact', {
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || '4e5f2514-dcf9-4d47-9ae4-00bd677c59a3';
+
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `New HPL Project Inquiry — ${payload.projectType}`,
+          from_name: 'HPL Website',
+          name: payload.name,
+          phone: payload.phone,
+          project_type: payload.projectType,
+          message: payload.details,
+        }),
       });
 
       const result = await response.json();
