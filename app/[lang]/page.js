@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import { getDictionary } from '../../dictionaries';
 import ClientPage from './ClientPage';
 import { getLocalizedUrl, getSiteUrl, hasRealContactValue, siteConfig } from '../../lib/site';
@@ -13,11 +14,12 @@ export default async function Page({ params }) {
 
   return (
     <>
-      <script
+      <ClientPage dict={dict} lang={lang} />
+      <Script
+        id="page-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
       />
-      <ClientPage dict={dict} lang={lang} />
     </>
   );
 }

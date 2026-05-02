@@ -3,8 +3,18 @@ import { NextResponse } from 'next/server';
 const locales = ['ar', 'en'];
 const defaultLocale = 'ar';
 
-export function proxy(request) {
+export default function middleware(request) {
   const { pathname } = request.nextUrl;
+
+  // Explicitly ignore API and static files
+  if (
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/Images') ||
+    pathname.includes('.') ||
+    pathname === '/favicon.ico'
+  ) {
+    return NextResponse.next();
+  }
 
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
@@ -19,5 +29,5 @@ export function proxy(request) {
 }
 
 export const config = {
-  matcher: ['/((?!_next|Images|favicon.ico|robots.txt|sitemap.xml).*)'],
+  matcher: ['/((?!_next|api|Images|favicon.ico|robots.txt|sitemap.xml).*)'],
 };

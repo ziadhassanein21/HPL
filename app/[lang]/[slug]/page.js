@@ -1,4 +1,6 @@
+import Script from 'next/script';
 import Image from 'next/image';
+import ExpandableImage from '../components/ui/ExpandableImage';
 import { notFound } from 'next/navigation';
 import { getSeoPageBySlug, getSeoPages } from '../../../lib/seo-pages';
 import { getLocalizedUrl, getSiteUrl, hasRealContactValue, siteConfig } from '../../../lib/site';
@@ -139,17 +141,16 @@ export default async function SeoServicePage({ params }) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
-      />
-
       <main className="seo-page">
         <section className="seo-hero">
           <div className="seo-hero-backdrop" />
           <div className="container seo-hero-grid">
             <div className="seo-hero-copy">
               <a href={`/${lang}`} className="seo-back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none' }}>
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
                 {lang === 'ar' ? 'العودة إلى الصفحة الرئيسية' : 'Back to homepage'}
               </a>
               <span className="eyebrow">{page.shortTitle}</span>
@@ -167,8 +168,8 @@ export default async function SeoServicePage({ params }) {
 
             <div className="seo-hero-media">
               <div className="seo-hero-image">
-                <Image
-                  src={siteConfig.ogImage}
+                <ExpandableImage
+                  src={page.image || siteConfig.ogImage}
                   alt={page.shortTitle}
                   fill
                   priority
@@ -252,6 +253,12 @@ export default async function SeoServicePage({ params }) {
           </div>
         </section>
       </main>
+
+      <Script
+        id="seo-page-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
+      />
     </>
   );
 }

@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Alexandria, Cormorant_Garamond, Manrope } from 'next/font/google';
 import '../globals.css';
@@ -192,20 +193,20 @@ export default async function LangLayout({ children, params }) {
   return (
     <html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <head>
-        <script
+        <Script
+          id="theme-initializer"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              (() => {
-                try {
-                  const storedTheme = localStorage.getItem('theme');
-                  const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  const resolvedTheme = storedTheme === 'light' || storedTheme === 'dark'
-                    ? storedTheme
-                    : (systemDark ? 'dark' : 'light');
-                  document.documentElement.dataset.theme = resolvedTheme;
-                  document.documentElement.style.colorScheme = resolvedTheme;
-                } catch (error) {}
-              })();
+              try {
+                const storedTheme = localStorage.getItem('theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const resolvedTheme = storedTheme === 'light' || storedTheme === 'dark'
+                  ? storedTheme
+                  : (systemDark ? 'dark' : 'light');
+                document.documentElement.dataset.theme = resolvedTheme;
+                document.documentElement.style.colorScheme = resolvedTheme;
+              } catch (e) {}
             `,
           }}
         />
@@ -217,19 +218,22 @@ export default async function LangLayout({ children, params }) {
           fontFamily: lang === 'ar' ? 'var(--font-arabic)' : 'var(--font-body)',
         }}
       >
-        <script
+        {children}
+        <Script
+          id="org-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-        <script
+        <Script
+          id="store-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(onlineStoreSchema) }}
         />
-        <script
+        <Script
+          id="business-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
-        {children}
         <SpeedInsights />
       </body>
     </html>
