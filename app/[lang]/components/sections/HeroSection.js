@@ -38,11 +38,9 @@ export default function HeroSection({ dict }) {
           <div className="hero-image-frame">
             <Image
               src="/Images/hpl-bathroom-partition-riyadh.jpg"
-              alt="HPL Partition Project in Riyadh"
+              alt="HPL Partition Project"
               fill
               priority
-              fetchPriority="high"
-              loading="eager"
               sizes="(max-width: 900px) 100vw, 50vw"
               className="cover-image"
             />

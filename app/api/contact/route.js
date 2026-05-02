@@ -30,15 +30,16 @@ export async function POST(request) {
       });
 
       const result = await response.json();
+      console.log('Web3Forms Result:', result);
 
       if (!result.success) {
-        console.error('Web3Forms error:', result);
         return Response.json(
-          { success: false, message: 'Failed to send message.' },
+          { success: false, message: result.message || 'Failed to send message.' },
           { status: 500 }
         );
       }
     } else {
+      console.warn('WEB3FORMS_KEY is missing!');
       // Fallback: log to Vercel server logs when no Web3Forms key is set
       console.log('=== NEW CONTACT FORM SUBMISSION ===');
       console.log('Name:', name);
