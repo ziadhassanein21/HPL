@@ -1,3 +1,6 @@
+'use client';
+
+import { memo } from 'react';
 import Image from 'next/image';
 
 const productImages = [
@@ -6,7 +9,7 @@ const productImages = [
   'hpl-shower-cubicle-riyadh.jpg',
 ];
 
-export default function ProductsSection({ dict }) {
+function ProductsSection({ dict }) {
   const products = [
     { title: dict.p1_title, description: dict.p1_desc, tag: dict.p1_tag },
     { title: dict.p2_title, description: dict.p2_desc, tag: dict.p2_tag },
@@ -46,3 +49,5 @@ export default function ProductsSection({ dict }) {
     </section>
   );
 }
+
+export default memo(ProductsSection);

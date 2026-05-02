@@ -1,5 +1,4 @@
 import Script from 'next/script';
-import Image from 'next/image';
 import ExpandableImage from '../components/ui/ExpandableImage';
 import { notFound } from 'next/navigation';
 import { getSeoPageBySlug, getSeoPages } from '../../../lib/seo-pages';

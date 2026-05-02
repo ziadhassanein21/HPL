@@ -1,4 +1,8 @@
-export default function TrustSection({ dict }) {
+'use client';
+
+import { memo } from 'react';
+
+function TrustSection({ dict }) {
   return (
     <section className="trust-strip">
       <div className="container trust-grid reveal">
@@ -13,3 +17,5 @@ export default function TrustSection({ dict }) {
     </section>
   );
 }
+
+export default memo(TrustSection);

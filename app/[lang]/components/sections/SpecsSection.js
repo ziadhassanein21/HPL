@@ -1,4 +1,8 @@
-export default function SpecsSection({ dict }) {
+'use client';
+
+import { memo } from 'react';
+
+function SpecsSection({ dict }) {
   const specificationItems = [
     dict.item1,
     dict.item2,
@@ -29,3 +33,5 @@ export default function SpecsSection({ dict }) {
     </section>
   );
 }
+
+export default memo(SpecsSection);

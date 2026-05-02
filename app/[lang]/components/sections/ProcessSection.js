@@ -1,4 +1,8 @@
-export default function ProcessSection({ dict }) {
+'use client';
+
+import { memo } from 'react';
+
+function ProcessSection({ dict }) {
   const processSteps = [
     { step: '01', title: dict.s1_title, description: dict.s1_desc },
     { step: '02', title: dict.s2_title, description: dict.s2_desc },
@@ -27,3 +31,5 @@ export default function ProcessSection({ dict }) {
     </section>
   );
 }
+
+export default memo(ProcessSection);

@@ -1,26 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { memo } from 'react';
+import { useTheme } from './providers/ThemeProvider';
 
-export default function ThemeToggle({ dict }) {
-  const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    if (typeof document === 'undefined') return 'dark';
-    return document.documentElement.dataset.theme || localStorage.getItem('theme') || 'dark';
-  });
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const toggleTheme = () => {
-    const root = document.documentElement;
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = nextTheme;
-    root.style.colorScheme = nextTheme;
-    localStorage.setItem('theme', nextTheme);
-    setTheme(nextTheme);
-  };
+function ThemeToggle({ dict }) {
+  const { theme, mounted, toggleTheme } = useTheme();
 
   return (
     <button
@@ -34,3 +18,5 @@ export default function ThemeToggle({ dict }) {
     </button>
   );
 }
+
+export default memo(ThemeToggle);

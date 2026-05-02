@@ -1,6 +1,9 @@
+'use client';
+
+import { memo } from 'react';
 import Image from 'next/image';
 
-export default function HeroSection({ dict }) {
+function HeroSection({ dict }) {
   const metrics = [dict.metric1, dict.metric2, dict.metric3];
   const heroBadges = [dict.badge1, dict.badge2, dict.badge3].filter(Boolean);
 
@@ -50,3 +53,5 @@ export default function HeroSection({ dict }) {
     </section>
   );
 }
+
+export default memo(HeroSection);

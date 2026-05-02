@@ -38,12 +38,12 @@ export default function SiteHeader({ dict, lang }) {
     router.push(newPathname || `/${newLang}`);
   };
 
-  const handleNavClick = () => setMenuActive(false);
+  const closeMenu = () => setMenuActive(false);
 
   return (
     <header className={scrolled ? 'site-header scrolled' : 'site-header'}>
       <div className="container nav-shell">
-        <a href="#home" className="brand-mark" onClick={handleNavClick}>
+        <a href="#home" className="brand-mark" onClick={closeMenu}>
           <Image
             src="/Images/logo.png"
             alt="NEW BASIC Company"
@@ -59,12 +59,12 @@ export default function SiteHeader({ dict, lang }) {
         </a>
 
         <nav id="primary-navigation" className={`nav-links ${menuActive ? 'active' : ''}`} aria-label={dict.nav.ariaLabel}>
-          <a href="#products" onClick={handleNavClick}>{dict.nav.products}</a>
-          <a href="#features" onClick={handleNavClick}>{dict.nav.features}</a>
-          <a href="#process" onClick={handleNavClick}>{dict.nav.process}</a>
-          <a href="#gallery" onClick={handleNavClick}>{dict.nav.gallery}</a>
-          <a href="#faq" onClick={handleNavClick}>{dict.nav.faq}</a>
-          <a href="#contact" onClick={handleNavClick}>{dict.nav.contact}</a>
+          <a href="#products" onClick={closeMenu}>{dict.nav.products}</a>
+          <a href="#features" onClick={closeMenu}>{dict.nav.features}</a>
+          <a href="#process" onClick={closeMenu}>{dict.nav.process}</a>
+          <a href="#gallery" onClick={closeMenu}>{dict.nav.gallery}</a>
+          <a href="#faq" onClick={closeMenu}>{dict.nav.faq}</a>
+          <a href="#contact" onClick={closeMenu}>{dict.nav.contact}</a>
           <ThemeToggle dict={dict} />
           <button className="lang-toggle" type="button" onClick={switchLanguage}>
             {dict.nav.langToggle}

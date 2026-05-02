@@ -4,6 +4,12 @@ import { Alexandria, Cormorant_Garamond, Manrope } from 'next/font/google';
 import '../globals.css';
 import { getDictionary } from '../../dictionaries';
 import { getLocalizedUrl, getSiteUrl, hasRealContactValue, keywordSets, siteConfig } from '../../lib/site';
+import {
+  generateOrganizationSchema,
+  generateOnlineStoreSchema,
+  generateLocalBusinessSchema,
+} from '../../lib/schema';
+import ThemeProvider from './components/providers/ThemeProvider';
 
 const arabicFont = Alexandria({
   subsets: ['arabic', 'latin'],
@@ -97,98 +103,10 @@ export async function generateStaticParams() {
 
 export default async function LangLayout({ children, params }) {
   const { lang } = await params;
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: siteConfig.name,
-    alternateName: siteConfig.legalName,
-    url: getSiteUrl(),
-    areaServed: {
-      '@type': 'Country',
-      name: siteConfig.countryName,
-    },
-  };
 
-  if (hasRealContactValue(siteConfig.email)) {
-    organizationSchema.email = siteConfig.email;
-  }
-
-  if (hasRealContactValue(siteConfig.phoneRaw)) {
-    organizationSchema.telephone = siteConfig.phoneRaw;
-  }
-
-  const onlineStoreSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'OnlineStore',
-    name: siteConfig.name,
-    description: lang === 'ar'
-      ? 'حلول HPL فينوليك للقواطع واللوكرات والمناطق الرطبة في السعودية'
-      : 'HPL phenolic partition, locker and wet-area solutions across Saudi Arabia',
-    url: getLocalizedUrl(lang),
-    areaServed: {
-      '@type': 'Country',
-      name: siteConfig.countryName,
-    },
-    availableLanguage: ['ar', 'en'],
-    image: `${getSiteUrl()}${siteConfig.ogImage}`,
-  };
-
-  if (hasRealContactValue(siteConfig.phoneRaw)) {
-    onlineStoreSchema.telephone = siteConfig.phoneRaw;
-  }
-
-  if (hasRealContactValue(siteConfig.email)) {
-    onlineStoreSchema.email = siteConfig.email;
-  }
-
-  const localBusinessSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': `${getSiteUrl()}#localbusiness`,
-    name: siteConfig.name,
-    image: `${getSiteUrl()}${siteConfig.logo}`,
-    url: getSiteUrl(),
-    telephone: siteConfig.phoneRaw,
-    email: siteConfig.email,
-    description: lang === 'ar'
-      ? 'توريد وتركيب قواطع حمامات ولوكرات وكبائن استحمام HPL فينوليك في السعودية'
-      : 'Supply and installation of HPL phenolic bathroom partitions, lockers and shower cubicles in Saudi Arabia',
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'SA',
-      addressRegion: lang === 'ar' ? 'المملكة العربية السعودية' : 'Saudi Arabia',
-    },
-    areaServed: {
-      '@type': 'Country',
-      name: 'Saudi Arabia',
-    },
-    priceRange: '$$',
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
-      opens: '08:00',
-      closes: '18:00',
-    },
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: lang === 'ar' ? 'حلول HPL' : 'HPL Solutions',
-      itemListElement: [
-        {
-          '@type': 'OfferCatalog',
-          name: lang === 'ar' ? 'قواطع حمامات HPL' : 'HPL Bathroom Partitions',
-        },
-        {
-          '@type': 'OfferCatalog',
-          name: lang === 'ar' ? 'لوكرات HPL' : 'HPL Lockers',
-        },
-        {
-          '@type': 'OfferCatalog',
-          name: lang === 'ar' ? 'كبائن استحمام HPL' : 'HPL Shower Cubicles',
-        },
-      ],
-    },
-    sameAs: [],
-  };
+  const organizationSchema = generateOrganizationSchema(lang, siteConfig, getSiteUrl, hasRealContactValue);
+  const onlineStoreSchema = generateOnlineStoreSchema(lang, siteConfig, getLocalizedUrl, hasRealContactValue);
+  const localBusinessSchema = generateLocalBusinessSchema(lang, siteConfig, getSiteUrl, hasRealContactValue);
 
   return (
     <html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
@@ -218,7 +136,9 @@ export default async function LangLayout({ children, params }) {
           fontFamily: lang === 'ar' ? 'var(--font-arabic)' : 'var(--font-body)',
         }}
       >
-        {children}
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
         <Script
           id="org-schema"
           type="application/ld+json"

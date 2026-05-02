@@ -1,10 +1,11 @@
-import Link from 'next/link';
-import Image from 'next/image';
+'use client';
+
+import dynamic from 'next/dynamic';
 import SiteHeader from './components/SiteHeader';
 import ContactForm from './components/ContactForm';
 import FaqAccordion from './components/FaqAccordion';
 import ScrollObserver from './components/ScrollObserver';
-import { getSeoPages } from '../../lib/seo-pages';
+import ContactIcon from './components/ui/ContactIcon';
 import { siteConfig } from '../../lib/site';
 
 import HeroSection from './components/sections/HeroSection';
@@ -14,6 +15,13 @@ import ProcessSection from './components/sections/ProcessSection';
 import GallerySection from './components/sections/GallerySection';
 import SpecsSection from './components/sections/SpecsSection';
 import TestimonialsSection from './components/sections/TestimonialsSection';
+
+// Lazy load below-the-fold sections
+const ValueSection = dynamic(() => import('./components/sections/ValueSection'));
+const LandingLinksSection = dynamic(() => import('./components/sections/LandingLinksSection'));
+const StatsSection = dynamic(() => import('./components/sections/StatsSection'));
+const ServiceAreaSection = dynamic(() => import('./components/sections/ServiceAreaSection'));
+const CtaBandSection = dynamic(() => import('./components/sections/CtaBandSection'));
 
 const galleryImages = [
   'hpl-partition-project-01.jpg',
@@ -32,23 +40,7 @@ const galleryImages = [
   'hpl-shower-cubicle-swimming-pool-ksa.png',
 ];
 
-export default function ClientPage({ dict, lang }) {
-  const useCases = [
-    dict.useCases.item1,
-    dict.useCases.item2,
-    dict.useCases.item3,
-    dict.useCases.item4,
-    dict.useCases.item5,
-    dict.useCases.item6,
-  ];
-
-  const serviceAreaItems = [
-    dict.serviceAreas.item1,
-    dict.serviceAreas.item2,
-    dict.serviceAreas.item3,
-    dict.serviceAreas.item4,
-  ];
-
+function ClientPage({ dict, lang }) {
   const faqs = [
     { question: dict.faq.q1, answer: dict.faq.a1 },
     { question: dict.faq.q2, answer: dict.faq.a2 },
@@ -65,130 +57,15 @@ export default function ClientPage({ dict, lang }) {
         <ProductsSection dict={dict.products} />
         <FeaturesSection dict={dict.features} />
         <ProcessSection dict={dict.process} />
-
-        <section className="value-section">
-          <div className="container value-grid">
-            <div className="value-copy reveal">
-              <span className="eyebrow">{dict.valueProps.eyebrow}</span>
-              <h2 className="section-title">{dict.valueProps.title}</h2>
-              <p className="section-subtitle align-start">{dict.valueProps.subtitle}</p>
-
-              <div className="value-points">
-                {(dict.valueProps.points || []).map((point, index) => (
-                  <div className="value-point" key={index}>
-                    <span className="value-dot" aria-hidden="true" />
-                    <p>{point}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="value-cards">
-              {[dict.valueProps.item1, dict.valueProps.item2, dict.valueProps.item3, dict.valueProps.item4].map((item) => (
-                <article className="value-card reveal" key={item.title}>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="landing-links-section">
-          <div className="container">
-            <div className="section-heading reveal">
-              <span className="eyebrow">{dict.landingLinks?.eyebrow || (lang === 'ar' ? 'دليل المشاريع' : 'Project Guides')}</span>
-              <h2 className="section-title">{dict.landingLinks?.title || (lang === 'ar' ? 'تعرف على المزيد حول حلولنا' : 'Learn More About Our Solutions')}</h2>
-              <p className="section-subtitle">{dict.landingLinks?.subtitle || ''}</p>
-            </div>
-
-            <div className="landing-links-grid">
-              {getSeoPages(lang).map((item) => (
-                <Link className="landing-link-card reveal" href={`/${lang}/${item.slug}`} key={item.slug}>
-                  {item.image && (
-                    <div className="landing-link-image">
-                      <Image
-                        src={item.image}
-                        alt={item.shortTitle}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="cover-image"
-                      />
-                    </div>
-                  )}
-                  <div className="landing-link-body">
-                    <h3>{item.shortTitle}</h3>
-                    <p>{item.heroText.substring(0, 80)}...</p>
-                    <span className="read-more">{lang === 'ar' ? 'اقرأ المزيد ←' : 'Read More →'}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ValueSection dict={dict} />
+        <LandingLinksSection dict={dict} lang={lang} />
 
         <SpecsSection dict={dict.specs} />
         <GallerySection dict={dict.gallery} images={galleryImages} />
-
-        <section className="stats-section">
-          <div className="container stats-bar reveal">
-            <div className="stat-item">
-              <span className="stat-value">{dict.stats.projects}</span>
-              <span className="stat-label">{dict.stats.projectsLabel}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-value">{dict.stats.experience}</span>
-              <span className="stat-label">{dict.stats.experienceLabel}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-value">{dict.stats.cities}</span>
-              <span className="stat-label">{dict.stats.citiesLabel}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-value">{dict.stats.satisfaction}</span>
-              <span className="stat-label">{dict.stats.satisfactionLabel}</span>
-            </div>
-          </div>
-        </section>
-
+        <StatsSection dict={dict} />
         <TestimonialsSection dict={dict.testimonials} />
-
-        <section className="service-area-section">
-          <div className="container service-area-shell reveal">
-            <div className="section-heading">
-              <span className="eyebrow">{dict.serviceAreas.eyebrow}</span>
-              <h2 className="section-title">{dict.serviceAreas.title}</h2>
-              <p className="section-subtitle">{dict.serviceAreas.subtitle}</p>
-            </div>
-
-            <div className="service-area-grid">
-              {serviceAreaItems.map((item) => (
-                <div className="service-area-card" key={item.title}>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="cta-band-section">
-          <div className="container">
-            <div className="cta-band reveal">
-              <div className="cta-band-copy">
-                <span className="eyebrow">{dict.ctaBand.eyebrow}</span>
-                <h2>{dict.ctaBand.title}</h2>
-                <p>{dict.ctaBand.text}</p>
-              </div>
-              <div className="cta-band-actions">
-                <a href="#contact" className="btn btn-primary">{dict.ctaBand.primary}</a>
-                <a href={`https://wa.me/${siteConfig.whatsappRaw}`} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                  {dict.ctaBand.secondary}
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ServiceAreaSection dict={dict} />
+        <CtaBandSection dict={dict} />
 
         <section className="faq-section" id="faq">
           <div className="container faq-shell reveal">
@@ -210,21 +87,21 @@ export default function ClientPage({ dict, lang }) {
 
               <div className="contact-points">
                 <div className="contact-point">
-                  <span>📍</span>
+                  <ContactIcon type="location" />
                   <div>
                     <strong>{dict.contact.locationLabel}</strong>
                     <p>{dict.contact.location}</p>
                   </div>
                 </div>
                 <div className="contact-point">
-                  <span>📞</span>
+                  <ContactIcon type="phone" />
                   <div>
                     <strong>{dict.contact.phoneLabel}</strong>
                     <p dir="ltr"><a href={`tel:${siteConfig.phoneRaw}`} style={{ color: 'inherit' }}>{siteConfig.phoneDisplay}</a></p>
                   </div>
                 </div>
                 <div className="contact-point">
-                  <span>✉️</span>
+                  <ContactIcon type="email" />
                   <div>
                     <strong>{dict.contact.emailLabel}</strong>
                     <p><a href={`mailto:${siteConfig.email}`} style={{ color: 'inherit' }}>{siteConfig.email}</a></p>
@@ -264,3 +141,5 @@ export default function ClientPage({ dict, lang }) {
     </>
   );
 }
+
+export default ClientPage;

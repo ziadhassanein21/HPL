@@ -1,16 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { memo, useState, useCallback } from 'react';
 import Image from 'next/image';
+import Lightbox from './Lightbox';
 
-export default function ExpandableImage({ src, alt, className, sizes, priority }) {
+function ExpandableImage({ src, alt, className, sizes, priority }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const openLightbox = useCallback(() => setIsOpen(true), []);
+  const closeLightbox = useCallback(() => setIsOpen(false), []);
 
   return (
     <>
       <div
         className="expandable-image-wrapper"
-        onClick={() => setIsOpen(true)}
+        onClick={openLightbox}
         style={{ cursor: 'zoom-in', width: '100%', height: '100%', position: 'relative', overflow: 'hidden' }}
       >
         <Image
@@ -24,25 +28,14 @@ export default function ExpandableImage({ src, alt, className, sizes, priority }
         />
       </div>
 
-      {isOpen && (
-        <div
-          className="image-lightbox"
-          onClick={() => setIsOpen(false)}
-        >
-          <button className="lightbox-close" aria-label="Close">
-            &times;
-          </button>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              style={{ objectFit: 'contain' }}
-              sizes="100vw"
-            />
-          </div>
-        </div>
-      )}
+      <Lightbox
+        src={src}
+        alt={alt}
+        isOpen={isOpen}
+        onClose={closeLightbox}
+      />
     </>
   );
 }
+
+export default memo(ExpandableImage);

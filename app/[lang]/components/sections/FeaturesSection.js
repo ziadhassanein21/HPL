@@ -1,4 +1,8 @@
-export default function FeaturesSection({ dict }) {
+'use client';
+
+import { memo } from 'react';
+
+function FeaturesSection({ dict }) {
   const features = [
     { icon: '01', title: dict.f1_title, description: dict.f1_desc },
     { icon: '02', title: dict.f2_title, description: dict.f2_desc },
@@ -30,3 +34,5 @@ export default function FeaturesSection({ dict }) {
     </section>
   );
 }
+
+export default memo(FeaturesSection);

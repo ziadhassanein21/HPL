@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 const locales = ['ar', 'en'];
 const defaultLocale = 'ar';
 
-export default function middleware(request) {
+export default function proxy(request) {
   const { pathname } = request.nextUrl;
 
   // Explicitly ignore API and static files

@@ -1,4 +1,8 @@
-export default function TestimonialsSection({ dict }) {
+'use client';
+
+import { memo } from 'react';
+
+function TestimonialsSection({ dict }) {
   return (
     <section className="testimonials-section">
       <div className="container">
@@ -33,3 +37,5 @@ export default function TestimonialsSection({ dict }) {
     </section>
   );
 }
+
+export default memo(TestimonialsSection);
