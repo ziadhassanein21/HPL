@@ -438,7 +438,7 @@ body[dir='rtl'] .site-footer h3 {
 .hero-backdrop {
   background:
     linear-gradient(90deg, var(--hero-overlay-start) 18%, var(--hero-overlay-mid) 58%, var(--hero-overlay-end) 100%),
-    url('/Images/hpl-partition-installation-ksa.jpg') center/cover no-repeat;
+    url('/Images/hpl-partition-installation-ksa.webp') center/cover no-repeat;
   inset: 0;
   opacity: 0.38;
   position: absolute;
@@ -447,7 +447,7 @@ body[dir='rtl'] .site-footer h3 {
 body[dir='rtl'] .hero-backdrop {
   background:
     linear-gradient(270deg, var(--hero-overlay-start) 18%, var(--hero-overlay-mid) 58%, var(--hero-overlay-end) 100%),
-    url('/Images/hpl-partition-installation-ksa.jpg') center/cover no-repeat;
+    url('/Images/hpl-partition-installation-ksa.webp') center/cover no-repeat;
 }
 
 .hero-grid {
@@ -1411,7 +1411,7 @@ html[lang="en"] h3 {
 .seo-hero-backdrop {
   background:
     linear-gradient(90deg, var(--seo-overlay-start) 18%, var(--seo-overlay-mid) 58%, var(--seo-overlay-end) 100%),
-    url('/Images/hpl-shower-cubicle-backdrop.jpg') center/cover no-repeat;
+    url('/Images/hpl-shower-cubicle-backdrop.webp') center/cover no-repeat;
   inset: 0;
   opacity: 0.36;
   position: absolute;
@@ -1420,7 +1420,7 @@ html[lang="en"] h3 {
 body[dir='rtl'] .seo-hero-backdrop {
   background:
     linear-gradient(270deg, var(--seo-overlay-start) 18%, var(--seo-overlay-mid) 58%, var(--seo-overlay-end) 100%),
-    url('/Images/hpl-shower-cubicle-backdrop.jpg') center/cover no-repeat;
+    url('/Images/hpl-shower-cubicle-backdrop.webp') center/cover no-repeat;
 }
 
 .seo-hero-grid {

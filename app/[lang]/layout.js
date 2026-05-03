@@ -78,9 +78,9 @@ export async function generateMetadata({ params }) {
     icons: {
       icon: [
         { url: '/favicon.ico' },
-        { url: '/Images/favicon-square.png', type: 'image/png' },
+        { url: '/Images/favicon-square.webp', type: 'image/png' },
       ],
-      apple: '/Images/favicon-square.png',
+      apple: '/Images/favicon-square.webp',
     },
     openGraph: {
       title: dict.meta.title,
@@ -133,17 +133,8 @@ export default async function LangLayout({ children, params }) {
 
         {/* ── Brand Icons for Google Search ── */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/Images/favicon-square.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/Images/favicon-square.png" />
-
-      </head>
-      <body
-        dir={direction}
-        className={`${arabicFont.variable} ${bodyFont.variable} ${headingFont.variable}`}
-        style={{
-          fontFamily: lang === 'ar' ? 'var(--font-arabic)' : 'var(--font-body)',
-        }}
-      >
+        <link rel="icon" href="/Images/favicon-square.webp" type="image/png" />
+        <link rel="apple-touch-icon" href="/Images/favicon-square.webp" />
         <Script id="theme-initializer" strategy="beforeInteractive">
           {`
             try {
@@ -155,6 +146,14 @@ export default async function LangLayout({ children, params }) {
             } catch (e) {}
           `}
         </Script>
+      </head>
+      <body
+        dir={direction}
+        className={`${arabicFont.variable} ${bodyFont.variable} ${headingFont.variable}`}
+        style={{
+          fontFamily: lang === 'ar' ? 'var(--font-arabic)' : 'var(--font-body)',
+        }}
+      >
         <Script
           id="org-schema"
           type="application/ld+json"

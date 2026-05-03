@@ -26,9 +26,9 @@ const CtaBandSection = dynamic(() => import('./components/sections/CtaBandSectio
 const LandingLinksSection = dynamic(() => import('./components/sections/LandingLinksSection'));
 
 const galleryImages = [
-  'hpl-partition-project-01.jpg',
-  'hpl-partition-project-04.jpg',
-  'hpl-partition-project-05.jpg',
+  'hpl-partition-project-01.webp',
+  'hpl-partition-project-04.webp',
+  'hpl-partition-project-05.webp',
   'hpl-partition-project-06.webp',
   'hpl-partition-project-07.webp',
   'hpl-shower-cubicle-sports-club-ksa.webp',

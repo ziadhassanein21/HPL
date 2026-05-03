@@ -19,13 +19,13 @@ export const metadata = {
     siteName: 'NEW BASIC Company',
     locale: 'ar_SA',
     type: 'article',
-    images: [{ url: 'https://hplksa.com/Images/hpl-bathroom-partition-riyadh.jpg', width: 1200, height: 630, alt: 'مقارنة بين خامات القواطع' }],
+    images: [{ url: 'https://hplksa.com/Images/hpl-bathroom-partition-riyadh.webp', width: 1200, height: 630, alt: 'مقارنة بين خامات القواطع' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'HPL مقابل MDF مقابل PVC: أي خامة تختار لقواطع حمامات مشروعك؟',
     description: 'مقارنة شاملة بين خامات قواطع الحمامات HPL وMDF وPVC من حيث تحمل الرطوبة والمتانة وتكاليف الصيانة ومدة الخدمة. دليل المشتري السعودي.',
-    images: ['https://hplksa.com/Images/hpl-bathroom-partition-riyadh.jpg'],
+    images: ['https://hplksa.com/Images/hpl-bathroom-partition-riyadh.webp'],
   },
 };
 
@@ -44,7 +44,7 @@ export default async function BlogPost() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'HPL مقابل MDF مقابل PVC: أي خامة تختار لقواطع حمامات مشروعك؟',
-    image: 'https://hplksa.com/Images/hpl-bathroom-partition-riyadh.jpg',
+    image: 'https://hplksa.com/Images/hpl-bathroom-partition-riyadh.webp',
     author: {
       '@type': 'Organization',
       name: 'NEW BASIC Company',

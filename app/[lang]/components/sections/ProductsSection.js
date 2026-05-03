@@ -5,8 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const productImages = [
-  'hpl-bathroom-partition-system.jpg',
-  'hpl-locker-system-riyadh.jpg',
+  'hpl-bathroom-partition-system.webp',
+  'hpl-locker-system-riyadh.webp',
   'hpl-shower-cubicle-swimming-pool-ksa.webp',
 ];
 
