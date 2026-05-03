@@ -8,13 +8,15 @@ import ScrollObserver from './components/ScrollObserver';
 import ContactIcon from './components/ui/ContactIcon';
 import { siteConfig } from '../../lib/site';
 
+
 import HeroSection from './components/sections/HeroSection';
-import ProductsSection from './components/sections/ProductsSection';
-import FeaturesSection from './components/sections/FeaturesSection';
-import ProcessSection from './components/sections/ProcessSection';
-import GallerySection from './components/sections/GallerySection';
-import SpecsSection from './components/sections/SpecsSection';
-import TestimonialsSection from './components/sections/TestimonialsSection';
+
+const ProductsSection = dynamic(() => import('./components/sections/ProductsSection'));
+const FeaturesSection = dynamic(() => import('./components/sections/FeaturesSection'));
+const ProcessSection = dynamic(() => import('./components/sections/ProcessSection'));
+const GallerySection = dynamic(() => import('./components/sections/GallerySection'));
+const SpecsSection = dynamic(() => import('./components/sections/SpecsSection'));
+const TestimonialsSection = dynamic(() => import('./components/sections/TestimonialsSection'));
 
 // Lazy load below-the-fold sections
 const ValueSection = dynamic(() => import('./components/sections/ValueSection'));
@@ -30,14 +32,14 @@ const galleryImages = [
   'hpl-partition-project-03.jpg',
   'hpl-partition-project-04.jpg',
   'hpl-partition-project-05.jpg',
-  'hpl-partition-project-06.png',
-  'hpl-partition-project-07.png',
-  'hpl-locker-gym-facilities-ksa.png',
-  'hpl-partition-corporate-office-ksa.png',
-  'hpl-partition-shopping-mall-ksa.png',
-  'hpl-partition-office-building-ksa.png',
-  'hpl-shower-cubicle-sports-club-ksa.png',
-  'hpl-shower-cubicle-swimming-pool-ksa.png',
+  'hpl-partition-project-06.webp',
+  'hpl-partition-project-07.webp',
+  'hpl-locker-gym-facilities-ksa.webp',
+  'hpl-partition-corporate-office-ksa.webp',
+  'hpl-partition-shopping-mall-ksa.webp',
+  'hpl-partition-office-building-ksa.webp',
+  'hpl-shower-cubicle-sports-club-ksa.webp',
+  'hpl-shower-cubicle-swimming-pool-ksa.webp',
 ];
 
 function ClientPage({ dict, lang }) {

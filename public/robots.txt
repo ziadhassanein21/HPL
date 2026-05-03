@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hplksa.com/sitemap.xml

@@ -49,6 +49,10 @@ export async function generateMetadata({ params }) {
     keywords: [...keywordSets[lang], ...keywordSets[lang === 'ar' ? 'en' : 'ar']],
     applicationName: siteConfig.name,
     category: 'construction',
+    /* ── Google Search Console verification placeholder ── */
+    verification: {
+      google: 'PASTE_YOUR_GSC_VERIFICATION_CODE_HERE',
+    },
     robots: {
       index: true,
       follow: true,
@@ -61,11 +65,10 @@ export async function generateMetadata({ params }) {
       },
     },
     alternates: {
-      canonical: `/${lang}`,
+      canonical: `${getSiteUrl()}/ar`,
       languages: {
-        en: '/en',
-        ar: '/ar',
-        'x-default': `/${siteConfig.defaultLocale}`,
+        ar: `${getSiteUrl()}/ar`,
+        'x-default': `${getSiteUrl()}/ar`,
       },
     },
     icons: {
@@ -76,8 +79,8 @@ export async function generateMetadata({ params }) {
       title: dict.meta.title,
       description: dict.meta.description,
       url: currentUrl,
-      siteName: siteConfig.name,
-      locale: lang === 'ar' ? 'ar_SA' : 'en_US',
+      siteName: 'NEW BASIC Company',
+      locale: 'ar_SA',
       type: 'website',
       images: [
         {
@@ -98,7 +101,7 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  return [{ lang: 'ar' }, { lang: 'en' }];
+  return [{ lang: 'ar' }];
 }
 
 export default async function LangLayout({ children, params }) {
@@ -109,8 +112,16 @@ export default async function LangLayout({ children, params }) {
   const localBusinessSchema = generateLocalBusinessSchema(lang, siteConfig, getSiteUrl, hasRealContactValue);
 
   return (
-    <html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
+        {/* ── TASK A3 — hreflang tags ── */}
+        <link rel="alternate" hrefLang="ar" href="https://hplksa.com/ar" />
+        <link rel="alternate" hrefLang="x-default" href="https://hplksa.com/ar" />
+
+        {/* ── TASK A8 — Preconnect for Google Fonts ── */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
         <Script
           id="theme-initializer"
           strategy="beforeInteractive"
@@ -130,10 +141,10 @@ export default async function LangLayout({ children, params }) {
         />
       </head>
       <body
-        dir={lang === 'ar' ? 'rtl' : 'ltr'}
+        dir="rtl"
         className={`${arabicFont.variable} ${bodyFont.variable} ${headingFont.variable}`}
         style={{
-          fontFamily: lang === 'ar' ? 'var(--font-arabic)' : 'var(--font-body)',
+          fontFamily: 'var(--font-arabic)',
         }}
       >
         <ThemeProvider>

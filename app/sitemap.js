@@ -1,35 +1,62 @@
-import { getLocalizedUrl, siteConfig } from '../lib/site';
-import { getSeoPages } from '../lib/seo-pages';
+/**
+ * TASK A2 — Next.js App Router Sitemap
+ * Covers all 7 pages (P1–P7) with correct priorities and changeFrequency.
+ */
+
+const BASE_URL = 'https://hplksa.com';
 
 export default function sitemap() {
-  const now = new Date();
-  const homePages = siteConfig.locales.map((lang) => ({
-    url: getLocalizedUrl(lang),
-    lastModified: now,
-    changeFrequency: 'weekly',
-    priority: lang === siteConfig.defaultLocale ? 1 : 0.9,
-    alternates: {
-      languages: {
-        ar: getLocalizedUrl('ar'),
-        en: getLocalizedUrl('en'),
-      },
-    },
-  }));
+  const now = new Date().toISOString();
 
-  const servicePages = siteConfig.locales.flatMap((lang) =>
-    getSeoPages(lang).map((page) => ({
-      url: `${getLocalizedUrl(lang)}/${page.slug}`,
+  return [
+    // P1 — Homepage
+    {
+      url: `${BASE_URL}/ar`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.8,
-      alternates: {
-        languages: {
-          ar: `${getLocalizedUrl('ar')}/${page.slug}`,
-          en: `${getLocalizedUrl('en')}/${page.slug}`,
-        },
-      },
-    }))
-  );
-
-  return [...homePages, ...servicePages];
+      priority: 1.0,
+    },
+    // P2 — Bathroom Partitions KSA
+    {
+      url: `${BASE_URL}/ar/hpl-bathroom-partitions-ksa`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    // P3 — Lockers KSA
+    {
+      url: `${BASE_URL}/ar/hpl-lockers-ksa`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    // P4 — Shower Cubicles KSA
+    {
+      url: `${BASE_URL}/ar/hpl-shower-cubicles-ksa`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    // P5 — Phenolic Compact Laminate KSA
+    {
+      url: `${BASE_URL}/ar/phenolic-compact-laminate-ksa`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    // P6 — HPL Partitions Jeddah (city page)
+    {
+      url: `${BASE_URL}/ar/hpl-partitions-jeddah`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    // P7 — HPL Partitions Dammam (city page)
+    {
+      url: `${BASE_URL}/ar/hpl-partitions-dammam`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+  ];
 }

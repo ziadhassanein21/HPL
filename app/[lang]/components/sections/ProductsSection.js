@@ -2,11 +2,26 @@
 
 import { memo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const productImages = [
   'hpl-bathroom-partition-system.jpg',
   'hpl-locker-phenolic-system.jpg',
   'hpl-shower-cubicle-riyadh.jpg',
+];
+
+/* ── TASK D1 — Arabic alt texts for product images ── */
+const productAlts = [
+  'نظام قواطع حمامات HPL كومباكت فينوليك بإكسسوارات فولاذ مقاوم للصدأ',
+  'خزائن HPL فينوليك لغرف تبديل الملابس في الأندية الرياضية بالمملكة',
+  'كبائن استحمام HPL مقاومة للمياه في نادٍ رياضي بالرياض',
+];
+
+/* ── TASK C1 — Product card links ── */
+const productLinks = [
+  '/ar/hpl-bathroom-partitions-ksa',
+  '/ar/hpl-lockers-ksa',
+  '/ar/hpl-shower-cubicles-ksa',
 ];
 
 function ProductsSection({ dict }) {
@@ -27,22 +42,24 @@ function ProductsSection({ dict }) {
 
         <div className="products-list">
           {products.map((product, index) => (
-            <article className="product-row reveal" key={product.title}>
-              <div className="product-row-image">
-                <span className="product-tag">{product.tag}</span>
-                <Image
-                  src={`/Images/${productImages[index]}`}
-                  alt={product.title}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                  className="cover-image"
-                />
-              </div>
-              <div className="product-row-body">
-                <h3>{product.title}</h3>
-                <p>{product.description}</p>
-              </div>
-            </article>
+            <Link href={productLinks[index]} key={product.title} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <article className="product-row reveal">
+                <div className="product-row-image">
+                  <span className="product-tag">{product.tag}</span>
+                  <Image
+                    src={`/Images/${productImages[index]}`}
+                    alt={productAlts[index]}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                    className="cover-image"
+                  />
+                </div>
+                <div className="product-row-body">
+                  <h3>{product.title}</h3>
+                  <p>{product.description}</p>
+                </div>
+              </article>
+            </Link>
           ))}
         </div>
       </div>

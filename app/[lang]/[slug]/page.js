@@ -1,54 +1,35 @@
 import Script from 'next/script';
+import Link from 'next/link';
 import ExpandableImage from '../components/ui/ExpandableImage';
 import { notFound } from 'next/navigation';
 import { getSeoPageBySlug, getSeoPages } from '../../../lib/seo-pages';
 import { getLocalizedUrl, getSiteUrl, hasRealContactValue, siteConfig } from '../../../lib/site';
+import SchemaOrg from '../../../components/SchemaOrg';
+import RelatedPages from '../components/RelatedPages';
 
-export async function generateStaticParams() {
-  return siteConfig.locales.flatMap((lang) =>
-    getSeoPages(lang).map((page) => ({
-      lang,
-      slug: page.slug,
-    }))
-  );
-}
-
+/* ── TASK A6 — per-page metadata with exact values ── */
 export async function generateMetadata({ params }) {
   const { lang, slug } = await params;
   const page = getSeoPageBySlug(lang, slug);
 
-  if (!page) {
-    return {};
-  }
+  if (!page) return {};
 
-  const currentUrl = `${getLocalizedUrl(lang)}/${page.slug}`;
-  const imageUrl = `${getSiteUrl()}${siteConfig.ogImage}`;
+  const imageUrl = `${getSiteUrl()}${page.image || siteConfig.ogImage}`;
 
   return {
     title: page.metaTitle,
     description: page.metaDescription,
     alternates: {
-      canonical: currentUrl,
-      languages: {
-        ar: `${getLocalizedUrl('ar')}/${page.slug}`,
-        en: `${getLocalizedUrl('en')}/${page.slug}`,
-      },
+      canonical: page.canonical || `${getLocalizedUrl(lang)}/${page.slug}`,
     },
     openGraph: {
       title: page.metaTitle,
       description: page.metaDescription,
-      url: currentUrl,
-      siteName: siteConfig.name,
-      locale: lang === 'ar' ? 'ar_SA' : 'en_US',
-      type: 'article',
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: page.shortTitle,
-        },
-      ],
+      url: page.canonical || `${getLocalizedUrl(lang)}/${page.slug}`,
+      siteName: 'NEW BASIC Company',
+      locale: 'ar_SA',
+      type: 'website',
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: page.shortTitle }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -59,112 +40,81 @@ export async function generateMetadata({ params }) {
   };
 }
 
+export async function generateStaticParams() {
+  return getSeoPages('ar').map((page) => ({
+    lang: 'ar',
+    slug: page.slug,
+  }));
+}
+
 export default async function SeoServicePage({ params }) {
   const { lang, slug } = await params;
   const page = getSeoPageBySlug(lang, slug);
+  if (!page) notFound();
 
-  if (!page) {
-    notFound();
-  }
+  const pageUrl = page.canonical || `${getLocalizedUrl(lang)}/${page.slug}`;
+  const imageUrl = `${getSiteUrl()}${page.image || siteConfig.ogImage}`;
 
-  const pageUrl = `${getLocalizedUrl(lang)}/${page.slug}`;
-  const imageUrl = `${getSiteUrl()}${siteConfig.ogImage}`;
-
-  const schemaGraph = {
+  /* ── TASK A5-d — BreadcrumbList schema ── */
+  const breadcrumbSchema = {
     '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'WebPage',
-        '@id': `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: page.metaTitle,
-        description: page.metaDescription,
-        inLanguage: lang,
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${pageUrl}#breadcrumb`,
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: lang === 'ar' ? 'الرئيسية' : 'Home',
-            item: getLocalizedUrl(lang),
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: page.shortTitle,
-            item: pageUrl,
-          },
-        ],
-      },
-      {
-        '@type': 'Service',
-        '@id': `${pageUrl}#service`,
-        name: page.shortTitle,
-        serviceType: page.shortTitle,
-        description: page.metaDescription,
-        areaServed: {
-          '@type': 'Country',
-          name: siteConfig.countryName,
-        },
-        provider: {
-          '@type': 'Organization',
-          name: siteConfig.name,
-          image: imageUrl,
-        },
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': `${pageUrl}#faq`,
-        mainEntity: page.faq.map((item) => ({
-          '@type': 'Question',
-          name: item.q,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.a,
-          },
-        })),
-      },
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: 'https://hplksa.com/ar' },
+      { '@type': 'ListItem', position: 2, name: page.shortTitle, item: pageUrl },
     ],
   };
 
-  if (hasRealContactValue(siteConfig.phoneRaw)) {
-    schemaGraph['@graph'][2].provider.telephone = siteConfig.phoneRaw;
-  }
+  /* ── TASK A5-e — Service schema ── */
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: page.shortTitle,
+    name: page.metaTitle,
+    description: page.metaDescription,
+    provider: {
+      '@type': 'LocalBusiness',
+      name: 'NEW BASIC Company',
+      telephone: '+966551130855',
+      email: 'newbasic.ac@gmail.com',
+    },
+    areaServed: { '@type': 'Country', name: 'SA' },
+  };
 
-  if (hasRealContactValue(siteConfig.email)) {
-    schemaGraph['@graph'][2].provider.email = siteConfig.email;
-  }
+  /* ── TASK A5 — FAQPage schema ── */
+  const faqSchema = page.faq?.length ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: page.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  } : null;
 
   return (
     <>
       <main className="seo-page">
+        {/* ── Hero Section ── */}
         <section className="seo-hero">
           <div className="seo-hero-backdrop" />
           <div className="container seo-hero-grid">
             <div className="seo-hero-copy">
-              <a href={`/${lang}`} className="seo-back-link">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none' }}>
-                  <line x1="19" y1="12" x2="5" y2="12"></line>
-                  <polyline points="12 19 5 12 12 5"></polyline>
+              <Link href="/ar" className="seo-back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: 'rotate(180deg)' }}>
+                  <line x1="19" y1="12" x2="5" y2="12" />
+                  <polyline points="12 19 5 12 12 5" />
                 </svg>
-                {lang === 'ar' ? 'العودة إلى الصفحة الرئيسية' : 'Back to homepage'}
-              </a>
+                العودة إلى الصفحة الرئيسية
+              </Link>
               <span className="eyebrow">{page.shortTitle}</span>
               <h1 className="section-title seo-main-title">{page.heroTitle}</h1>
               <p className="section-subtitle align-start">{page.heroText}</p>
               <div className="seo-hero-actions">
-                <a href={`/${lang}#contact`} className="btn btn-primary">
-                  {lang === 'ar' ? 'اطلب عرض سعر' : 'Request Quote'}
-                </a>
-                <a href={`/${lang}`} className="btn btn-secondary">
-                  {lang === 'ar' ? 'استعرض الموقع' : 'Explore Website'}
-                </a>
+                <a href="/ar#contact" className="btn btn-primary">اطلب عرض سعر</a>
+                <a href="/ar" className="btn btn-secondary">استعرض الموقع</a>
               </div>
             </div>
-
             <div className="seo-hero-media">
               <div className="seo-hero-image">
                 <ExpandableImage
@@ -180,34 +130,45 @@ export default async function SeoServicePage({ params }) {
           </div>
         </section>
 
+        {/* ── Content Sections ── */}
         <section className="seo-content-section">
           <div className="container seo-content-grid">
             <article className="seo-content-main">
-              <div className="seo-content-block">
-                <h2>{page.introTitle}</h2>
-                <p>{page.introText}</p>
-              </div>
-
               {page.sections.map((section) => (
                 <div className="seo-content-block" key={section.title}>
                   <h2>{section.title}</h2>
-                  <p>{section.body}</p>
+                  {section.body.split('\n\n').map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                  {section.isSpecsTable && section.specsData && (
+                    <div className="seo-specs-table-wrapper">
+                      <table className="seo-specs-table">
+                        <thead>
+                          <tr><th>المواصفة</th><th>القيمة</th></tr>
+                        </thead>
+                        <tbody>
+                          {section.specsData.map((spec) => (
+                            <tr key={spec.label}><td>{spec.label}</td><td>{spec.value}</td></tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
                 </div>
               ))}
             </article>
 
             <aside className="seo-content-side">
               <div className="seo-side-card">
-                <h3>{lang === 'ar' ? 'نقاط أساسية' : 'Key Highlights'}</h3>
+                <h3>نقاط أساسية</h3>
                 <ul className="seo-list">
                   {page.highlights.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
               </div>
-
               <div className="seo-side-card">
-                <h3>{lang === 'ar' ? 'نقاط مهمة للمشروع' : 'Project Considerations'}</h3>
+                <h3>نقاط مهمة للمشروع</h3>
                 <ul className="seo-list">
                   {page.specs.map((item) => (
                     <li key={item}>{item}</li>
@@ -218,46 +179,44 @@ export default async function SeoServicePage({ params }) {
           </div>
         </section>
 
-        <section className="seo-faq-section">
-          <div className="container">
-            <div className="section-heading">
-              <span className="eyebrow">{lang === 'ar' ? 'أسئلة شائعة' : 'FAQ'}</span>
-              <h2 className="section-title">{page.shortTitle}</h2>
+        {/* ── FAQ Section ── */}
+        {page.faq?.length > 0 && (
+          <section className="seo-faq-section">
+            <div className="container">
+              <div className="section-heading">
+                <span className="eyebrow">أسئلة شائعة</span>
+                <h2 className="section-title">أسئلة شائعة حول {page.shortTitle}</h2>
+              </div>
+              <div className="seo-faq-grid">
+                {page.faq.map((item) => (
+                  <article className="seo-faq-card" key={item.q}>
+                    <h3>{item.q}</h3>
+                    <p>{item.a}</p>
+                  </article>
+                ))}
+              </div>
             </div>
+          </section>
+        )}
 
-            <div className="seo-faq-grid">
-              {page.faq.map((item) => (
-                <article className="seo-faq-card" key={item.q}>
-                  <h3>{item.q}</h3>
-                  <p>{item.a}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
+        {/* ── CTA Section ── */}
         <section className="seo-cta-section">
           <div className="container seo-cta-card">
             <div>
-              <span className="eyebrow">{lang === 'ar' ? 'ابدأ الآن' : 'Get Started'}</span>
-              <h2 className="section-title">
-                {lang === 'ar'
-                  ? 'هل تريد حلاً مناسباً لمشروعك باستخدام أنظمة HPL؟'
-                  : 'Need the right HPL solution for your project?'}
-              </h2>
+              <span className="eyebrow">ابدأ الآن</span>
+              <h2 className="section-title">{page.cta || 'هل تريد حلاً مناسباً لمشروعك باستخدام أنظمة HPL؟'}</h2>
             </div>
-            <a href={`/${lang}#contact`} className="btn btn-primary">
-              {lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}
-            </a>
+            <a href="/ar#contact" className="btn btn-primary">تواصل معنا</a>
           </div>
         </section>
+
+        {/* ── TASK C — Related Links Section ── */}
+        <RelatedPages currentPage={slug} />
       </main>
 
-      <Script
-        id="seo-page-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
-      />
+      <SchemaOrg schema={breadcrumbSchema} />
+      <SchemaOrg schema={serviceSchema} />
+      {faqSchema && <SchemaOrg schema={faqSchema} />}
     </>
   );
 }
