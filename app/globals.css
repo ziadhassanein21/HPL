@@ -770,6 +770,12 @@ html[lang="en"] h3 {
   position: relative;
 }
 
+.product-row-link {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+}
+
 .product-row-body {
   display: flex;
   flex-direction: column;
@@ -806,6 +812,17 @@ html[lang="en"] h3 {
   color: var(--muted);
   line-height: 1.85;
   margin-top: 0.85rem;
+}
+
+.text-link {
+  color: var(--gold);
+  font-weight: 700;
+  margin-top: 1.25rem;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  color: var(--gold-strong);
 }
 
 .features-layout {
@@ -1379,6 +1396,7 @@ html[lang="en"] h3 {
 
 .seo-hero,
 .seo-content-section,
+.seo-proof-section,
 .seo-faq-section,
 .seo-cta-section {
   padding: var(--section-space) 0;
@@ -1545,6 +1563,31 @@ body[dir='rtl'] .seo-specs-table {
   color: var(--muted);
 }
 
+.seo-proof-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.seo-proof-card,
+.seo-related-card {
+  background: linear-gradient(180deg, var(--surface-subtle), rgba(255, 255, 255, 0.015));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.seo-proof-card h3 {
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.seo-proof-card p {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-top: 0.7rem;
+}
+
 .seo-cta-card {
   align-items: center;
   display: flex;
@@ -1641,6 +1684,7 @@ body[dir='ltr'] .whatsapp-float {
   .specs-grid,
   .service-area-grid,
   .landing-links-grid,
+  .seo-proof-grid,
   .seo-faq-grid {
     grid-template-columns: 1fr;
   }

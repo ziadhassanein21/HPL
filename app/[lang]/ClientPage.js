@@ -23,22 +23,15 @@ const ValueSection = dynamic(() => import('./components/sections/ValueSection'))
 const StatsSection = dynamic(() => import('./components/sections/StatsSection'));
 const ServiceAreaSection = dynamic(() => import('./components/sections/ServiceAreaSection'));
 const CtaBandSection = dynamic(() => import('./components/sections/CtaBandSection'));
+const LandingLinksSection = dynamic(() => import('./components/sections/LandingLinksSection'));
 
 const galleryImages = [
   'hpl-partition-project-01.jpg',
-  'hpl-partition-project-02.jpg',
-  'hpl-bathroom-partition-riyadh.jpg',
-  'hpl-partition-project-03.jpg',
   'hpl-partition-project-04.jpg',
   'hpl-partition-project-05.jpg',
   'hpl-partition-project-06.webp',
   'hpl-partition-project-07.webp',
-  'hpl-locker-gym-facilities-ksa.webp',
-  'hpl-partition-corporate-office-ksa.webp',
-  'hpl-partition-shopping-mall-ksa.webp',
-  'hpl-partition-office-building-ksa.webp',
   'hpl-shower-cubicle-sports-club-ksa.webp',
-  'hpl-shower-cubicle-swimming-pool-ksa.webp',
 ];
 
 function ClientPage({ dict, lang }) {
@@ -56,6 +49,7 @@ function ClientPage({ dict, lang }) {
       <main id="main-content">
         <HeroSection dict={dict.hero} />
         <ProductsSection dict={dict.products} lang={lang} />
+        <LandingLinksSection dict={dict} lang={lang} />
         <FeaturesSection dict={dict.features} />
         <ProcessSection dict={dict.process} />
         <ValueSection dict={dict} />

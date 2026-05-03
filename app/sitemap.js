@@ -1,28 +1,21 @@
-/**
- * TASK A2 — Next.js App Router Sitemap
- * Covers all 7 pages (P1–P7) with correct priorities and changeFrequency.
- */
+import { getSeoPages } from '../lib/seo-pages';
 
 const BASE_URL = 'https://hplksa.com';
 
 export default function sitemap() {
   const now = new Date().toISOString();
+  const pageEntries = ['ar', 'en'].flatMap((lang) =>
+    getSeoPages(lang).map((page) => ({
+      url: `${BASE_URL}/${lang}/${page.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: lang === 'ar' ? 0.9 : 0.8,
+    }))
+  );
 
   return [
-    // P1 — Homepage
     { url: `${BASE_URL}/ar`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
     { url: `${BASE_URL}/en`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
-    // P2 — Bathroom Partitions KSA
-    { url: `${BASE_URL}/ar/hpl-bathroom-partitions-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE_URL}/en/hpl-bathroom-partitions-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    // P3 — Lockers KSA
-    { url: `${BASE_URL}/ar/hpl-lockers-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE_URL}/en/hpl-lockers-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    // P4 — Shower Cubicles KSA
-    { url: `${BASE_URL}/ar/hpl-shower-cubicles-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE_URL}/en/hpl-shower-cubicles-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    // P5 — Phenolic Compact Laminate KSA
-    { url: `${BASE_URL}/ar/phenolic-compact-laminate-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE_URL}/en/phenolic-compact-laminate-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    ...pageEntries,
   ];
 }

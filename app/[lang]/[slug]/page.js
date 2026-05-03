@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { getSeoPageBySlug, getSeoPages } from '../../../lib/seo-pages';
 import { getLocalizedUrl, getSiteUrl, hasRealContactValue, siteConfig } from '../../../lib/site';
 import SchemaOrg from '../../../components/SchemaOrg';
-import RelatedPages from '../components/RelatedPages';
 
 /* ── TASK A6 — per-page metadata with exact values ── */
 export async function generateMetadata({ params }) {
@@ -213,9 +212,6 @@ export default async function SeoServicePage({ params }) {
             <Link href={`/${lang}#contact`} className="btn btn-primary">{lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}</Link>
           </div>
         </section>
-
-        {/* ── TASK C — Related Links Section ── */}
-        <RelatedPages currentPage={slug} lang={lang} />
       </main>
 
       <SchemaOrg schema={breadcrumbSchema} />

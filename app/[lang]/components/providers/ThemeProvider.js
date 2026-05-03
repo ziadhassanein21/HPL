@@ -12,7 +12,8 @@ function ThemeProvider({ children }) {
   });
 
   useEffect(() => {
-    setMounted(true);
+    const frame = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const setThemeValue = useCallback((newTheme) => {

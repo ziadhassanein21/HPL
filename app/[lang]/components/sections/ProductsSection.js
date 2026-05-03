@@ -2,11 +2,12 @@
 
 import { memo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const productImages = [
   'hpl-bathroom-partition-system.jpg',
-  'hpl-locker-phenolic-system.jpg',
-  'hpl-shower-cubicle-riyadh.jpg',
+  'hpl-locker-system-riyadh.jpg',
+  'hpl-shower-cubicle-swimming-pool-ksa.webp',
 ];
 
 /* ── TASK D1 — Alt texts for product images ── */
@@ -14,7 +15,7 @@ const productAlts = {
   ar: [
     'نظام قواطع حمامات HPL كومباكت فينوليك بإكسسوارات فولاذ مقاوم للصدأ',
     'خزائن HPL فينوليك لغرف تبديل الملابس في الأندية الرياضية بالمملكة',
-    'كبائن استحمام HPL مقاومة للمياه في نادٍ رياضي بالرياض',
+    'كبائن استحمام HPL مقاومة للمياه في نادٍ رياضي بالسعودية',
   ],
   en: [
     'HPL compact phenolic bathroom partition system with stainless steel accessories',
@@ -26,6 +27,12 @@ const productAlts = {
 
 
 function ProductsSection({ dict, lang = 'ar' }) {
+  const productLinks = [
+    `/${lang}/hpl-bathroom-partitions-ksa`,
+    `/${lang}/hpl-lockers-ksa`,
+    `/${lang}/hpl-shower-cubicles-ksa`,
+  ];
+
   const products = [
     { title: dict.p1_title, description: dict.p1_desc, tag: dict.p1_tag },
     { title: dict.p2_title, description: dict.p2_desc, tag: dict.p2_tag },
@@ -47,7 +54,7 @@ function ProductsSection({ dict, lang = 'ar' }) {
           {products.map((product, index) => (
             <div key={product.title}>
               <article className="product-row reveal">
-                <div className="product-row-image">
+                <Link className="product-row-image product-row-link" href={productLinks[index]} aria-label={product.title}>
                   <span className="product-tag">{product.tag}</span>
                   <Image
                     src={`/Images/${productImages[index]}`}
@@ -56,10 +63,13 @@ function ProductsSection({ dict, lang = 'ar' }) {
                     sizes="(max-width: 900px) 100vw, 50vw"
                     className="cover-image"
                   />
-                </div>
+                </Link>
                 <div className="product-row-body">
                   <h3>{product.title}</h3>
                   <p>{product.description}</p>
+                  <Link className="text-link" href={productLinks[index]}>
+                    {lang === 'ar' ? 'تفاصيل الحل والمواصفات' : 'View solution details'}
+                  </Link>
                 </div>
               </article>
             </div>

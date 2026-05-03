@@ -5,6 +5,7 @@ import '../globals.css';
 import { getDictionary } from '../../dictionaries';
 import { getLocalizedUrl, getSiteUrl, hasRealContactValue, keywordSets, siteConfig } from '../../lib/site';
 import {
+  generateLocalBusinessSchema,
   generateOrganizationSchema,
   generateOnlineStoreSchema,
 } from '../../lib/schema';
@@ -48,10 +49,13 @@ export async function generateMetadata({ params }) {
     keywords: [...keywordSets[lang], ...keywordSets[lang === 'ar' ? 'en' : 'ar']],
     applicationName: siteConfig.name,
     category: 'construction',
-    /* ── Google Search Console verification placeholder ── */
-    verification: {
-      google: 'PASTE_YOUR_GSC_VERIFICATION_CODE_HERE',
-    },
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+      ? {
+          verification: {
+            google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+          },
+        }
+      : {}),
     robots: {
       index: true,
       follow: true,
@@ -113,6 +117,7 @@ export default async function LangLayout({ children, params }) {
 
   const organizationSchema = generateOrganizationSchema(lang, siteConfig, getSiteUrl, hasRealContactValue);
   const onlineStoreSchema = generateOnlineStoreSchema(lang, siteConfig, getLocalizedUrl, hasRealContactValue);
+  const localBusinessSchema = generateLocalBusinessSchema(lang, siteConfig, getSiteUrl, hasRealContactValue);
 
   return (
     <html lang={lang} dir={direction} suppressHydrationWarning>
@@ -159,6 +164,11 @@ export default async function LangLayout({ children, params }) {
           id="store-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(onlineStoreSchema) }}
+        />
+        <Script
+          id="local-business-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         <ThemeProvider>
           {children}

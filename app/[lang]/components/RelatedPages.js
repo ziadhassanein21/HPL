@@ -1,99 +1,36 @@
 'use client';
 
 import Link from 'next/link';
-
-/**
- * TASK C2 — Reusable RelatedPages component
- * Renders "صفحات ذات صلة" section at the bottom of each page.
- * Accepts currentPage slug and renders links to all other 6 pages.
- */
-
-const allPages = {
-  ar: [
-    {
-      slug: 'hpl-bathroom-partitions-ksa',
-      name: 'قواطع حمامات HPL',
-      description: 'قواطع حمامات HPL كومباكت فينوليك للمشاريع التجارية والعامة في السعودية.',
-    },
-    {
-      slug: 'hpl-lockers-ksa',
-      name: 'لوكرات HPL',
-      description: 'لوكرات فينوليك لغرف تبديل الملابس والأندية والمنشآت المؤسسية.',
-    },
-    {
-      slug: 'hpl-shower-cubicles-ksa',
-      name: 'كبائن استحمام HPL',
-      description: 'كبائن استحمام مقاومة للماء المباشر للأندية والمسابح والمنشآت الرياضية.',
-    },
-    {
-      slug: 'phenolic-compact-laminate-ksa',
-      name: 'ألواح فينوليك HPL',
-      description: 'ألواح HPL كومباكت فينوليك للمشاريع التجارية والصناعية في السعودية.',
-    },
-    {
-      slug: 'home',
-      name: 'الصفحة الرئيسية',
-      description: 'الصفحة الرئيسية لشركة NEW BASIC — قواطع وخزائن وكبائن HPL في السعودية.',
-    },
-  ],
-  en: [
-    {
-      slug: 'hpl-bathroom-partitions-ksa',
-      name: 'HPL Bathroom Partitions',
-      description: 'Compact phenolic HPL bathroom partitions for commercial and public projects in Saudi Arabia.',
-    },
-    {
-      slug: 'hpl-lockers-ksa',
-      name: 'HPL Lockers',
-      description: 'Phenolic lockers for changing rooms, clubs, and institutional facilities.',
-    },
-    {
-      slug: 'hpl-shower-cubicles-ksa',
-      name: 'HPL Shower Cubicles',
-      description: 'Water-resistant shower cubicles for clubs, pools, and sports facilities.',
-    },
-    {
-      slug: 'phenolic-compact-laminate-ksa',
-      name: 'HPL Phenolic Panels',
-      description: 'Compact phenolic HPL panels for commercial and industrial projects in Saudi Arabia.',
-    },
-    {
-      slug: 'home',
-      name: 'Home Page',
-      description: 'Home page of NEW BASIC — HPL partitions, lockers, and cubicles in Saudi Arabia.',
-    },
-  ],
-};
+import { getSeoPages } from '../../../lib/seo-pages';
 
 export default function RelatedPages({ currentPage, lang = 'ar' }) {
-  const pages = allPages[lang] || allPages.ar;
-  const filteredPages = pages.filter((page) => page.slug !== currentPage);
+  const pages = getSeoPages(lang).filter((page) => page.slug !== currentPage);
+  const primaryPages = pages.slice(0, 8);
 
   return (
-    <section className="seo-related-section" style={{ padding: '3rem 0' }}>
+    <section className="seo-related-section">
       <div className="container">
-        <h2 className="section-title" style={{ fontSize: '1.5rem', marginBottom: '2rem' }}>
-          {lang === 'ar' ? 'صفحات ذات صلة' : 'Related Pages'}
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
-          {filteredPages.map((page) => (
-            <Link
-              href={page.slug === 'home' ? `/${lang}` : `/${lang}/${page.slug}`}
-              key={page.slug}
-              style={{
-                display: 'block',
-                padding: '1.25rem',
-                borderRadius: '12px',
-                border: '1px solid var(--border, rgba(255,255,255,0.1))',
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'border-color 0.2s',
-              }}
-            >
-              <strong style={{ display: 'block', marginBottom: '0.5rem' }}>{page.name}</strong>
-              <span style={{ fontSize: '0.9rem', opacity: 0.7 }}>{page.description}</span>
+        <div className="section-heading">
+          <span className="eyebrow">{lang === 'ar' ? 'روابط داخلية' : 'Internal Links'}</span>
+          <h2 className="section-title">{lang === 'ar' ? 'صفحات ذات صلة بمشروعك' : 'Related Pages'}</h2>
+        </div>
+        <div className="landing-links-grid">
+          {primaryPages.map((page) => (
+            <Link className="landing-link-card seo-related-card" href={`/${lang}/${page.slug}`} key={page.slug}>
+              <div className="landing-link-body">
+                <h3>{page.shortTitle}</h3>
+                <p>{page.metaDescription}</p>
+                <span className="read-more">{lang === 'ar' ? 'اطلع على التفاصيل' : 'View details'}</span>
+              </div>
             </Link>
           ))}
+          <Link className="landing-link-card seo-related-card" href={`/${lang}`}>
+            <div className="landing-link-body">
+              <h3>{lang === 'ar' ? 'حلول HPL في السعودية' : 'HPL Solutions in Saudi Arabia'}</h3>
+              <p>{lang === 'ar' ? 'الصفحة الرئيسية لخدمات قواطع الحمامات واللوكرات وكبائن الاستحمام HPL.' : 'Main page for HPL partitions, lockers, and shower cubicle solutions.'}</p>
+              <span className="read-more">{lang === 'ar' ? 'العودة للرئيسية' : 'Back home'}</span>
+            </div>
+          </Link>
         </div>
       </div>
     </section>
