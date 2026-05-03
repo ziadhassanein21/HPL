@@ -1405,9 +1405,17 @@ body[dir='rtl'] .seo-hero-backdrop {
     url('/Images/hpl-shower-cubicle-backdrop.jpg') center/cover no-repeat;
 }
 
-.seo-hero-grid,
-.seo-content-grid {
+.seo-hero-grid {
   align-items: center;
+  display: grid;
+  gap: 32px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  position: relative;
+  z-index: 1;
+}
+
+.seo-content-grid {
+  align-items: start;
   display: grid;
   gap: 32px;
   grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
@@ -1503,6 +1511,38 @@ body[dir='rtl'] .seo-hero-backdrop {
 
 .seo-faq-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.seo-specs-table-wrapper {
+  margin-top: 1.5rem;
+  overflow-x: auto;
+}
+
+.seo-specs-table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+}
+
+body[dir='rtl'] .seo-specs-table {
+  text-align: right;
+}
+
+.seo-specs-table th,
+.seo-specs-table td {
+  border: 1px solid var(--line);
+  padding: 12px 16px;
+  line-height: 1.6;
+}
+
+.seo-specs-table th {
+  background: var(--surface-subtle);
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.seo-specs-table td {
+  color: var(--muted);
 }
 
 .seo-cta-card {

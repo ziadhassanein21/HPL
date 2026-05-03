@@ -2,7 +2,6 @@
 
 import { memo } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 const productImages = [
   'hpl-bathroom-partition-system.jpg',
@@ -10,26 +9,30 @@ const productImages = [
   'hpl-shower-cubicle-riyadh.jpg',
 ];
 
-/* ── TASK D1 — Arabic alt texts for product images ── */
-const productAlts = [
-  'نظام قواطع حمامات HPL كومباكت فينوليك بإكسسوارات فولاذ مقاوم للصدأ',
-  'خزائن HPL فينوليك لغرف تبديل الملابس في الأندية الرياضية بالمملكة',
-  'كبائن استحمام HPL مقاومة للمياه في نادٍ رياضي بالرياض',
-];
+/* ── TASK D1 — Alt texts for product images ── */
+const productAlts = {
+  ar: [
+    'نظام قواطع حمامات HPL كومباكت فينوليك بإكسسوارات فولاذ مقاوم للصدأ',
+    'خزائن HPL فينوليك لغرف تبديل الملابس في الأندية الرياضية بالمملكة',
+    'كبائن استحمام HPL مقاومة للمياه في نادٍ رياضي بالرياض',
+  ],
+  en: [
+    'HPL compact phenolic bathroom partition system with stainless steel accessories',
+    'Phenolic HPL lockers for changing rooms in sports clubs across the Kingdom',
+    'Water-resistant HPL shower cubicles in a sports club',
+  ],
+};
 
-/* ── TASK C1 — Product card links ── */
-const productLinks = [
-  '/ar/hpl-bathroom-partitions-ksa',
-  '/ar/hpl-lockers-ksa',
-  '/ar/hpl-shower-cubicles-ksa',
-];
 
-function ProductsSection({ dict }) {
+
+function ProductsSection({ dict, lang = 'ar' }) {
   const products = [
     { title: dict.p1_title, description: dict.p1_desc, tag: dict.p1_tag },
     { title: dict.p2_title, description: dict.p2_desc, tag: dict.p2_tag },
     { title: dict.p3_title, description: dict.p3_desc, tag: dict.p3_tag },
   ];
+  
+  const currentAlts = productAlts[lang] || productAlts.ar;
 
   return (
     <section className="products-section" id="products">
@@ -42,13 +45,13 @@ function ProductsSection({ dict }) {
 
         <div className="products-list">
           {products.map((product, index) => (
-            <Link href={productLinks[index]} key={product.title} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div key={product.title}>
               <article className="product-row reveal">
                 <div className="product-row-image">
                   <span className="product-tag">{product.tag}</span>
                   <Image
                     src={`/Images/${productImages[index]}`}
-                    alt={productAlts[index]}
+                    alt={currentAlts[index]}
                     fill
                     sizes="(max-width: 900px) 100vw, 50vw"
                     className="cover-image"
@@ -59,7 +62,7 @@ function ProductsSection({ dict }) {
                   <p>{product.description}</p>
                 </div>
               </article>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

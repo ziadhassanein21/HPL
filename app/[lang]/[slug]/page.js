@@ -41,10 +41,15 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  return getSeoPages('ar').map((page) => ({
+  const arPages = getSeoPages('ar').map((page) => ({
     lang: 'ar',
     slug: page.slug,
   }));
+  const enPages = getSeoPages('en').map((page) => ({
+    lang: 'en',
+    slug: page.slug,
+  }));
+  return [...arPages, ...enPages];
 }
 
 export default async function SeoServicePage({ params }) {
@@ -55,12 +60,11 @@ export default async function SeoServicePage({ params }) {
   const pageUrl = page.canonical || `${getLocalizedUrl(lang)}/${page.slug}`;
   const imageUrl = `${getSiteUrl()}${page.image || siteConfig.ogImage}`;
 
-  /* ── TASK A5-d — BreadcrumbList schema ── */
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: 'https://hplksa.com/ar' },
+      { '@type': 'ListItem', position: 1, name: lang === 'ar' ? 'الرئيسية' : 'Home', item: `https://hplksa.com/${lang}` },
       { '@type': 'ListItem', position: 2, name: page.shortTitle, item: pageUrl },
     ],
   };
@@ -100,19 +104,19 @@ export default async function SeoServicePage({ params }) {
           <div className="seo-hero-backdrop" />
           <div className="container seo-hero-grid">
             <div className="seo-hero-copy">
-              <Link href="/ar" className="seo-back-link">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: 'rotate(180deg)' }}>
+              <Link href={`/${lang}`} className="seo-back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none' }}>
                   <line x1="19" y1="12" x2="5" y2="12" />
                   <polyline points="12 19 5 12 12 5" />
                 </svg>
-                العودة إلى الصفحة الرئيسية
+                {lang === 'ar' ? 'العودة إلى الصفحة الرئيسية' : 'Back to Home'}
               </Link>
               <span className="eyebrow">{page.shortTitle}</span>
               <h1 className="section-title seo-main-title">{page.heroTitle}</h1>
               <p className="section-subtitle align-start">{page.heroText}</p>
               <div className="seo-hero-actions">
-                <Link href="/ar#contact" className="btn btn-primary">اطلب عرض سعر</Link>
-                <Link href="/ar" className="btn btn-secondary">استعرض الموقع</Link>
+                <Link href={`/${lang}#contact`} className="btn btn-primary">{lang === 'ar' ? 'اطلب عرض سعر' : 'Get a Quote'}</Link>
+                <Link href={`/${lang}`} className="btn btn-secondary">{lang === 'ar' ? 'استعرض الموقع' : 'Explore Site'}</Link>
               </div>
             </div>
             <div className="seo-hero-media">
@@ -144,7 +148,7 @@ export default async function SeoServicePage({ params }) {
                     <div className="seo-specs-table-wrapper">
                       <table className="seo-specs-table">
                         <thead>
-                          <tr><th>المواصفة</th><th>القيمة</th></tr>
+                          <tr><th>{lang === 'ar' ? 'المواصفة' : 'Specification'}</th><th>{lang === 'ar' ? 'القيمة' : 'Value'}</th></tr>
                         </thead>
                         <tbody>
                           {section.specsData.map((spec) => (
@@ -160,7 +164,7 @@ export default async function SeoServicePage({ params }) {
 
             <aside className="seo-content-side">
               <div className="seo-side-card">
-                <h3>نقاط أساسية</h3>
+                <h3>{lang === 'ar' ? 'نقاط أساسية' : 'Key Highlights'}</h3>
                 <ul className="seo-list">
                   {page.highlights.map((item) => (
                     <li key={item}>{item}</li>
@@ -168,7 +172,7 @@ export default async function SeoServicePage({ params }) {
                 </ul>
               </div>
               <div className="seo-side-card">
-                <h3>نقاط مهمة للمشروع</h3>
+                <h3>{lang === 'ar' ? 'نقاط مهمة للمشروع' : 'Project Insights'}</h3>
                 <ul className="seo-list">
                   {page.specs.map((item) => (
                     <li key={item}>{item}</li>
@@ -184,8 +188,8 @@ export default async function SeoServicePage({ params }) {
           <section className="seo-faq-section">
             <div className="container">
               <div className="section-heading">
-                <span className="eyebrow">أسئلة شائعة</span>
-                <h2 className="section-title">أسئلة شائعة حول {page.shortTitle}</h2>
+                <span className="eyebrow">{lang === 'ar' ? 'أسئلة شائعة' : 'FAQ'}</span>
+                <h2 className="section-title">{lang === 'ar' ? `أسئلة شائعة حول ${page.shortTitle}` : `Frequently Asked Questions about ${page.shortTitle}`}</h2>
               </div>
               <div className="seo-faq-grid">
                 {page.faq.map((item) => (
@@ -203,15 +207,15 @@ export default async function SeoServicePage({ params }) {
         <section className="seo-cta-section">
           <div className="container seo-cta-card">
             <div>
-              <span className="eyebrow">ابدأ الآن</span>
-              <h2 className="section-title">{page.cta || 'هل تريد حلاً مناسباً لمشروعك باستخدام أنظمة HPL؟'}</h2>
+              <span className="eyebrow">{lang === 'ar' ? 'ابدأ الآن' : 'Start Now'}</span>
+              <h2 className="section-title">{page.cta || (lang === 'ar' ? 'هل تريد حلاً مناسباً لمشروعك باستخدام أنظمة HPL؟' : 'Do you want a suitable solution for your project using HPL systems?')}</h2>
             </div>
-            <Link href="/ar#contact" className="btn btn-primary">تواصل معنا</Link>
+            <Link href={`/${lang}#contact`} className="btn btn-primary">{lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}</Link>
           </div>
         </section>
 
         {/* ── TASK C — Related Links Section ── */}
-        <RelatedPages currentPage={slug} />
+        <RelatedPages currentPage={slug} lang={lang} />
       </main>
 
       <SchemaOrg schema={breadcrumbSchema} />

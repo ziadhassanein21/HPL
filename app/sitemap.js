@@ -24,11 +24,5 @@ export default function sitemap() {
     // P5 — Phenolic Compact Laminate KSA
     { url: `${BASE_URL}/ar/phenolic-compact-laminate-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${BASE_URL}/en/phenolic-compact-laminate-ksa`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    // P6 — HPL Partitions Jeddah
-    { url: `${BASE_URL}/ar/hpl-partitions-jeddah`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${BASE_URL}/en/hpl-partitions-jeddah`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
-    // P7 — HPL Partitions Dammam
-    { url: `${BASE_URL}/ar/hpl-partitions-dammam`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${BASE_URL}/en/hpl-partitions-dammam`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
   ];
 }

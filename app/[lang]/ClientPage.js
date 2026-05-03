@@ -56,7 +56,7 @@ function ClientPage({ dict, lang }) {
 
       <main id="main-content">
         <HeroSection dict={dict.hero} />
-        <ProductsSection dict={dict.products} />
+        <ProductsSection dict={dict.products} lang={lang} />
         <FeaturesSection dict={dict.features} />
         <ProcessSection dict={dict.process} />
         <ValueSection dict={dict} />

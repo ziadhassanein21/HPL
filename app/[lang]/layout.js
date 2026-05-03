@@ -131,23 +131,6 @@ export default async function LangLayout({ children, params }) {
         <link rel="icon" href="/Images/favicon-square.png" type="image/png" />
         <link rel="apple-touch-icon" href="/Images/favicon-square.png" />
 
-        <Script
-          id="theme-initializer"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                const storedTheme = localStorage.getItem('theme');
-                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const resolvedTheme = storedTheme === 'light' || storedTheme === 'dark'
-                  ? storedTheme
-                  : (systemDark ? 'dark' : 'light');
-                document.documentElement.dataset.theme = resolvedTheme;
-                document.documentElement.style.colorScheme = resolvedTheme;
-              } catch (e) {}
-            `,
-          }}
-        />
       </head>
       <body
         dir={direction}
@@ -156,9 +139,17 @@ export default async function LangLayout({ children, params }) {
           fontFamily: lang === 'ar' ? 'var(--font-arabic)' : 'var(--font-body)',
         }}
       >
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <Script id="theme-initializer" strategy="beforeInteractive">
+          {`
+            try {
+              var t = localStorage.getItem('theme');
+              var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              var r = t === 'light' || t === 'dark' ? t : (d ? 'dark' : 'light');
+              document.documentElement.dataset.theme = r;
+              document.documentElement.style.colorScheme = r;
+            } catch (e) {}
+          `}
+        </Script>
         <Script
           id="org-schema"
           type="application/ld+json"
@@ -169,6 +160,9 @@ export default async function LangLayout({ children, params }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(onlineStoreSchema) }}
         />
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
         <SpeedInsights />
       </body>
     </html>
