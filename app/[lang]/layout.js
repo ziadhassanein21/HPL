@@ -7,7 +7,6 @@ import { getLocalizedUrl, getSiteUrl, hasRealContactValue, keywordSets, siteConf
 import {
   generateOrganizationSchema,
   generateOnlineStoreSchema,
-  generateLocalBusinessSchema,
 } from '../../lib/schema';
 import ThemeProvider from './components/providers/ThemeProvider';
 
@@ -83,8 +82,8 @@ export async function generateMetadata({ params }) {
       title: dict.meta.title,
       description: dict.meta.description,
       url: currentUrl,
-      siteName: 'NEW BASIC Company',
-      locale: 'ar_SA',
+      siteName: siteConfig.name,
+      locale: lang === 'ar' ? 'ar_SA' : 'en_US',
       type: 'website',
       images: [
         {
@@ -105,23 +104,23 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  return [{ lang: 'ar' }];
+  return siteConfig.locales.map((lang) => ({ lang }));
 }
 
 export default async function LangLayout({ children, params }) {
   const { lang } = await params;
+  const direction = lang === 'ar' ? 'rtl' : 'ltr';
 
   const organizationSchema = generateOrganizationSchema(lang, siteConfig, getSiteUrl, hasRealContactValue);
   const onlineStoreSchema = generateOnlineStoreSchema(lang, siteConfig, getLocalizedUrl, hasRealContactValue);
-  const localBusinessSchema = generateLocalBusinessSchema(lang, siteConfig, getSiteUrl, hasRealContactValue);
 
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
+    <html lang={lang} dir={direction} suppressHydrationWarning>
       <head>
         {/* ── TASK A3 — hreflang tags ── */}
-        <link rel="alternate" hrefLang="ar" href="https://hplksa.com/ar" />
-        <link rel="alternate" hrefLang="en" href="https://hplksa.com/en" />
-        <link rel="alternate" hrefLang="x-default" href="https://hplksa.com/ar" />
+        <link rel="alternate" hrefLang="ar" href={`${getSiteUrl()}/ar`} />
+        <link rel="alternate" hrefLang="en" href={`${getSiteUrl()}/en`} />
+        <link rel="alternate" hrefLang="x-default" href={`${getSiteUrl()}/ar`} />
 
         {/* ── TASK A8 — Preconnect for Google Fonts ── */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -151,10 +150,10 @@ export default async function LangLayout({ children, params }) {
         />
       </head>
       <body
-        dir="rtl"
+        dir={direction}
         className={`${arabicFont.variable} ${bodyFont.variable} ${headingFont.variable}`}
         style={{
-          fontFamily: 'var(--font-arabic)',
+          fontFamily: lang === 'ar' ? 'var(--font-arabic)' : 'var(--font-body)',
         }}
       >
         <ThemeProvider>
@@ -169,11 +168,6 @@ export default async function LangLayout({ children, params }) {
           id="store-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(onlineStoreSchema) }}
-        />
-        <Script
-          id="business-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         <SpeedInsights />
       </body>

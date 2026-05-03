@@ -26,8 +26,8 @@ export async function generateMetadata({ params }) {
       title: page.metaTitle,
       description: page.metaDescription,
       url: page.canonical || `${getLocalizedUrl(lang)}/${page.slug}`,
-      siteName: 'NEW BASIC Company',
-      locale: 'ar_SA',
+      siteName: siteConfig.name,
+      locale: lang === 'ar' ? 'ar_SA' : 'en_US',
       type: 'website',
       images: [{ url: imageUrl, width: 1200, height: 630, alt: page.shortTitle }],
     },
@@ -73,12 +73,12 @@ export default async function SeoServicePage({ params }) {
     name: page.metaTitle,
     description: page.metaDescription,
     provider: {
-      '@type': 'LocalBusiness',
-      name: 'NEW BASIC Company',
-      telephone: '+966551130855',
-      email: 'newbasic.ac@gmail.com',
+      '@type': 'Organization',
+      name: siteConfig.name,
+      telephone: siteConfig.phoneRaw,
+      email: siteConfig.email,
     },
-    areaServed: { '@type': 'Country', name: 'SA' },
+    areaServed: { '@type': 'Country', name: siteConfig.countryName },
   };
 
   /* ── TASK A5 — FAQPage schema ── */
