@@ -9,17 +9,6 @@ const nextConfig = {
         destination: '/ar',
         permanent: true,
       },
-      // 301 redirect from /en to /ar (Arabic-only site now)
-      {
-        source: '/en',
-        destination: '/ar',
-        permanent: true,
-      },
-      {
-        source: '/en/:path*',
-        destination: '/ar/:path*',
-        permanent: true,
-      },
     ];
   },
 

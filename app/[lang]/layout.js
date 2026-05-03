@@ -65,15 +65,19 @@ export async function generateMetadata({ params }) {
       },
     },
     alternates: {
-      canonical: `${getSiteUrl()}/ar`,
+      canonical: `${getSiteUrl()}/${lang}`,
       languages: {
         ar: `${getSiteUrl()}/ar`,
+        en: `${getSiteUrl()}/en`,
         'x-default': `${getSiteUrl()}/ar`,
       },
     },
     icons: {
-      icon: '/Images/logo.png',
-      apple: '/Images/logo.png',
+      icon: [
+        { url: '/favicon.ico' },
+        { url: '/Images/favicon-square.png', type: 'image/png' },
+      ],
+      apple: '/Images/favicon-square.png',
     },
     openGraph: {
       title: dict.meta.title,
@@ -116,11 +120,17 @@ export default async function LangLayout({ children, params }) {
       <head>
         {/* ── TASK A3 — hreflang tags ── */}
         <link rel="alternate" hrefLang="ar" href="https://hplksa.com/ar" />
+        <link rel="alternate" hrefLang="en" href="https://hplksa.com/en" />
         <link rel="alternate" hrefLang="x-default" href="https://hplksa.com/ar" />
 
         {/* ── TASK A8 — Preconnect for Google Fonts ── */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* ── Brand Icons for Google Search ── */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/Images/favicon-square.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/Images/favicon-square.png" />
 
         <Script
           id="theme-initializer"

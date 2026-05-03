@@ -111,8 +111,8 @@ export default async function SeoServicePage({ params }) {
               <h1 className="section-title seo-main-title">{page.heroTitle}</h1>
               <p className="section-subtitle align-start">{page.heroText}</p>
               <div className="seo-hero-actions">
-                <a href="/ar#contact" className="btn btn-primary">اطلب عرض سعر</a>
-                <a href="/ar" className="btn btn-secondary">استعرض الموقع</a>
+                <Link href="/ar#contact" className="btn btn-primary">اطلب عرض سعر</Link>
+                <Link href="/ar" className="btn btn-secondary">استعرض الموقع</Link>
               </div>
             </div>
             <div className="seo-hero-media">
@@ -206,7 +206,7 @@ export default async function SeoServicePage({ params }) {
               <span className="eyebrow">ابدأ الآن</span>
               <h2 className="section-title">{page.cta || 'هل تريد حلاً مناسباً لمشروعك باستخدام أنظمة HPL؟'}</h2>
             </div>
-            <a href="/ar#contact" className="btn btn-primary">تواصل معنا</a>
+            <Link href="/ar#contact" className="btn btn-primary">تواصل معنا</Link>
           </div>
         </section>
 
