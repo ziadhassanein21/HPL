@@ -20,7 +20,6 @@ const TestimonialsSection = dynamic(() => import('./components/sections/Testimon
 
 // Lazy load below-the-fold sections
 const ValueSection = dynamic(() => import('./components/sections/ValueSection'));
-const LandingLinksSection = dynamic(() => import('./components/sections/LandingLinksSection'));
 const StatsSection = dynamic(() => import('./components/sections/StatsSection'));
 const ServiceAreaSection = dynamic(() => import('./components/sections/ServiceAreaSection'));
 const CtaBandSection = dynamic(() => import('./components/sections/CtaBandSection'));
@@ -60,8 +59,6 @@ function ClientPage({ dict, lang }) {
         <FeaturesSection dict={dict.features} />
         <ProcessSection dict={dict.process} />
         <ValueSection dict={dict} />
-        <LandingLinksSection dict={dict} lang={lang} />
-
         <SpecsSection dict={dict.specs} />
         <GallerySection dict={dict.gallery} images={galleryImages} />
         <StatsSection dict={dict} />
