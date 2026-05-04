@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import SEOLinkGrid from './SEOLinkGrid';
 import { getProjectGuides } from '../../../../lib/seo-pages';
 

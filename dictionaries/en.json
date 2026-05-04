@@ -24,7 +24,7 @@
   "hero": {
     "eyebrow": "Trusted HPL Partner Across Saudi Arabia",
     "title": "HPL Bathroom Partitions and Phenolic Lockers in Saudi Arabia",
-    "subtitle": "We supply and install compact phenolic systems for malls, hospitals, sports clubs and schools — with a clean finish, real moisture resistance and a quality guarantee on every project.",
+    "subtitle": "We supply and install compact phenolic systems for malls, hospitals, sports clubs and schools — with a clean finish, practical moisture resistance and documented handover notes for every project.",
     "btnExplore": "View Solutions",
     "btnQuote": "Get a Free Quote",
     "badge1": "Custom-sized for your project",
@@ -36,8 +36,8 @@
     "panelBottomLabel": "Built on",
     "panelBottomValue": "Fast supply and clean installation",
     "metric1": {
-      "value": "100%",
-      "label": "Fully water and moisture resistant"
+      "value": "Wet areas",
+      "label": "Selected for water and moisture resistance"
     },
     "metric2": {
       "value": "SS304",
@@ -95,7 +95,7 @@
     "s2_title": "Detailed quote & specifications",
     "s2_desc": "You receive a complete proposal covering dimensions, colors, hardware and timeline — everything transparent from the start.",
     "s3_title": "Professional supply & installation",
-    "s3_desc": "Our team installs with precision and care, handing over a project that's ready for immediate use — backed by a quality guarantee."
+    "s3_desc": "Our team installs with precision and care, handing over a project that's ready for immediate use — with agreed warranty terms and maintenance guidance."
   },
   "useCases": {
     "eyebrow": "Where It's Used",
@@ -111,40 +111,40 @@
   },
   "valueProps": {
     "eyebrow": "Why Choose NEW BASIC?",
-    "title": "HPL Solutions Compliant with the Highest Engineering Standards in KSA",
-    "subtitle": "We are committed to supplying high-quality compact phenolic that meets the requirements of government and giga-projects.",
+    "title": "HPL systems specified for demanding Saudi projects",
+    "subtitle": "We help contractors, consultants and owners choose compact phenolic systems with clear specifications, practical budgets and installation details before work starts.",
     "item1": {
-      "title": "Aramco & NEOM Compliant",
-      "description": "Our materials are certified and meet the highest quality specifications required for major projects in the Kingdom."
+      "title": "Major-project ready specifications",
+      "description": "Systems can be specified around EN 438 / ISO 4586 panels, SS304 hardware and documented submittals for consultant review."
     },
     "item2": {
-      "title": "Antibacterial Protection",
-      "description": "Advanced technology that prevents the growth of bacteria and germs, making it ideal for hospitals and healthcare centers."
+      "title": "Hygiene-focused surfaces",
+      "description": "Non-porous compact phenolic surfaces are easy to clean and can be selected with antibacterial finishes when the project requires it."
     },
     "item3": {
-      "title": "Absolute Water Resistance",
-      "description": "A total guarantee against moisture and swelling, perfect for coastal climates and high-humidity environments."
+      "title": "Built for wet Saudi environments",
+      "description": "Recommended panel thicknesses and stainless hardware help reduce swelling, corrosion and maintenance in pools, malls and coastal cities."
     },
     "item4": {
-      "title": "Smart Long-term Investment",
-      "description": "Durable designs that resist impact and scratches, reducing operational costs for public facilities and major developments."
+      "title": "Lower lifecycle disruption",
+      "description": "A correctly specified HPL system reduces repeat maintenance, replacement closures and mismatched repairs after handover."
     }
   },
   "specs": {
     "eyebrow": "Technical Details",
-    "title": "Everything you need to know about HPL materials before you decide.",
-    "subtitle": "Practical, simplified information to help you understand the material, compare your options and choose what's best for your project.",
+    "title": "Specification details consultants and contractors ask for.",
+    "subtitle": "A practical checklist for selecting HPL toilet cubicles, bathroom partitions, lockers and wet-area systems in Saudi projects.",
     "item1": {
-      "title": "Material Type & Quality Standards",
-      "description": "We supply HPL panels (European, Indian, and Chinese) compliant with international standards ISO 4586 and EN 438 for maximum durability."
+      "title": "Panel standards",
+      "description": "Compact phenolic HPL options can be supplied to EN 438 / ISO 4586 requirements, with origin and datasheets documented in the quotation stage."
     },
     "item2": {
-      "title": "Exceptional & Eco-Friendly Performance",
-      "description": "Our materials are Phthalate-free and Antibacterial, making them the first choice for healthcare and educational facilities."
+      "title": "Hardware selection",
+      "description": "SS304 stainless steel is recommended for humid and high-use washrooms; nylon accessories can be reviewed for budget-sensitive indoor areas."
     },
     "item3": {
-      "title": "Thickness Options (1mm - 25mm)",
-      "description": "Whether you need bathroom partitions (12-13mm) or thick lab surfaces, we provide all thicknesses to meet your needs."
+      "title": "Thickness options",
+      "description": "12-13 mm panels are typical for toilet cubicles and partitions, with thicker compact panels available for counters, benches and lab surfaces."
     },
     "item4": {
       "title": "Versatile design options",
@@ -161,8 +161,53 @@
   },
   "gallery": {
     "eyebrow": "Our Work",
-    "title": "Real projects that showcase the quality of execution we deliver.",
-    "subtitle": "No stock photos — these are actual projects we completed across Saudi Arabia with a professional finish that speaks for itself."
+    "title": "Project photos that show the finish, hardware and site execution.",
+    "subtitle": "Use these examples to review panel alignment, privacy gaps, hardware finish and how HPL looks in real commercial washrooms and wet areas."
+  },
+  "proof": {
+    "eyebrow": "Project Proof",
+    "title": "How we document HPL work before a quote becomes a project.",
+    "subtitle": "Until client names are approved for publication, we present proof as anonymized case studies with the practical details contractors need to compare suppliers.",
+    "cases": [
+      {
+        "sector": "Commercial washrooms",
+        "title": "Bathroom partitions for a Riyadh commercial facility",
+        "description": "A compact phenolic toilet cubicle system planned around daily traffic, easy cleaning and long-term hardware stability.",
+        "facts": [
+          { "label": "City", "value": "Riyadh" },
+          { "label": "System", "value": "HPL bathroom partitions / toilet cubicles" },
+          { "label": "Typical spec", "value": "12-13 mm panels, SS304 hardware" }
+        ]
+      },
+      {
+        "sector": "Sports clubs",
+        "title": "HPL lockers and changing-room systems",
+        "description": "Locker layouts specified for humid changing rooms where metal can rust and wood-based cabinets can swell.",
+        "facts": [
+          { "label": "Use case", "value": "Gyms, pools and staff changing rooms" },
+          { "label": "Options", "value": "Key, combination or digital locks" },
+          { "label": "Focus", "value": "Ventilation, cleaning and moisture resistance" }
+        ]
+      },
+      {
+        "sector": "Wet areas",
+        "title": "Shower cubicles for pools and shared facilities",
+        "description": "Cubicles specified for direct water exposure, privacy and repeated cleaning in clubs, pools and accommodation projects.",
+        "facts": [
+          { "label": "System", "value": "HPL shower cubicles" },
+          { "label": "Hardware", "value": "Rust-resistant stainless accessories" },
+          { "label": "Review item", "value": "Drainage, door swing and privacy gaps" }
+        ]
+      }
+    ],
+    "checklistTitle": "Proof we recommend adding to every major submittal",
+    "checklist": [
+      "Project photos with city, sector and system type.",
+      "Panel datasheet showing thickness, standard and origin.",
+      "Hardware schedule with SS304 or approved accessory type.",
+      "Warranty terms and maintenance guidance.",
+      "Approved client logos or anonymized project references."
+    ]
   },
   "landingLinks": {
     "eyebrow": "HPL Resources & Guides",
@@ -206,7 +251,7 @@
     "eyebrow": "FAQ",
     "title": "Straight answers to the questions our clients ask most",
     "q1": "Why should I choose HPL over traditional materials?",
-    "a1": "Traditional materials like MDF and PVC swell and rot within months in humid conditions. HPL compact phenolic panels are fully resistant to water, impacts and repeated cleaning — and they maintain their appearance for years without needing replacement.",
+    "a1": "Traditional materials like MDF and low-grade PVC often struggle in humid washrooms. Compact phenolic HPL is a stronger choice for toilet cubicles and bathroom partitions because it resists moisture, impact and repeated cleaning when specified with the right thickness and hardware.",
     "q2": "How long does it take to supply and install HPL partitions?",
     "a2": "The duration depends on the project size, but typically it takes between 7 to 14 days from the final measurement to complete installation.",
     "q3": "Can I choose custom sizes and finishes for my project?",
@@ -216,8 +261,8 @@
     "eyebrow": "Start Your Project With Us",
     "title": "Get a free, detailed quote within 24 hours.",
     "subtitle": "Free consultation",
-    "desc": "Send us your project type, city and approximate quantities — and we'll respond with a detailed quote covering materials, installation and timeline.",
-    "note": "The more details you share, the faster and more accurate your quote will be.",
+    "desc": "Send your city, project type, approximate quantities, drawings or site photos, preferred finish and target timeline — and we'll respond with a detailed quote covering materials, installation and delivery.",
+    "note": "For the fastest quote, include dimensions, number of cubicles or lockers, hardware preference and whether you need supply only or supply with installation.",
     "locationLabel": "We serve",
     "location": "All cities across Saudi Arabia",
     "phoneLabel": "Call us",
@@ -276,7 +321,7 @@
   },
   "footer": {
     "title": "NEW BASIC Company",
-    "desc": "Your trusted partner for HPL compact phenolic solutions in Saudi Arabia — specializing in antibacterial toilet partitions and lockers compliant with Aramco and NEOM standards.",
+    "desc": "Your partner for HPL compact phenolic solutions in Saudi Arabia — bathroom partitions, toilet cubicles, lockers and shower cubicles specified for wet, high-use projects.",
     "copy": "© 2026 NEW BASIC Company. All rights reserved.",
     "links": {
       "servicesTitle": "Quick Resources",
