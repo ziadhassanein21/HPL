@@ -20,6 +20,11 @@ export async function generateMetadata({ params }) {
     description: page.metaDescription,
     alternates: {
       canonical: page.canonical || `${getLocalizedUrl(lang)}/${page.slug}`,
+      languages: {
+        ar: `${getSiteUrl()}/ar/${page.slug}`,
+        en: `${getSiteUrl()}/en/${page.slug}`,
+        'x-default': `${getSiteUrl()}/ar/${page.slug}`,
+      },
     },
     openGraph: {
       title: page.metaTitle,
@@ -145,13 +150,47 @@ export default async function SeoServicePage({ params }) {
                   ))}
                   {section.isSpecsTable && section.specsData && (
                     <div className="seo-specs-table-wrapper">
-                      <table className="seo-specs-table">
+                      <table className={`seo-specs-table ${section.isComparisonTable ? 'comparison-table' : ''}`}>
                         <thead>
-                          <tr><th>{lang === 'ar' ? 'المواصفة' : 'Specification'}</th><th>{lang === 'ar' ? 'القيمة' : 'Value'}</th></tr>
+                          {section.isComparisonTable ? (
+                            <tr>
+                              {section.columns ? (
+                                section.columns.map(col => <th key={col}>{col}</th>)
+                              ) : (
+                                <>
+                                  <th>{lang === 'ar' ? 'الميزة' : 'Feature'}</th>
+                                  <th>HPL</th>
+                                  <th>MDF</th>
+                                </>
+                              )}
+                            </tr>
+                          ) : (
+                            <tr>
+                              <th>{lang === 'ar' ? 'المواصفة' : 'Specification'}</th>
+                              <th>{lang === 'ar' ? 'القيمة' : 'Value'}</th>
+                            </tr>
+                          )}
                         </thead>
                         <tbody>
-                          {section.specsData.map((spec) => (
-                            <tr key={spec.label}><td>{spec.label}</td><td>{spec.value}</td></tr>
+                          {section.specsData.map((spec, idx) => (
+                            <tr key={idx}>
+                              {section.isComparisonTable ? (
+                                section.columnKeys ? (
+                                  section.columnKeys.map(key => <td key={key}>{spec[key]}</td>)
+                                ) : (
+                                  <>
+                                    <td>{spec.label}</td>
+                                    <td>{spec.hpl}</td>
+                                    <td>{spec.mdf}</td>
+                                  </>
+                                )
+                              ) : (
+                                <>
+                                  <td>{spec.label}</td>
+                                  <td>{spec.value}</td>
+                                </>
+                              )}
+                            </tr>
                           ))}
                         </tbody>
                       </table>

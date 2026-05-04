@@ -122,11 +122,6 @@ export default async function LangLayout({ children, params }) {
   return (
     <html lang={lang} dir={direction} suppressHydrationWarning>
       <head>
-        {/* ── TASK A3 — hreflang tags ── */}
-        <link rel="alternate" hrefLang="ar" href={`${getSiteUrl()}/ar`} />
-        <link rel="alternate" hrefLang="en" href={`${getSiteUrl()}/en`} />
-        <link rel="alternate" hrefLang="x-default" href={`${getSiteUrl()}/ar`} />
-
         {/* ── TASK A8 — Preconnect for Google Fonts ── */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

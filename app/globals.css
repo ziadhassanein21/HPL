@@ -2206,3 +2206,22 @@ html[data-theme='light'] .seo-back-link:hover {
   background: rgba(0, 0, 0, 0.05);
   border-color: rgba(0, 0, 0, 0.2);
 }
+
+/* ── Comparison Table Highlights ── */
+.comparison-table th,
+.comparison-table td {
+  text-align: center;
+  width: 33.33%;
+}
+
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+  text-align: inherit;
+}
+
+.comparison-table td:nth-child(2) {
+  color: var(--gold-strong);
+  font-weight: 700;
+  background: rgba(201, 170, 106, 0.05);
+}
+

@@ -37,6 +37,16 @@ function SiteFooter({ dict, lang }) {
                 {footerLinks.cladding}
               </Link>
             </li>
+            <li>
+              <Link href={`/${lang}/hpl-technical-specifications-submittals-ksa`}>
+                {footerLinks.specs}
+              </Link>
+            </li>
+            <li>
+              <Link href={`/${lang}/hpl-cleaning-maintenance-guide-ksa`}>
+                {footerLinks.maintenance}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
