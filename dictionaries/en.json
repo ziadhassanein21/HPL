@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "HPL KSA | Bathroom Partitions & Phenolic Lockers in Saudi Arabia",
-    "description": "Leading supplier and installer of HPL bathroom partitions and phenolic lockers in KSA. High durability, moisture-resistant solutions for projects in Riyadh, Jeddah & Dammam."
+    "title": "HPL Saudi Arabia | HPL Bathroom Partitions & Phenolic Lockers",
+    "description": "Saudi Arabia's premier HPL solutions provider. Supply and installation of HPL toilet partitions, phenolic lockers, and exterior cladding with engineering specs. Get a quote today."
   },
   "nav": {
     "brand": "Premium Partition Systems",
@@ -67,7 +67,10 @@
     "p2_tag": "Smart Storage",
     "p3_title": "HPL Shower Cubicles",
     "p3_desc": "Fully water-resistant cubicles with maximum privacy — engineered for daily cleaning and heavy use in sports clubs, pools and shared accommodation.",
-    "p3_tag": "Wet Area Solutions"
+    "p3_tag": "Wet Area Solutions",
+    "p4_title": "HPL Cladding & Lining",
+    "p4_desc": "Exterior building facades and interior wall lining using durable HPL compact phenolic panels — high-performance engineering solutions for modern architecture.",
+    "p4_tag": "Facades & Lining"
   },
   "features": {
     "eyebrow": "Why HPL?",
@@ -327,7 +330,8 @@
       "servicesTitle": "Quick Resources",
       "prices": "HPL Price Guide 2026",
       "guide": "What is HPL? Guide",
-      "comparison": "HPL vs Marble vs Wood"
+      "comparison": "HPL vs Marble vs Wood",
+      "cladding": "HPL Cladding & Lining"
     }
   }
 }

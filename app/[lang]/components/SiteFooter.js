@@ -32,6 +32,11 @@ function SiteFooter({ dict, lang }) {
                 {footerLinks.comparison}
               </Link>
             </li>
+            <li>
+              <Link href={`/${lang}/hpl-exterior-cladding-wall-lining-ksa`}>
+                {footerLinks.cladding}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

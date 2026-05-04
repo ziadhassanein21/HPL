@@ -8,6 +8,7 @@ const productImages = [
   'hpl-bathroom-partition-riyadh.webp',
   'hpl-locker-system-riyadh.webp',
   'hpl-shower-cubicle-swimming-pool-ksa.webp',
+  'hpl-cladding-main.webp',
 ];
 
 /* ── TASK D1 — Alt texts for product images ── */
@@ -16,11 +17,13 @@ const productAlts = {
     'نظام قواطع حمامات HPL كومباكت فينوليك بإكسسوارات فولاذ مقاوم للصدأ',
     'خزائن HPL فينوليك لغرف تبديل الملابس في الأندية الرياضية بالمملكة',
     'كبائن استحمام HPL مقاومة للمياه في نادٍ رياضي بالسعودية',
+    'تجليد واجهات خارجية HPL وتكسية جدران داخلية في السعودية',
   ],
   en: [
     'HPL compact phenolic bathroom partition system with stainless steel accessories',
     'Phenolic HPL lockers for changing rooms in sports clubs across the Kingdom',
     'Water-resistant HPL shower cubicles in a sports club',
+    'HPL exterior facade cladding and interior wall lining in KSA',
   ],
 };
 
@@ -31,12 +34,14 @@ function ProductsSection({ dict, lang = 'ar' }) {
     `/${lang}/hpl-bathroom-partitions-ksa`,
     `/${lang}/hpl-lockers-ksa`,
     `/${lang}/hpl-shower-cubicles-ksa`,
+    `/${lang}/hpl-exterior-cladding-wall-lining-ksa`,
   ];
 
   const products = [
     { title: dict.p1_title, description: dict.p1_desc, tag: dict.p1_tag },
     { title: dict.p2_title, description: dict.p2_desc, tag: dict.p2_tag },
     { title: dict.p3_title, description: dict.p3_desc, tag: dict.p3_tag },
+    { title: dict.p4_title, description: dict.p4_desc, tag: dict.p4_tag },
   ];
   
   const currentAlts = productAlts[lang] || productAlts.ar;
