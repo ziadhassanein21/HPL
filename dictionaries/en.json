@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "HPL Panels and Solutions in Saudi Arabia | Bathroom Partitions & Lockers",
-    "description": "Supply and installation of HPL panels, bathroom partitions, lockers and shower cubicles across Saudi Arabia for commercial and institutional projects. Request a quote."
+    "title": "HPL KSA | Bathroom Partitions & Phenolic Lockers in Saudi Arabia",
+    "description": "Leading supplier and installer of HPL bathroom partitions and phenolic lockers in KSA. High durability, moisture-resistant solutions for projects in Riyadh, Jeddah & Dammam."
   },
   "nav": {
     "brand": "Premium Partition Systems",
@@ -23,7 +23,7 @@
   },
   "hero": {
     "eyebrow": "Trusted HPL Partner Across Saudi Arabia",
-    "title": "Bathroom partitions, lockers and shower cubicles that won't let you down.",
+    "title": "HPL Bathroom Partitions and Phenolic Lockers in Saudi Arabia",
     "subtitle": "We supply and install compact phenolic systems for malls, hospitals, sports clubs and schools — with a clean finish, real moisture resistance and a quality guarantee on every project.",
     "btnExplore": "View Solutions",
     "btnQuote": "Get a Free Quote",
@@ -110,24 +110,24 @@
     "item6": "Shopping centers and offices"
   },
   "valueProps": {
-    "eyebrow": "Why Choose Us Specifically?",
-    "title": "The difference isn't just the material — it's the execution and the full experience.",
-    "subtitle": "Most suppliers offer the same material. What sets us apart is how we execute your project and how we treat you from first call to final handover.",
+    "eyebrow": "Why Choose NEW BASIC?",
+    "title": "HPL Solutions Compliant with the Highest Engineering Standards in KSA",
+    "subtitle": "We are committed to supplying high-quality compact phenolic that meets the requirements of government and giga-projects.",
     "item1": {
-      "title": "Recommendations based on your actual site",
-      "description": "We don't send you a generic catalog. We understand your project — its layout, moisture levels and usage type — then recommend a solution that actually fits."
+      "title": "Aramco & NEOM Compliant",
+      "description": "Our materials are certified and meet the highest quality specifications required for major projects in the Kingdom."
     },
     "item2": {
-      "title": "Installation quality you can see",
-      "description": "The difference between ordinary and professional partitions is the installation. We care about every detail: alignment, gaps, hardware — and the result is obvious at first glance."
+      "title": "Antibacterial Protection",
+      "description": "Advanced technology that prevents the growth of bacteria and germs, making it ideal for hospitals and healthcare centers."
     },
     "item3": {
-      "title": "Clear information, no jargon",
-      "description": "We explain exactly what separates different materials and finishes — in plain language, no complex terminology — so you can compare and choose with confidence."
+      "title": "Absolute Water Resistance",
+      "description": "A total guarantee against moisture and swelling, perfect for coastal climates and high-humidity environments."
     },
     "item4": {
-      "title": "A smart investment, not a recurring expense",
-      "description": "Cheap systems need replacing every two years. Our systems maintain their appearance and performance for years — saving you significantly more in the long run."
+      "title": "Smart Long-term Investment",
+      "description": "Durable designs that resist impact and scratches, reducing operational costs for public facilities and major developments."
     }
   },
   "specs": {
@@ -135,16 +135,16 @@
     "title": "Everything you need to know about HPL materials before you decide.",
     "subtitle": "Practical, simplified information to help you understand the material, compare your options and choose what's best for your project.",
     "item1": {
-      "title": "Material type",
-      "description": "HPL compact phenolic panels — made from resin layers compressed under extreme heat and pressure. The result: a solid, durable board that's fully waterproof."
+      "title": "Material Type & Quality Standards",
+      "description": "We supply HPL panels (European, Indian, and Chinese) compliant with international standards ISO 4586 and EN 438 for maximum durability."
     },
     "item2": {
-      "title": "Exceptional moisture performance",
-      "description": "Ideal for washrooms, pools and wet areas — no swelling, no rot, no warping regardless of how high the humidity gets."
+      "title": "Exceptional & Eco-Friendly Performance",
+      "description": "Our materials are Phthalate-free and Antibacterial, making them the first choice for healthcare and educational facilities."
     },
     "item3": {
-      "title": "Wide range of applications",
-      "description": "Bathroom partitions, urinal screens, shower cubicles, lockers, changing rooms — one material system covers every need in your project."
+      "title": "Thickness Options (1mm - 25mm)",
+      "description": "Whether you need bathroom partitions (12-13mm) or thick lab surfaces, we provide all thicknesses to meet your needs."
     },
     "item4": {
       "title": "Versatile design options",
@@ -163,6 +163,16 @@
     "eyebrow": "Our Work",
     "title": "Real projects that showcase the quality of execution we deliver.",
     "subtitle": "No stock photos — these are actual projects we completed across Saudi Arabia with a professional finish that speaks for itself."
+  },
+  "landingLinks": {
+    "eyebrow": "HPL Resources & Guides",
+    "title": "Everything You Need to Know About HPL in KSA",
+    "subtitle": "Explore our price guides, material comparisons, and specialized solutions for different sectors and cities."
+  },
+  "projectGuides": {
+    "eyebrow": "Project Coverage",
+    "title": "Custom HPL Solutions for Your Sector & City in KSA",
+    "subtitle": "Serving various sectors in Riyadh, Jeddah, Dammam & Khobar with the highest quality standards."
   },
   "serviceAreas": {
     "eyebrow": "Local Expertise",
@@ -266,7 +276,13 @@
   },
   "footer": {
     "title": "NEW BASIC Company",
-    "desc": "Your trusted partner for compact phenolic solutions in Saudi Arabia — partitions, lockers and cubicles with a professional finish that lasts.",
-    "copy": "© 2026 NEW BASIC Company. All rights reserved."
+    "desc": "Your trusted partner for HPL compact phenolic solutions in Saudi Arabia — specializing in antibacterial toilet partitions and lockers compliant with Aramco and NEOM standards.",
+    "copy": "© 2026 NEW BASIC Company. All rights reserved.",
+    "links": {
+      "servicesTitle": "Quick Resources",
+      "prices": "HPL Price Guide 2026",
+      "guide": "What is HPL? Guide",
+      "comparison": "HPL vs Marble vs Wood"
+    }
   }
 }

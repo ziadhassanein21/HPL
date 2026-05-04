@@ -7,7 +7,7 @@ import FaqAccordion from './components/FaqAccordion';
 import ScrollObserver from './components/ScrollObserver';
 import ContactIcon from './components/ui/ContactIcon';
 import { siteConfig } from '../../lib/site';
-
+import SiteFooter from './components/SiteFooter';
 
 import HeroSection from './components/sections/HeroSection';
 
@@ -24,6 +24,7 @@ const StatsSection = dynamic(() => import('./components/sections/StatsSection'))
 const ServiceAreaSection = dynamic(() => import('./components/sections/ServiceAreaSection'));
 const CtaBandSection = dynamic(() => import('./components/sections/CtaBandSection'));
 const LandingLinksSection = dynamic(() => import('./components/sections/LandingLinksSection'));
+const ResourcesSection = dynamic(() => import('./components/sections/ResourcesSection'));
 
 const galleryImages = [
   'hpl-partition-project-01.webp',
@@ -49,6 +50,7 @@ function ClientPage({ dict, lang }) {
       <main id="main-content">
         <HeroSection dict={dict.hero} />
         <ProductsSection dict={dict.products} lang={lang} />
+        <ResourcesSection dict={dict} lang={lang} />
         <LandingLinksSection dict={dict} lang={lang} />
         <FeaturesSection dict={dict.features} />
         <ProcessSection dict={dict.process} />
@@ -108,15 +110,7 @@ function ClientPage({ dict, lang }) {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <div className="container footer-shell">
-          <div>
-            <h3>{dict.footer.title}</h3>
-            <p>{dict.footer.desc}</p>
-          </div>
-          <p>{dict.footer.copy}</p>
-        </div>
-      </footer>
+      <SiteFooter dict={dict} lang={lang} />
 
       <div className="mobile-action-bar">
         <a href="#contact" className="mobile-action primary-action">{dict.contact.quickQuote}</a>

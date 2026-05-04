@@ -41,7 +41,7 @@ function HeroSection({ dict }) {
           <div className="hero-image-frame">
             <Image
               src="/Images/hpl-bathroom-partition-riyadh.webp"
-              alt="قواطع حمامات HPL مركّبة في مشروع تجاري، المملكة العربية السعودية"
+              alt={dict.imageAlt}
               fill
               priority
               sizes="(max-width: 900px) 100vw, 50vw"
