@@ -12,6 +12,17 @@ function SiteFooter({ dict, lang }) {
         <div className="footer-brand-section">
           <h3>{dict.footer.title}</h3>
           <p>{dict.footer.desc}</p>
+          <div className="footer-contact-info" style={{ marginTop: '1.5rem', opacity: 0.8 }}>
+            <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
+              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <a href="https://maps.google.com/?q=Riyadh,+Saudi+Arabia" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'inherit', textUnderlineOffset: '4px' }}>
+                {lang === 'ar' ? 'المقر الرئيسي: الرياض، المملكة العربية السعودية' : 'Headquarters: Riyadh, Saudi Arabia'}
+              </a>
+            </p>
+          </div>
         </div>
 
         <div className="footer-links-section">
