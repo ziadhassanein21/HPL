@@ -146,7 +146,7 @@ export default async function SeoServicePage({ params }) {
                 <div className="seo-content-block" key={section.title}>
                   <h2>{section.title}</h2>
                   {section.body.split('\n\n').map((paragraph, i) => (
-                    <p key={i}>{paragraph}</p>
+                    <p key={i} dangerouslySetInnerHTML={{ __html: paragraph }} />
                   ))}
                   {section.isSpecsTable && section.specsData && (
                     <div className="seo-specs-table-wrapper">
@@ -217,6 +217,18 @@ export default async function SeoServicePage({ params }) {
                   ))}
                 </ul>
               </div>
+              {page.crossLinks && page.crossLinks.length > 0 && (
+                <div className="seo-side-card">
+                  <h3>{lang === 'ar' ? 'أدلة ذات صلة' : 'Related Guides'}</h3>
+                  <ul className="seo-list">
+                    {page.crossLinks.map((link) => (
+                      <li key={link.url}>
+                        <Link href={`/${lang}/${link.url}`}>{link.text}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </aside>
           </div>
         </section>

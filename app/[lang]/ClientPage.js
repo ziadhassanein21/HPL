@@ -27,12 +27,12 @@ const LandingLinksSection = dynamic(() => import('./components/sections/LandingL
 const ResourcesSection = dynamic(() => import('./components/sections/ResourcesSection'));
 
 const galleryImages = [
-  'hpl-partition-project-01.webp',
-  'hpl-partition-project-04.webp',
-  'hpl-partition-project-05.webp',
-  'hpl-partition-project-06.webp',
-  'hpl-partition-project-07.webp',
-  'hpl-shower-cubicle-sports-club-ksa.webp',
+  { src: 'hpl-partition-project-01.webp', altAr: 'مشروع قواطع حمامات HPL في مركز تجاري بالرياض', altEn: 'HPL bathroom partition project in a Riyadh commercial center' },
+  { src: 'hpl-partition-project-04.webp', altAr: 'كبائن دورات مياه فينوليك في مدرسة بجدة', altEn: 'Phenolic toilet cubicles in a Jeddah school' },
+  { src: 'hpl-partition-project-05.webp', altAr: 'لوكرات HPL في غرفة تبديل ملابس نادي رياضي', altEn: 'HPL lockers in a sports club changing room' },
+  { src: 'hpl-partition-project-06.webp', altAr: 'قواطع حمامات مقاومة للماء في مستشفى بالدمام', altEn: 'Waterproof bathroom partitions in a Dammam hospital' },
+  { src: 'hpl-partition-project-07.webp', altAr: 'فواصل دورات مياه HPL بتشطيب خشبي', altEn: 'HPL toilet partitions with wood finish' },
+  { src: 'hpl-shower-cubicle-sports-club-ksa.webp', altAr: 'كبائن استحمام HPL في مسبح بالسعودية', altEn: 'HPL shower cubicles in a Saudi swimming pool' },
 ];
 
 function ClientPage({ dict, lang }) {
@@ -56,7 +56,7 @@ function ClientPage({ dict, lang }) {
         <ProcessSection dict={dict.process} />
         <ValueSection dict={dict} />
         <SpecsSection dict={dict.specs} />
-        <GallerySection dict={dict.gallery} images={galleryImages} />
+        <GallerySection dict={dict.gallery} images={galleryImages} lang={lang} />
         <StatsSection dict={dict} />
         <TestimonialsSection dict={dict.testimonials} />
         <ServiceAreaSection dict={dict} />

@@ -4,7 +4,7 @@ import { memo, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Lightbox from '../ui/Lightbox';
 
-function GallerySection({ dict, images }) {
+function GallerySection({ dict, images, lang }) {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const openLightbox = useCallback((image) => setSelectedImage(image), []);
@@ -13,8 +13,8 @@ function GallerySection({ dict, images }) {
   return (
     <>
       <Lightbox
-        src={selectedImage ? `/Images/${selectedImage}` : ''}
-        alt="Expanded view"
+        src={selectedImage ? `/Images/${selectedImage.src}` : ''}
+        alt={selectedImage ? (lang === 'ar' ? selectedImage.altAr : selectedImage.altEn) : "Expanded view"}
         isOpen={!!selectedImage}
         onClose={closeLightbox}
       />
@@ -31,13 +31,13 @@ function GallerySection({ dict, images }) {
             {images.map((image, index) => (
               <figure 
                 className={`gallery-card gallery-card-${index + 1} reveal`} 
-                key={image}
+                key={image.src}
                 onClick={() => openLightbox(image)}
                 style={{ cursor: 'zoom-in' }}
               >
                 <Image
-                  src={`/Images/${image}`}
-                  alt={`${dict.title} ${index + 1}`}
+                  src={`/Images/${image.src}`}
+                  alt={lang === 'ar' ? image.altAr : image.altEn}
                   fill
                   sizes="(max-width: 900px) 100vw, 33vw"
                   className="cover-image"
