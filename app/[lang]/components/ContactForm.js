@@ -1,7 +1,7 @@
 'use client';
 
-import { siteConfig } from '@/lib/site';
 import { useState } from 'react';
+import { trackFormSubmission } from '@/lib/analytics';
 
 export default function ContactForm({ dict }) {
   const [submitting, setSubmitting] = useState(false);
@@ -49,6 +49,9 @@ export default function ContactForm({ dict }) {
       const result = await response.json();
 
       if (result.success) {
+        // Track the conversion
+        trackFormSubmission('contact_form', payload.projectType);
+        
         setSubmitted(true);
         form.reset();
       } else {

@@ -2,6 +2,7 @@
 
 import { memo } from 'react';
 import { siteConfig } from '../../../../lib/site';
+import { trackWhatsAppClick } from '@/lib/analytics';
 
 function CtaBandSection({ dict }) {
   return (
@@ -15,7 +16,13 @@ function CtaBandSection({ dict }) {
           </div>
           <div className="cta-band-actions">
             <a href="#contact" className="btn btn-primary">{dict.ctaBand.primary}</a>
-            <a href={`https://wa.me/${siteConfig.whatsappRaw}`} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+            <a 
+              href={`https://wa.me/${siteConfig.whatsappRaw}`} 
+              className="btn btn-secondary" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick('cta_band')}
+            >
               {dict.ctaBand.secondary}
             </a>
           </div>
