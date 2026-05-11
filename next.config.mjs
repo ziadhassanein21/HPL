@@ -9,6 +9,27 @@ const nextConfig = {
         destination: '/ar',
         permanent: true,
       },
+      // Redirects for old -riyadh slugs to new -ksa slugs
+      {
+        source: '/:lang/hpl-bathroom-partitions-riyadh',
+        destination: '/:lang/hpl-bathroom-partitions-ksa',
+        permanent: true,
+      },
+      {
+        source: '/:lang/hpl-lockers-riyadh',
+        destination: '/:lang/hpl-lockers-ksa',
+        permanent: true,
+      },
+      {
+        source: '/:lang/hpl-shower-cubicles-riyadh',
+        destination: '/:lang/hpl-shower-cubicles-ksa',
+        permanent: true,
+      },
+      {
+        source: '/:lang/phenolic-compact-laminate-riyadh',
+        destination: '/:lang/phenolic-compact-laminate-ksa',
+        permanent: true,
+      },
     ];
   },
 
