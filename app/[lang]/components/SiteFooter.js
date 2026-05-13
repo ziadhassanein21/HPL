@@ -3,6 +3,7 @@
 import { memo } from 'react';
 import Link from 'next/link';
 import { trackEvent } from '@/lib/analytics';
+import { siteConfig } from '@/lib/site';
 
 function SiteFooter({ dict, lang }) {
   const footerLinks = dict.footer.links;
@@ -81,7 +82,7 @@ function SiteFooter({ dict, lang }) {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
-              <a href="https://maps.google.com/?q=Riyadh,+Saudi+Arabia" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', lineHeight: 1.6, transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = 'var(--gold)'} onMouseLeave={(e) => e.target.style.color = 'inherit'}>
+              <a href={siteConfig.googleMapsUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', lineHeight: 1.6, transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = 'var(--gold)'} onMouseLeave={(e) => e.target.style.color = 'inherit'}>
                 <strong style={{ display: 'block', fontWeight: 600, marginBottom: '2px', fontSize: '0.95rem' }}>
                   {lang === 'ar' ? 'المقر الرئيسي' : 'Headquarters'}
                 </strong>

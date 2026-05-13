@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import ThemeToggle from './ThemeToggle';
 
 export default function SiteHeader({ dict, lang }) {
@@ -43,7 +44,7 @@ export default function SiteHeader({ dict, lang }) {
   return (
     <header className={scrolled ? 'site-header scrolled' : 'site-header'}>
       <div className="container nav-shell">
-        <a href="#home" className="brand-mark" onClick={closeMenu}>
+        <Link href={`/${lang}`} className="brand-mark" onClick={closeMenu}>
           <Image
             src="/Images/logo.png"
             alt="NEW BASIC Company"
@@ -56,15 +57,15 @@ export default function SiteHeader({ dict, lang }) {
             <strong>NEW BASIC</strong>
             <small>{dict.nav.brand}</small>
           </span>
-        </a>
+        </Link>
 
         <nav id="primary-navigation" className={`nav-links ${menuActive ? 'active' : ''}`} aria-label={dict.nav.ariaLabel}>
-          <a href="#products" onClick={closeMenu}>{dict.nav.products}</a>
-          <a href="#features" onClick={closeMenu}>{dict.nav.features}</a>
-          <a href="#process" onClick={closeMenu}>{dict.nav.process}</a>
-          <a href="#gallery" onClick={closeMenu}>{dict.nav.gallery}</a>
-          <a href="#faq" onClick={closeMenu}>{dict.nav.faq}</a>
-          <a href="#contact" onClick={closeMenu}>{dict.nav.contact}</a>
+          <Link href={`/${lang}#products`} onClick={closeMenu}>{dict.nav.products}</Link>
+          <Link href={`/${lang}#features`} onClick={closeMenu}>{dict.nav.features}</Link>
+          <Link href={`/${lang}#process`} onClick={closeMenu}>{dict.nav.process}</Link>
+          <Link href={`/${lang}#gallery`} onClick={closeMenu}>{dict.nav.gallery}</Link>
+          <Link href={`/${lang}#faq`} onClick={closeMenu}>{dict.nav.faq}</Link>
+          <Link href={`/${lang}#contact`} onClick={closeMenu}>{dict.nav.contact}</Link>
           <ThemeToggle dict={dict} />
           <button className="lang-toggle" type="button" onClick={switchLanguage}>
             {dict.nav.langToggle}

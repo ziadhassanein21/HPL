@@ -14,6 +14,11 @@ export async function generateMetadata({ params }) {
     description: dict.meta.description,
     alternates: {
       canonical: currentUrl,
+      languages: {
+        ar: `${getSiteUrl()}/ar`,
+        en: `${getSiteUrl()}/en`,
+        'x-default': `${getSiteUrl()}/ar`,
+      },
     },
     openGraph: {
       title: dict.meta.title,

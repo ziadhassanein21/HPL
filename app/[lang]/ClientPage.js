@@ -87,7 +87,7 @@ function ClientPage({ dict, lang }) {
                   <ContactIcon type="location" />
                   <div>
                     <strong>{dict.contact.locationLabel}</strong>
-                    <p>{dict.contact.location}</p>
+                    <p><a href={siteConfig.googleMapsUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>{dict.contact.location}</a></p>
                   </div>
                 </div>
                 <div className="contact-point">
