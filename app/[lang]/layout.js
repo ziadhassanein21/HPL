@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { Alexandria, Cormorant_Garamond, Manrope } from 'next/font/google';
 import '../globals.css';
 import { getDictionary } from '../../dictionaries';
@@ -184,6 +185,7 @@ export default async function LangLayout({ children, params }) {
           </>
         )}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
