@@ -95,12 +95,38 @@ export default async function SeoServicePage({ params }) {
     name: page.metaTitle,
     description: page.metaDescription,
     provider: {
-      '@type': 'Organization',
-      name: siteConfig.name,
+      '@type': 'LocalBusiness',
+      '@id': `${getSiteUrl()}/${lang}#localbusiness`,
+      name: lang === 'ar' ? 'شركة نيو بيسك - قواطع HPL' : 'NEW BASIC Company - HPL Systems',
+      url: `${getSiteUrl()}/${lang}`,
       telephone: siteConfig.phoneRaw,
       email: siteConfig.email,
+      priceRange: '$$',
+      image: `${getSiteUrl()}${page.image || siteConfig.ogImage}`,
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'SA',
+        addressLocality: lang === 'ar' ? 'الرياض' : 'Riyadh',
+      },
     },
-    areaServed: { '@type': 'Country', name: siteConfig.countryName },
+    areaServed: [
+      {
+        '@type': 'Country',
+        name: lang === 'ar' ? 'المملكة العربية السعودية' : 'Saudi Arabia',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: lang === 'ar' ? 'الرياض' : 'Riyadh',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: lang === 'ar' ? 'جدة' : 'Jeddah',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: lang === 'ar' ? 'الدمام' : 'Dammam',
+      },
+    ],
   };
 
   /* ── TASK A5 — FAQPage schema ── */

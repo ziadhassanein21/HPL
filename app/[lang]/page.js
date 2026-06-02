@@ -101,12 +101,57 @@ export default async function Page({ params }) {
     ],
   };
 
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${getSiteUrl()}/${lang}#localbusiness`,
+    name: lang === 'ar' ? 'شركة نيو بيسك - قواطع HPL' : 'NEW BASIC Company - HPL Systems',
+    description: dict.meta.description,
+    url: currentUrl,
+    logo: `${getSiteUrl()}${siteConfig.logo}`,
+    image: imageUrl,
+    telephone: siteConfig.phoneRaw,
+    email: siteConfig.email,
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'SA',
+      addressLocality: lang === 'ar' ? 'الرياض' : 'Riyadh',
+      streetAddress: lang === 'ar' ? 'الرياض، المملكة العربية السعودية' : 'Riyadh, Saudi Arabia',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 24.222142,
+      longitude: 45.0740834,
+    },
+    hasMap: siteConfig.googleMapsUrl,
+    areaServed: [
+      {
+        '@type': 'AdministrativeArea',
+        name: lang === 'ar' ? 'الرياض' : 'Riyadh',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: lang === 'ar' ? 'جدة' : 'Jeddah',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: lang === 'ar' ? 'الدمام' : 'Dammam',
+      },
+      {
+        '@type': 'Country',
+        name: lang === 'ar' ? 'المملكة العربية السعودية' : 'Saudi Arabia',
+      },
+    ],
+  };
+
   return (
     <>
       <ClientPage dict={dict} lang={lang} />
       <SchemaOrg schema={webPageSchema} />
       <SchemaOrg schema={faqSchema} />
       <SchemaOrg schema={breadcrumbSchema} />
+      <SchemaOrg schema={localBusinessSchema} />
     </>
   );
 }
