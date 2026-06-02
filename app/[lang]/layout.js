@@ -126,6 +126,9 @@ export default async function LangLayout({ children, params }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
+        {/* ── Preload Hero Background Image for LCP Optimization ── */}
+        <link rel="preload" as="image" href="/Images/hpl-partition-installation-ksa.webp" />
+
         {/* ── Brand Icons for Google Search ── */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/Images/favicon-square.webp" type="image/png" />

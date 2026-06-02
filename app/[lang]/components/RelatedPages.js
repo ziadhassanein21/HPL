@@ -16,7 +16,7 @@ export default function RelatedPages({ currentPage, lang = 'ar' }) {
         </div>
         <div className="landing-links-grid">
           {primaryPages.map((page) => (
-            <Link className="landing-link-card seo-related-card" href={`/${lang}/${page.slug}`} key={page.slug}>
+            <Link className="landing-link-card seo-related-card" href={`/${lang}/${page.slug}`} key={page.slug} title={page.shortTitle}>
               <div className="landing-link-body">
                 <h3>{page.shortTitle}</h3>
                 <p>{page.metaDescription}</p>
@@ -24,7 +24,7 @@ export default function RelatedPages({ currentPage, lang = 'ar' }) {
               </div>
             </Link>
           ))}
-          <Link className="landing-link-card seo-related-card" href={`/${lang}`}>
+          <Link className="landing-link-card seo-related-card" href={`/${lang}`} title={lang === 'ar' ? 'حلول HPL في السعودية' : 'HPL Solutions in Saudi Arabia'}>
             <div className="landing-link-body">
               <h3>{lang === 'ar' ? 'حلول HPL في السعودية' : 'HPL Solutions in Saudi Arabia'}</h3>
               <p>{lang === 'ar' ? 'الصفحة الرئيسية لخدمات قواطع الحمامات واللوكرات وكبائن الاستحمام HPL.' : 'Main page for HPL partitions, lockers, and shower cubicle solutions.'}</p>

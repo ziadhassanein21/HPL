@@ -65,6 +65,7 @@ export default function SiteHeader({ dict, lang }) {
           <Link href={`/${lang}#process`} onClick={closeMenu}>{dict.nav.process}</Link>
           <Link href={`/${lang}#gallery`} onClick={closeMenu}>{dict.nav.gallery}</Link>
           <Link href={`/${lang}#faq`} onClick={closeMenu}>{dict.nav.faq}</Link>
+          <Link href={`/${lang}/blog`} onClick={closeMenu}>{dict.nav.blog}</Link>
           <Link href={`/${lang}#contact`} onClick={closeMenu}>{dict.nav.contact}</Link>
           <ThemeToggle dict={dict} />
           <button className="lang-toggle" type="button" onClick={switchLanguage}>

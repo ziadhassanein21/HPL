@@ -40,6 +40,21 @@ function SiteFooter({ dict, lang }) {
           <h4>{footerLinks.servicesTitle}</h4>
           <ul className="footer-links-list">
             <li>
+              <Link href={`/${lang}/hpl-bathroom-partitions-ksa`}>
+                {footerLinks.partitions}
+              </Link>
+            </li>
+            <li>
+              <Link href={`/${lang}/hpl-lockers-ksa`}>
+                {footerLinks.lockers}
+              </Link>
+            </li>
+            <li>
+              <Link href={`/${lang}/hpl-shower-cubicles-ksa`}>
+                {footerLinks.cubicles}
+              </Link>
+            </li>
+            <li>
               <Link href={`/${lang}/hpl-prices-saudi-arabia-2026`}>
                 {footerLinks.prices}
               </Link>
@@ -64,11 +79,13 @@ function SiteFooter({ dict, lang }) {
                 {footerLinks.specs}
               </Link>
             </li>
-            <li>
-              <Link href={`/${lang}/hpl-cleaning-maintenance-guide-ksa`}>
-                {footerLinks.maintenance}
-              </Link>
-            </li>
+            {footerLinks.maintenance && (
+              <li>
+                <Link href={`/${lang}/hpl-cleaning-maintenance-guide-ksa`}>
+                  {footerLinks.maintenance}
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
 

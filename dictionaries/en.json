@@ -11,6 +11,7 @@
     "process": "Process",
     "gallery": "Projects",
     "faq": "FAQ",
+    "blog": "Blog",
     "contact": "Contact",
     "themeLight": "Light",
     "themeDark": "Dark",
@@ -328,6 +329,9 @@
     "copy": "© 2026 NEW BASIC Company. All rights reserved.",
     "links": {
       "servicesTitle": "Quick Resources",
+      "partitions": "HPL Bathroom Partitions",
+      "lockers": "HPL Lockers",
+      "cubicles": "HPL Shower Cubicles",
       "prices": "HPL Price Guide 2026",
       "guide": "What is HPL? Guide",
       "comparison": "HPL vs Marble vs Wood",
