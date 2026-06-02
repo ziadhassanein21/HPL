@@ -10,12 +10,30 @@ export default function sitemap() {
       lastModified: now,
       changeFrequency: 'monthly',
       priority: lang === 'ar' ? 0.9 : 0.8,
+      alternates: {
+        languages: {
+          ar: `${BASE_URL}/ar/${page.slug}`,
+          en: `${BASE_URL}/en/${page.slug}`,
+        },
+      },
     }))
   );
 
   return [
-    { url: `${BASE_URL}/ar`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
-    { url: `${BASE_URL}/en`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
+    {
+      url: `${BASE_URL}/ar`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+      alternates: { languages: { ar: `${BASE_URL}/ar`, en: `${BASE_URL}/en` } }
+    },
+    {
+      url: `${BASE_URL}/en`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+      alternates: { languages: { ar: `${BASE_URL}/ar`, en: `${BASE_URL}/en` } }
+    },
     ...pageEntries,
   ];
 }

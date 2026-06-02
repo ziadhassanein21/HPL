@@ -61,6 +61,20 @@ export default async function SeoServicePage({ params }) {
   const page = getSeoPageBySlug(lang, slug);
   if (!page) notFound();
 
+  // Ensure we have crossLinks for internal linking SEO
+  let crossLinks = page.crossLinks || [];
+  if (crossLinks.length === 0) {
+    const allPages = getSeoPages(lang).filter(p => p.slug !== slug);
+    // Grab 4 related pages (pseudo-random based on slug length to distribute them)
+    crossLinks = allPages
+      .sort((a, b) => a.slug.length - b.slug.length)
+      .slice(0, 4)
+      .map(p => ({
+        url: p.slug,
+        text: p.shortTitle
+      }));
+  }
+
   const pageUrl = page.canonical || `${getLocalizedUrl(lang)}/${page.slug}`;
   const imageUrl = `${getSiteUrl()}${page.image || siteConfig.ogImage}`;
 
@@ -217,11 +231,11 @@ export default async function SeoServicePage({ params }) {
                   ))}
                 </ul>
               </div>
-              {page.crossLinks && page.crossLinks.length > 0 && (
+              {crossLinks && crossLinks.length > 0 && (
                 <div className="seo-side-card">
                   <h3>{lang === 'ar' ? 'أدلة ذات صلة' : 'Related Guides'}</h3>
                   <ul className="seo-list">
-                    {page.crossLinks.map((link) => (
+                    {crossLinks.map((link) => (
                       <li key={link.url}>
                         <Link href={`/${lang}/${link.url}`}>{link.text}</Link>
                       </li>
