@@ -1,4 +1,6 @@
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
 import { getSiteUrl, siteConfig } from '../../../../lib/site';
 import SchemaOrg from '../../../../components/SchemaOrg';
 import { getBlogPosts, getBlogPostBySlug } from '../../../../lib/content/blog-data';
@@ -100,14 +102,27 @@ export default async function BlogPost({ params }) {
     <>
       <main className="seo-page" style={{ paddingTop: '100px' }}>
         <div className="container">
-          <article className="seo-content-main" style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <h1 className="section-title seo-main-title" style={{ marginBottom: '2rem' }}>
-              {postLang.title}
-            </h1>
+          <Link href={`/${lang}/blog`} className="seo-back-link">
+            <span>&larr;</span> {lang === 'ar' ? 'العودة إلى المدونة' : 'Back to Blog'}
+          </Link>
+
+          <article className="seo-content-main blog-content-article" style={{ maxWidth: '850px', margin: '0 auto' }}>
+            <div className="blog-hero-banner">
+              <Image src={post.image} alt={postLang.title} fill priority sizes="(max-width: 1024px) 100vw, 850px" />
+              <div className="blog-hero-overlay">
+                <span className="blog-meta-date">
+                  {new Date(post.date).toLocaleDateString(lang === 'ar' ? 'ar-SA' : 'en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </span>
+                <h1 className="seo-main-title">{postLang.title}</h1>
+              </div>
+            </div>
 
             {/* Render dynamic HTML content from blog-data.js */}
             <div dangerouslySetInnerHTML={{ __html: postLang.html }} />
-
           </article>
         </div>
       </main>

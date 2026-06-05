@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getDictionary } from '../../../dictionaries';
 import { getLocalizedUrl, getSiteUrl, siteConfig } from '../../../lib/site';
 import SchemaOrg from '../../../components/SchemaOrg';
@@ -90,11 +91,21 @@ export default async function BlogIndex({ params }) {
             <h1 className="section-title">{description}</h1>
           </div>
           
-          <div className="landing-links-grid" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+          <div className="landing-links-grid" style={{ maxWidth: '1000px', margin: '0 auto', gap: '2.5rem' }}>
             {posts.map((post) => (
               <Link className="landing-link-card seo-related-card" href={`/${lang}/blog/${post.slug}`} key={post.slug} title={post.title} style={{ padding: '2rem' }}>
+                <div className="blog-card-image">
+                  <Image src={post.image} alt={post.title} fill sizes="(max-width: 768px) 100vw, 500px" />
+                </div>
                 <div className="landing-link-body">
-                  <h2 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--primary)' }}>{post.title}</h2>
+                  <span className="blog-meta-date">
+                    {new Date(post.date).toLocaleDateString(lang === 'ar' ? 'ar-SA' : 'en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </span>
+                  <h2 style={{ fontSize: '1.25rem', marginBottom: '1rem', color: 'var(--primary)', lineHeight: 1.4 }}>{post.title}</h2>
                   <p style={{ opacity: 0.8, lineHeight: 1.6, marginBottom: '1.5rem' }}>{post.description}</p>
                   <span className="read-more" style={{ color: 'var(--gold)', fontWeight: 600 }}>{lang === 'ar' ? 'اقرأ المقال كاملاً' : 'Read full article'}</span>
                 </div>
