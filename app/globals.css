@@ -2237,7 +2237,6 @@ html[data-theme='light'] .seo-back-link:hover {
   height: 220px;
   overflow: hidden;
   border-radius: var(--radius-md) var(--radius-md) 0 0;
-  margin: -2rem -2rem 1.5rem -2rem; /* Pull image out to the edges of the card */
   border-bottom: 1px solid var(--line);
 }
 

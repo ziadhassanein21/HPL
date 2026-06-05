@@ -93,7 +93,7 @@ export default async function BlogIndex({ params }) {
           
           <div className="landing-links-grid" style={{ maxWidth: '1000px', margin: '0 auto', gap: '2.5rem' }}>
             {posts.map((post) => (
-              <Link className="landing-link-card seo-related-card" href={`/${lang}/blog/${post.slug}`} key={post.slug} title={post.title} style={{ padding: '2rem' }}>
+              <Link className="landing-link-card" href={`/${lang}/blog/${post.slug}`} key={post.slug} title={post.title}>
                 <div className="blog-card-image">
                   <Image src={post.image} alt={post.title} fill sizes="(max-width: 768px) 100vw, 500px" />
                 </div>
