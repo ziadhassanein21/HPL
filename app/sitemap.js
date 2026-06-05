@@ -1,9 +1,11 @@
 import { getSeoPages } from '../lib/seo-pages';
+import { getBlogPosts } from '../lib/content/blog-data';
 
 const BASE_URL = 'https://hplksa.com';
 
 export default function sitemap() {
   const now = new Date().toISOString();
+  
   const pageEntries = ['ar', 'en'].flatMap((lang) =>
     getSeoPages(lang).map((page) => ({
       url: `${BASE_URL}/${lang}/${page.slug}`,
@@ -19,32 +21,37 @@ export default function sitemap() {
     }))
   );
 
-  const blogEntries = ['ar', 'en'].flatMap((lang) => [
-    {
-      url: `${BASE_URL}/${lang}/blog`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-      alternates: {
-        languages: {
-          ar: `${BASE_URL}/ar/blog`,
-          en: `${BASE_URL}/en/blog`,
-        },
+  const allBlogPosts = getBlogPosts();
+  
+  const blogIndexEntries = ['ar', 'en'].map((lang) => ({
+    url: `${BASE_URL}/${lang}/blog`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.8,
+    alternates: {
+      languages: {
+        ar: `${BASE_URL}/ar/blog`,
+        en: `${BASE_URL}/en/blog`,
       },
     },
-    {
-      url: `${BASE_URL}/${lang}/blog/hpl-vs-mdf-vs-pvc`,
-      lastModified: now,
+  }));
+
+  const blogPostEntries = ['ar', 'en'].flatMap((lang) => 
+    allBlogPosts.map((post) => ({
+      url: `${BASE_URL}/${lang}/blog/${post.slug}`,
+      lastModified: post.date,
       changeFrequency: 'monthly',
       priority: 0.7,
       alternates: {
         languages: {
-          ar: `${BASE_URL}/ar/blog/hpl-vs-mdf-vs-pvc`,
-          en: `${BASE_URL}/en/blog/hpl-vs-mdf-vs-pvc`,
+          ar: `${BASE_URL}/ar/blog/${post.slug}`,
+          en: `${BASE_URL}/en/blog/${post.slug}`,
         },
       },
-    }
-  ]);
+    }))
+  );
+
+  const blogEntries = [...blogIndexEntries, ...blogPostEntries];
 
   return [
     {

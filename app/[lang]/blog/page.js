@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getDictionary } from '../../../dictionaries';
 import { getLocalizedUrl, getSiteUrl, siteConfig } from '../../../lib/site';
 import SchemaOrg from '../../../components/SchemaOrg';
+import { getBlogPosts } from '../../../lib/content/blog-data';
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
@@ -50,21 +51,14 @@ export default async function BlogIndex({ params }) {
     ? 'أحدث المقالات والدلائل الإرشادية'
     : 'Latest articles and practical guides';
 
-  // For now, we manually define the available blog posts.
-  // This can be refactored to read from lib/content or a CMS later.
-  const posts = [
-    {
-      slug: 'hpl-vs-mdf-vs-pvc',
-      title: lang === 'ar' 
-        ? 'HPL مقابل MDF مقابل PVC: أي خامة تختار لقواطع حمامات مشروعك؟'
-        : 'HPL vs MDF vs PVC: Which material to choose for your bathroom partitions?',
-      description: lang === 'ar'
-        ? 'مقارنة شاملة بين خامات قواطع الحمامات HPL وMDF وPVC من حيث تحمل الرطوبة والمتانة وتكاليف الصيانة ومدة الخدمة. دليل المشتري السعودي.'
-        : 'A comprehensive comparison between HPL, MDF, and PVC bathroom partition materials in terms of moisture resistance, durability, and maintenance costs.',
-      image: '/Images/hpl-bathroom-partition-riyadh.webp',
-      date: new Date().toISOString()
-    }
-  ];
+  const allPosts = getBlogPosts();
+  const posts = allPosts.map(post => ({
+    slug: post.slug,
+    title: post[lang].title,
+    description: post[lang].description,
+    image: post.image,
+    date: post.date
+  }));
 
   const itemListElement = posts.map((post, index) => ({
     '@type': 'ListItem',
