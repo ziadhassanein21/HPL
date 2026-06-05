@@ -19,6 +19,33 @@ export default function sitemap() {
     }))
   );
 
+  const blogEntries = ['ar', 'en'].flatMap((lang) => [
+    {
+      url: `${BASE_URL}/${lang}/blog`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+      alternates: {
+        languages: {
+          ar: `${BASE_URL}/ar/blog`,
+          en: `${BASE_URL}/en/blog`,
+        },
+      },
+    },
+    {
+      url: `${BASE_URL}/${lang}/blog/hpl-vs-mdf-vs-pvc`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      alternates: {
+        languages: {
+          ar: `${BASE_URL}/ar/blog/hpl-vs-mdf-vs-pvc`,
+          en: `${BASE_URL}/en/blog/hpl-vs-mdf-vs-pvc`,
+        },
+      },
+    }
+  ]);
+
   return [
     {
       url: `${BASE_URL}/ar`,
@@ -34,6 +61,7 @@ export default function sitemap() {
       priority: 1.0,
       alternates: { languages: { ar: `${BASE_URL}/ar`, en: `${BASE_URL}/en` } }
     },
+    ...blogEntries,
     ...pageEntries,
   ];
 }
