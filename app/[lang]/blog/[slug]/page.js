@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { getSiteUrl, siteConfig } from '../../../../lib/site';
 import SchemaOrg from '../../../../components/SchemaOrg';
 import { getBlogPosts, getBlogPostBySlug, getRelatedBlogPosts } from '../../../../lib/content/blog-data';
+import SiteHeader from '../../components/SiteHeader';
+import SiteFooter from '../../components/SiteFooter';
+import { getDictionary } from '../../../../dictionaries';
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();
@@ -59,6 +62,7 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogPost({ params }) {
   const { lang, slug } = await params;
+  const dict = await getDictionary(lang);
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
@@ -122,6 +126,7 @@ export default async function BlogPost({ params }) {
 
   return (
     <>
+      <SiteHeader dict={dict} lang={lang} />
       <main className="seo-page" style={{ paddingTop: '100px' }}>
         <div className="container">
           <Link href={`/${lang}/blog`} className="seo-back-link">
@@ -192,6 +197,7 @@ export default async function BlogPost({ params }) {
           </article>
         </div>
       </main>
+      <SiteFooter dict={dict} lang={lang} />
 
       <SchemaOrg schema={breadcrumbSchema} />
       <SchemaOrg schema={articleSchema} />

@@ -3,6 +3,9 @@ import Image from 'next/image';
 import { getLocalizedUrl, getSiteUrl, siteConfig } from '../../../lib/site';
 import SchemaOrg from '../../../components/SchemaOrg';
 import { getBlogPosts } from '../../../lib/content/blog-data';
+import SiteHeader from '../components/SiteHeader';
+import SiteFooter from '../components/SiteFooter';
+import { getDictionary } from '../../../dictionaries';
 
 export async function generateMetadata({ params }) {
   const { lang } = await params;
@@ -44,6 +47,7 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogIndex({ params }) {
   const { lang } = await params;
+  const dict = await getDictionary(lang);
   const currentUrl = `${getLocalizedUrl(lang)}/blog`;
   const title = lang === 'ar' ? 'المدونة' : 'Blog';
   const description = lang === 'ar'
@@ -88,6 +92,7 @@ export default async function BlogIndex({ params }) {
 
   return (
     <>
+      <SiteHeader dict={dict} lang={lang} />
       <main className="seo-page" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
         <div className="container">
           <div className="blog-index-hero section-heading text-center" style={{ marginBottom: '3rem' }}>
@@ -149,6 +154,7 @@ export default async function BlogIndex({ params }) {
           </div>
         </div>
       </main>
+      <SiteFooter dict={dict} lang={lang} />
 
       <SchemaOrg schema={blogSchema} />
       <SchemaOrg schema={breadcrumbSchema} />
