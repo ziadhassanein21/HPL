@@ -97,7 +97,6 @@ export default async function BlogIndex({ params }) {
           </div>
           
           <div className="blog-featured-card">
-            <span className="blog-category-chip">{featuredPost.category}</span>
             <div className="blog-featured-grid">
               <div className="blog-card-image">
                 <Image src={featuredPost.image} alt={featuredPost.title} fill priority sizes="(max-width: 768px) 100vw, 50vw" />
