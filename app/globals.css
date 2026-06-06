@@ -2491,19 +2491,4 @@ html[data-theme='light'] .landing-link-card:hover {
   margin-bottom: 1.5rem;
 }
 
-/* Drop-cap for the first paragraph of the blog */
-.blog-content-article .seo-content-block:first-of-type p:first-of-type::first-letter {
-  font-size: 3.5rem;
-  font-weight: 700;
-  color: var(--gold);
-  float: left;
-  line-height: 1;
-  margin-right: 0.8rem;
-  margin-top: -0.2rem;
-}
 
-body[dir='rtl'] .blog-content-article .seo-content-block:first-of-type p:first-of-type::first-letter {
-  float: right;
-  margin-right: 0;
-  margin-left: 0.8rem;
-}
