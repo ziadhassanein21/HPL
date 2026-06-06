@@ -125,7 +125,7 @@ export default async function BlogPost({ params }) {
       <main className="seo-page" style={{ paddingTop: '100px' }}>
         <div className="container">
           <Link href={`/${lang}/blog`} className="seo-back-link">
-            <span>&larr;</span> {lang === 'ar' ? 'العودة إلى المدونة' : 'Back to Blog'}
+            <span>{lang === 'ar' ? '→' : '←'}</span> {lang === 'ar' ? 'العودة إلى المدونة' : 'Back to Blog'}
           </Link>
 
           <article className="seo-content-main blog-content-article" style={{ maxWidth: '850px', margin: '0 auto' }}>

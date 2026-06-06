@@ -96,7 +96,7 @@ export default async function BlogIndex({ params }) {
             <p className="section-subtitle">{description}</p>
           </div>
           
-          <div className="blog-featured-card reveal">
+          <div className="blog-featured-card">
             <span className="blog-category-chip">{featuredPost.category}</span>
             <div className="blog-featured-grid">
               <div className="blog-card-image">
