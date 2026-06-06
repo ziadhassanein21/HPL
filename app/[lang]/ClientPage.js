@@ -38,11 +38,14 @@ const galleryImages = [
 ];
 
 function ClientPage({ dict, lang }) {
-  const faqs = [
-    { question: dict.faq.q1, answer: dict.faq.a1 },
-    { question: dict.faq.q2, answer: dict.faq.a2 },
-    { question: dict.faq.q3, answer: dict.faq.a3 },
-  ];
+  const faqs = [];
+  for (let i = 1; i <= 5; i++) {
+    const question = dict.faq[`q${i}`];
+    const answer = dict.faq[`a${i}`];
+    if (question && answer) {
+      faqs.push({ question, answer });
+    }
+  }
 
   return (
     <>

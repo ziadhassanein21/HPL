@@ -65,33 +65,23 @@ export default async function Page({ params }) {
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: dict.faq.q1,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: dict.faq.a1,
-        },
-      },
-      {
-        '@type': 'Question',
-        name: dict.faq.q2,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: dict.faq.a2,
-        },
-      },
-      {
-        '@type': 'Question',
-        name: dict.faq.q3,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: dict.faq.a3,
-        },
-      },
-    ],
+    mainEntity: [],
   };
+
+  for (let i = 1; i <= 5; i++) {
+    const question = dict.faq[`q${i}`];
+    const answer = dict.faq[`a${i}`];
+    if (question && answer) {
+      faqSchema.mainEntity.push({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answer,
+        },
+      });
+    }
+  }
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',

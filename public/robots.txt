@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+# Block search engines from crawling admin, api, or private routes if any exist
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*?* # Block URLs with query parameters to avoid duplicate content
+
 Sitemap: https://hplksa.com/sitemap.xml
