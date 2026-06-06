@@ -2240,7 +2240,7 @@ html[data-theme='light'] .seo-back-link:hover {
 .blog-featured-card {
   background: linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.015));
   border: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: var(--radius-md);
   margin: 0 auto 2rem;
   max-width: 1000px;
   overflow: hidden;
