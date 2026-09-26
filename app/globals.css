@@ -1291,7 +1291,7 @@ html[lang="en"] h3 {
 
 .form-control {
   background: var(--field-bg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1.5px solid var(--line);
   border-radius: 16px;
   color: var(--text);
   min-height: 56px;
@@ -2508,6 +2508,49 @@ body[dir='rtl'] .blog-content-article .seo-content-block:first-of-type p:first-o
   float: right;
   margin-right: 0;
   margin-left: 0.8rem;
+}
+
+/* ── Contact Form Field Refinements ─────────────────── */
+.form-label {
+  color: var(--text) !important;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-control {
+  font-size: 1rem;
+}
+
+.form-control::placeholder {
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+html[data-theme='light'] .contact-form-card {
+  background: #fdfaf6;
+  border: 1px solid rgba(78, 58, 28, 0.14);
+  box-shadow: 0 16px 40px rgba(112, 82, 36, 0.08);
+}
+
+html[data-theme='light'] .contact-form-card .form-label {
+  color: #3d2f1f !important;
+}
+
+html[data-theme='light'] .contact-form-card .form-control {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(78, 58, 28, 0.28) !important;
+  color: #241c13 !important;
+  box-shadow: 0 2px 6px rgba(78, 58, 28, 0.05);
+}
+
+html[data-theme='light'] .contact-form-card .form-control::placeholder {
+  color: #7b6954 !important;
+  opacity: 0.85;
+}
+
+html[data-theme='light'] .contact-form-card .form-control:focus {
+  border-color: var(--gold-strong) !important;
+  box-shadow: 0 0 0 4px rgba(176, 131, 63, 0.18) !important;
 }
 
 
